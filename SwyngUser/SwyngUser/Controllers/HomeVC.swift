@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class HomeVC: UIViewController {
     @IBOutlet weak var clctnBanners:UICollectionView!
@@ -23,6 +25,7 @@ class HomeVC: UIViewController {
     
     
     var arrOpenEnquiery:[Bool] = Array(repeating: false, count: 2)
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,7 @@ class HomeVC: UIViewController {
         viewNeedhelpShadow.dropShadow(color: UIColor.black, opacity: 0.5)
         viewBulkbookingShadow.dropShadow(color: UIColor.black, opacity: 0.5)
         viewAccountShadow.dropShadow(color: UIColor.black, opacity: 0.5)
+        setupUpcomingTable()
         // Do any additional setup after loading the view.
     }
     
@@ -45,6 +49,15 @@ class HomeVC: UIViewController {
         viewNeedhelpShadow.updateShadowPath()
         viewBulkbookingShadow.updateShadowPath()
         viewBulkbookingShadow.updateShadowPath()
+    }
+    
+    func setupUpcomingTable(){
+        let arr = Observable.just(["ab", "cd"])
+        arr.bind(to: tblUpcomming.rx.items(cellIdentifier: "UpcommingCourtBookingCell", cellType: UpcommingCourtBookingCell.self)){ index, model, cell in
+            cell.layoutIfNeeded()
+        }
+        .disposed(by: disposeBag)
+        tblUpcomming.rx.setDelegate(self).disposed(by: disposeBag)
     }
 }
 
@@ -67,12 +80,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == tblUpcomming{
+        /*if tableView == tblUpcomming{
             let cell = tableView.dequeueReusableCell(withIdentifier: "UpcommingCourtBookingCell", for: indexPath) as! UpcommingCourtBookingCell
             
             return cell
         }
-        else if tableView == tblSportsCoaching{
+        else*/ if tableView == tblSportsCoaching{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SportsCoachingCell", for: indexPath) as! SportsCoachingCell
             cell.isOpenEnquiery = arrOpenEnquiery[indexPath.row]
             cell.enquiryChangeBlock = { isOpen in

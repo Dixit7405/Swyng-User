@@ -11,6 +11,9 @@ target 'SwyngUser' do
   pod 'NVActivityIndicatorView'
   pod 'IQKeyboardManagerSwift'
   pod 'SnapKit'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxDataSources', '~> 4.0'
 #  pod 'Firebase/Analytics'
 #  pod 'Firebase/Messaging'
 

@@ -12,16 +12,9 @@ class UpcommingCourtBookingCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layoutIfNeeded()
-        viewBg.dropShadow(color: UIColor.black, opacity: 0.5)
         // Initialization code
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        viewBg.updateShadowPath()
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -69,7 +69,7 @@
                                         <rect key="frame" x="215" y="-5" width="160" height="210"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms Of Use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M78-4w-Di1">
-                                        <rect key="frame" x="30" y="150" width="221" height="43"/>
+                                        <rect key="frame" x="30" y="151" width="218.5" height="42"/>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="36"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -289,7 +289,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qo-x2-Dys">
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qo-x2-Dys" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
                                                                                     <rect key="frame" x="15" y="10" width="345" height="88"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2cv-yb-sKd">
@@ -370,10 +370,6 @@
                                                                         </connections>
                                                                     </tableViewCell>
                                                                 </prototypes>
-                                                                <connections>
-                                                                    <outlet property="dataSource" destination="OuU-pj-JFW" id="2Jz-VE-TJg"/>
-                                                                    <outlet property="delegate" destination="OuU-pj-JFW" id="GlJ-nE-Igi"/>
-                                                                </connections>
                                                             </tableView>
                                                         </subviews>
                                                     </stackView>
@@ -1316,10 +1312,6 @@ Focused</string>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="T4W-Ko-szr" id="bOU-GM-J7s"/>
-                                    <outlet property="delegate" destination="T4W-Ko-szr" id="w77-NT-7Oj"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mvn-nS-uh9"/>

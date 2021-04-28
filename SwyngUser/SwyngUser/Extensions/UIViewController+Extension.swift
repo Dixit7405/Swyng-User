@@ -242,7 +242,7 @@ extension UIViewController{
     
     func addLeftBarButton(){
         let back = UIButton()
-        back.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+        back.setImage(#imageLiteral(resourceName: "menu_arrow"), for: .normal)
         back.tintColor = UIColor.white
         back.addTarget(self, action: #selector(leftBarPressed), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)

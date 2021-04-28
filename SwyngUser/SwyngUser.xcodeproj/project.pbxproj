@@ -56,6 +56,7 @@
 		1BB8D990263918380075C109 /* EventMenuFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB8D98E263918380075C109 /* EventMenuFooter.xib */; };
 		1BB8D99326391BAE0075C109 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8D99226391BAE0075C109 /* ShadowView.swift */; };
 		1BB8D996263924B80075C109 /* CMSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8D995263924B80075C109 /* CMSVC.swift */; };
+		1BB8D9DA263976C50075C109 /* EventMenuSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8D9D9263976C50075C109 /* EventMenuSectionData.swift */; };
 		FBC0394DA5121389F85116FB /* Pods_SwyngUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		1BB8D98E263918380075C109 /* EventMenuFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMenuFooter.xib; sourceTree = "<group>"; };
 		1BB8D99226391BAE0075C109 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		1BB8D995263924B80075C109 /* CMSVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSVC.swift; sourceTree = "<group>"; };
+		1BB8D9D9263976C50075C109 /* EventMenuSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuSectionData.swift; sourceTree = "<group>"; };
 		AD51C64A8B348D3B513D9C23 /* Pods-SwyngUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwyngUser.release.xcconfig"; path = "Target Support Files/Pods-SwyngUser/Pods-SwyngUser.release.xcconfig"; sourceTree = "<group>"; };
 		C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwyngUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE283B0CE639F779DFF97AC5 /* Pods-SwyngUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwyngUser.debug.xcconfig"; path = "Target Support Files/Pods-SwyngUser/Pods-SwyngUser.debug.xcconfig"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		1BB7021626328CCF00B66B62 /* SwyngUser */ = {
 			isa = PBXGroup;
 			children = (
+				1BB8D9D8263976A10075C109 /* ViewModel */,
 				1B0C30B72633EB70004793D5 /* Extensions */,
 				1B0C30A92633EB3E004793D5 /* Utilities */,
 				1B242CAE26333F400077AECD /* Supported Files */,
@@ -265,6 +268,14 @@
 				1BB8D98E263918380075C109 /* EventMenuFooter.xib */,
 			);
 			path = EventMenuFooter;
+			sourceTree = "<group>";
+		};
+		1BB8D9D8263976A10075C109 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1BB8D9D9263976C50075C109 /* EventMenuSectionData.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E835CB53F1EC3BE9A1CDAC09 /* Pods */ = {
@@ -428,6 +439,7 @@
 				1BB7021826328CCF00B66B62 /* AppDelegate.swift in Sources */,
 				1B0C30CC2633F78F004793D5 /* SceneDelegate.swift in Sources */,
 				1B0C30D426340722004793D5 /* LastNameVC.swift in Sources */,
+				1BB8D9DA263976C50075C109 /* EventMenuSectionData.swift in Sources */,
 				1B0C30C12633EB7A004793D5 /* UIVIew+Extension.swift in Sources */,
 				1B0C30B42633EB53004793D5 /* DefaultsManager.swift in Sources */,
 				1B80EDD126354A950017A06B /* HomeVC.swift in Sources */,
