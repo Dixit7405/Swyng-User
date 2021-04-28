@@ -16,7 +16,7 @@ extension UIViewController{
     func setTitle(_ title:String){
         let titlelabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 25))
         titlelabel.text = title
-        titlelabel.textColor = UIColor.white
+        titlelabel.textColor = UIColor.black
         titlelabel.font = UIFont.boldSystemFont(ofSize: 19)
         let button1 = UIBarButtonItem.init(customView: titlelabel)
         self.navigationItem.leftBarButtonItem  = button1
@@ -214,7 +214,7 @@ extension UIViewController{
         
         self.view.window!.layer.add(transition, forKey: kCATransition)
         viewControllerToPresent.modalPresentationStyle = .fullScreen
-        viewControllerToPresent.modalPresentationStyle = .overCurrentContext
+//        viewControllerToPresent.modalPresentationStyle = .currentContext
         present(viewControllerToPresent, animated: false)
     }
     
@@ -240,6 +240,32 @@ extension UIViewController{
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)
     }
     
+    func addLeftBarButton(){
+        let back = UIButton()
+        back.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+        back.tintColor = UIColor.white
+        back.addTarget(self, action: #selector(leftBarPressed), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)
+    }
+    
+    
+    @objc func leftBarPressed(){
+        let vc:AccountMenuVC = AccountMenuVC.controller()
+        self.presentFromLeft(vc)
+    }
+    
+    func addRightBarButton(){
+        let bar = UIButton()
+        bar.setImage(#imageLiteral(resourceName: "menu"), for: .normal)
+        bar.tintColor = UIColor.white
+        bar.addTarget(self, action: #selector(rightBarPressed), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bar)
+    }
+    
+    
+    @objc func rightBarPressed(){
+        
+    }
     
     @objc func btnBackPressed(){
         navigationController?.popViewController(animated: true)

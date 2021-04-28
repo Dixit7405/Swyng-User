@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let vc = UIStoryboard(name: "Dashboard", bundle: nil)
         window?.rootViewController = vc.instantiateInitialViewController()
+        
+        IQKeyboardManager.shared.enable = true
         
         return true
     }

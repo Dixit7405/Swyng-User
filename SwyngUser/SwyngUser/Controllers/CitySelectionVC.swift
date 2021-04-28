@@ -59,7 +59,7 @@ extension CitySelectionVC{
 //MARK: - ACTION METHODS
 extension CitySelectionVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(UITextView.contentSize),
+        if keyPath == #keyPath(UICollectionView.contentSize),
            let contentSize = change?[NSKeyValueChangeKey.newKey] as? CGSize {
             print("contentSize:", contentSize)
             nslcCollectionHeight.constant = contentSize.height

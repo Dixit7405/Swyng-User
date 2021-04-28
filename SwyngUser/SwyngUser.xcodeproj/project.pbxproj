@@ -40,11 +40,22 @@
 		1B242CC626333FA00077AECD /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B242CBA26333FA00077AECD /* Roboto-Medium.ttf */; };
 		1B242CC726333FA00077AECD /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B242CBB26333FA00077AECD /* Roboto-Black.ttf */; };
 		1B242CC826333FA00077AECD /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B242CBC26333FA00077AECD /* Roboto-BlackItalic.ttf */; };
+		1B5AEEE626372CE300E6FA86 /* MembershipPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5AEEE526372CE300E6FA86 /* MembershipPlanCell.swift */; };
+		1B5BCEC126387E6A005EAFE9 /* AccountMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BCEC026387E6A005EAFE9 /* AccountMenuVC.swift */; };
+		1B5BCEC4263884BF005EAFE9 /* AccountMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BCEC3263884BF005EAFE9 /* AccountMenuCell.swift */; };
+		1B6276A62636785700F46B15 /* UpcommingCourtBookingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6276A52636785700F46B15 /* UpcommingCourtBookingCell.swift */; };
+		1B6276A926367B3300F46B15 /* HomeBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6276A826367B3300F46B15 /* HomeBannerCell.swift */; };
+		1B6EDC152637CEFA0081B2AA /* SportsCoachingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6EDC142637CEFA0081B2AA /* SportsCoachingCell.swift */; };
+		1B80EDD126354A950017A06B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B80EDD026354A950017A06B /* HomeVC.swift */; };
 		1BB7021826328CCF00B66B62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7021726328CCF00B66B62 /* AppDelegate.swift */; };
 		1BB7021C26328CCF00B66B62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7021B26328CCF00B66B62 /* ViewController.swift */; };
 		1BB7021F26328CCF00B66B62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB7021D26328CCF00B66B62 /* Main.storyboard */; };
 		1BB7022126328CD000B66B62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB7022026328CD000B66B62 /* Assets.xcassets */; };
 		1BB7022426328CD000B66B62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB7022226328CD000B66B62 /* LaunchScreen.storyboard */; };
+		1BB8D98F263918380075C109 /* EventMenuFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8D98D263918380075C109 /* EventMenuFooter.swift */; };
+		1BB8D990263918380075C109 /* EventMenuFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB8D98E263918380075C109 /* EventMenuFooter.xib */; };
+		1BB8D99326391BAE0075C109 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8D99226391BAE0075C109 /* ShadowView.swift */; };
+		1BB8D996263924B80075C109 /* CMSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8D995263924B80075C109 /* CMSVC.swift */; };
 		FBC0394DA5121389F85116FB /* Pods_SwyngUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +93,13 @@
 		1B242CBA26333FA00077AECD /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1B242CBB26333FA00077AECD /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		1B242CBC26333FA00077AECD /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		1B5AEEE526372CE300E6FA86 /* MembershipPlanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipPlanCell.swift; sourceTree = "<group>"; };
+		1B5BCEC026387E6A005EAFE9 /* AccountMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMenuVC.swift; sourceTree = "<group>"; };
+		1B5BCEC3263884BF005EAFE9 /* AccountMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMenuCell.swift; sourceTree = "<group>"; };
+		1B6276A52636785700F46B15 /* UpcommingCourtBookingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcommingCourtBookingCell.swift; sourceTree = "<group>"; };
+		1B6276A826367B3300F46B15 /* HomeBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerCell.swift; sourceTree = "<group>"; };
+		1B6EDC142637CEFA0081B2AA /* SportsCoachingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsCoachingCell.swift; sourceTree = "<group>"; };
+		1B80EDD026354A950017A06B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1BB7021426328CCF00B66B62 /* SwyngUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwyngUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB7021726328CCF00B66B62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB7021B26328CCF00B66B62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +107,10 @@
 		1BB7022026328CD000B66B62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BB7022326328CD000B66B62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BB7022526328CD000B66B62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BB8D98D263918380075C109 /* EventMenuFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuFooter.swift; sourceTree = "<group>"; };
+		1BB8D98E263918380075C109 /* EventMenuFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMenuFooter.xib; sourceTree = "<group>"; };
+		1BB8D99226391BAE0075C109 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		1BB8D995263924B80075C109 /* CMSVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSVC.swift; sourceTree = "<group>"; };
 		AD51C64A8B348D3B513D9C23 /* Pods-SwyngUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwyngUser.release.xcconfig"; path = "Target Support Files/Pods-SwyngUser/Pods-SwyngUser.release.xcconfig"; sourceTree = "<group>"; };
 		C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwyngUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE283B0CE639F779DFF97AC5 /* Pods-SwyngUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwyngUser.debug.xcconfig"; path = "Target Support Files/Pods-SwyngUser/Pods-SwyngUser.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +137,7 @@
 				1B0C30AA2633EB50004793D5 /* NavController.swift */,
 				1B0C30AB2633EB51004793D5 /* NotificationManager.swift */,
 				1B0C30AC2633EB51004793D5 /* Webservices.swift */,
+				1BB8D99226391BAE0075C109 /* ShadowView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -134,7 +157,13 @@
 		1B0C30DF26345929004793D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1BB8D98C263918170075C109 /* EventMenuFooter */,
 				1B0C30E026345980004793D5 /* CityCell.swift */,
+				1B6276A52636785700F46B15 /* UpcommingCourtBookingCell.swift */,
+				1B6276A826367B3300F46B15 /* HomeBannerCell.swift */,
+				1B5AEEE526372CE300E6FA86 /* MembershipPlanCell.swift */,
+				1B6EDC142637CEFA0081B2AA /* SportsCoachingCell.swift */,
+				1B5BCEC3263884BF005EAFE9 /* AccountMenuCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -157,6 +186,9 @@
 				1B0C30D62634072C004793D5 /* EmailVC.swift */,
 				1B0C30D92634073B004793D5 /* GetStartedVC.swift */,
 				1B0C30DC2634085D004793D5 /* CitySelectionVC.swift */,
+				1B80EDD026354A950017A06B /* HomeVC.swift */,
+				1B5BCEC026387E6A005EAFE9 /* AccountMenuVC.swift */,
+				1BB8D995263924B80075C109 /* CMSVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +256,15 @@
 				1B0C30E326346DA7004793D5 /* Dashboard.storyboard */,
 			);
 			path = SwyngUser;
+			sourceTree = "<group>";
+		};
+		1BB8D98C263918170075C109 /* EventMenuFooter */ = {
+			isa = PBXGroup;
+			children = (
+				1BB8D98D263918380075C109 /* EventMenuFooter.swift */,
+				1BB8D98E263918380075C109 /* EventMenuFooter.xib */,
+			);
+			path = EventMenuFooter;
 			sourceTree = "<group>";
 		};
 		E835CB53F1EC3BE9A1CDAC09 /* Pods */ = {
@@ -311,6 +352,7 @@
 				1B242CC426333FA00077AECD /* Roboto-Thin.ttf in Resources */,
 				1B242CBE26333FA00077AECD /* Roboto-Bold.ttf in Resources */,
 				1B242CC826333FA00077AECD /* Roboto-BlackItalic.ttf in Resources */,
+				1BB8D990263918380075C109 /* EventMenuFooter.xib in Resources */,
 				1B242CC526333FA00077AECD /* Roboto-Regular.ttf in Resources */,
 				1B242CC026333FA00077AECD /* Roboto-Light.ttf in Resources */,
 				1B242CBD26333FA00077AECD /* Roboto-LightItalic.ttf in Resources */,
@@ -370,25 +412,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6EDC152637CEFA0081B2AA /* SportsCoachingCell.swift in Sources */,
 				1B0C30BE2633EB7A004793D5 /* CustomField.swift in Sources */,
+				1BB8D996263924B80075C109 /* CMSVC.swift in Sources */,
 				1B0C30C02633EB7A004793D5 /* UIViewController+Extension.swift in Sources */,
 				1B0C30C82633F0E5004793D5 /* OTPVC.swift in Sources */,
+				1BB8D99326391BAE0075C109 /* ShadowView.swift in Sources */,
 				1B0C30D02634070A004793D5 /* FirstNameVC.swift in Sources */,
+				1B6276A926367B3300F46B15 /* HomeBannerCell.swift in Sources */,
 				1B0C30B22633EB53004793D5 /* Webservices.swift in Sources */,
 				1B0C30DA2634073B004793D5 /* GetStartedVC.swift in Sources */,
 				1BB7021C26328CCF00B66B62 /* ViewController.swift in Sources */,
+				1B5BCEC126387E6A005EAFE9 /* AccountMenuVC.swift in Sources */,
 				1B0C30BF2633EB7A004793D5 /* UIColor+Extension.swift in Sources */,
 				1BB7021826328CCF00B66B62 /* AppDelegate.swift in Sources */,
 				1B0C30CC2633F78F004793D5 /* SceneDelegate.swift in Sources */,
 				1B0C30D426340722004793D5 /* LastNameVC.swift in Sources */,
 				1B0C30C12633EB7A004793D5 /* UIVIew+Extension.swift in Sources */,
 				1B0C30B42633EB53004793D5 /* DefaultsManager.swift in Sources */,
+				1B80EDD126354A950017A06B /* HomeVC.swift in Sources */,
+				1B5BCEC4263884BF005EAFE9 /* AccountMenuCell.swift in Sources */,
 				1B0C30B12633EB53004793D5 /* NotificationManager.swift in Sources */,
+				1B6276A62636785700F46B15 /* UpcommingCourtBookingCell.swift in Sources */,
 				1B0C30E126345980004793D5 /* CityCell.swift in Sources */,
+				1B5AEEE626372CE300E6FA86 /* MembershipPlanCell.swift in Sources */,
 				1B0C30BD2633EB7A004793D5 /* Extensions.swift in Sources */,
 				1B0C30B32633EB53004793D5 /* AppUtilities.swift in Sources */,
 				1B0C30B02633EB53004793D5 /* NavController.swift in Sources */,
 				1B0C30B52633EB53004793D5 /* Constants.swift in Sources */,
+				1BB8D98F263918380075C109 /* EventMenuFooter.swift in Sources */,
 				1B0C30C52633F03C004793D5 /* LoginVC.swift in Sources */,
 				1B0C30DD2634085D004793D5 /* CitySelectionVC.swift in Sources */,
 				1B0C30D72634072C004793D5 /* EmailVC.swift in Sources */,
