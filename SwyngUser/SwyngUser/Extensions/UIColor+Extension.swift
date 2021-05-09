@@ -11,7 +11,7 @@ import UIKit
 extension UIColor{
     struct AppColor {
         static let themeColor = UIColor(named: "appBlue")
-//        static let darkOrange = UIColor(named: "dark_orange")
+        static let appBlack = UIColor(named: "textBlack")
 //        static let lightOrange = UIColor(named: "light_orange")
     }
 }

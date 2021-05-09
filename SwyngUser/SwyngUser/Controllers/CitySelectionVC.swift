@@ -56,7 +56,7 @@ extension CitySelectionVC{
     }
 }
 
-//MARK: - ACTION METHODS
+//MARK: - COLLECTIONVIEW DELEGATES METHODS
 extension CitySelectionVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(UICollectionView.contentSize),

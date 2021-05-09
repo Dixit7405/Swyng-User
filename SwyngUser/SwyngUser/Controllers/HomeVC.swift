@@ -32,7 +32,7 @@ class HomeVC: UIViewController {
         view.layoutIfNeeded()
         self.addLeftBarButton()
         self.addRightBarButton()
-        self.title = "Hello Champion!"
+        self.navigationItem.title = "Hello Champion!"
         
         tblUpcomming.addObserver(self, forKeyPath: #keyPath(UITableView.contentSize), options: .new, context: nil)
         tblMembershipPlans.addObserver(self, forKeyPath: #keyPath(UITableView.contentSize), options: .new, context: nil)

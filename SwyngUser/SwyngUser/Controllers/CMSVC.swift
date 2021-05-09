@@ -6,12 +6,33 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CMSVC: UIViewController {
-
+    @IBOutlet weak var lblPageTitle:UILabel!
+    @IBOutlet weak var txtvContent:UITextView!
+    @IBOutlet weak var imgHeader:UIImageView!
+    
+    
+    let disposeBag = DisposeBag()
+    var viewModel = CMSViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        viewModel.type
+          .asObservable()
+            .map { $0.rawValue }
+          .bind(to:self.lblPageTitle.rx.text)
+          .disposed(by:self.disposeBag)
+        
+        viewModel.image.asObservable()
+            .map({UIImage(named: $0.rawValue)})
+            .bind(to: imgHeader.rx.image)
+            .disposed(by: disposeBag)
+        
+        
         // Do any additional setup after loading the view.
     }
     

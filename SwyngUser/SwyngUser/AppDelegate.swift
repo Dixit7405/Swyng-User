@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let vc = UIStoryboard(name: "Dashboard", bundle: nil)
-        window?.rootViewController = vc.instantiateInitialViewController()
+//        let vc = UIStoryboard(name: "Dashboard", bundle: nil)
+//        window?.rootViewController = vc.instantiateInitialViewController()
         
         IQKeyboardManager.shared.enable = true
         

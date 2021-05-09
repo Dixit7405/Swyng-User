@@ -10,26 +10,30 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+protocol AccountMenuDelegate:AnyObject {
+    func didSelectMenu(option:EventMenuOptions)
+}
+
 class AccountMenuVC: UIViewController {
     @IBOutlet weak var collectionView:UICollectionView!
     
+    var arrOptions:[EventMenuOptions] = [.home,
+                                         .accountInfo,
+                                         .sportsCenter,
+                                         .bookings,
+                                         .bulkbookings,
+                                         .sportsTournaments,
+                                         .tournamenRegistrations,
+                                         .runs,
+                                         .runRegistrations,
+                                         .cancelRules,
+                                         .paymentPolicy,
+                                         .aboutSwyngs,
+                                         .partner,
+                                         .terms,
+                                         .privacy]
     
-    var arrOptions = ["Home",
-                      "Account Info",
-                      "Sports Centers",
-                      "Bookings",
-                      "Bulk Bookings",
-                      "Sports Tournaments",
-                      "Tournament\nRegistrations",
-                      "Runs",
-                      "Run\nRegistrations",
-                      "Cancelation & Rescheduling Rules",
-                      "Payments Policy",
-                      "About SWYNG",
-                      "Partner with SWYNG",
-                      "Terms of use",
-                      "Privacy Policy"]
-    
+    weak var delegate:AccountMenuDelegate?
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -51,7 +55,7 @@ extension AccountMenuVC{
           configureCell: { dataSource, collectionView, indexPath, item in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AccountMenuCell", for: indexPath) as! AccountMenuCell
-            cell.titleLabel.text = item
+            cell.titleLabel.text = item.rawValue
             return cell
             
           }) { (datasource, collectionView, item, indexPath) -> UICollectionReusableView in
@@ -81,6 +85,18 @@ extension AccountMenuVC{
     }
 }
 
+//MARK: - CUSTOM METHODS
+extension AccountMenuVC{
+    private func openCMSPage(pageType:PageType, image:PageImage){
+        let vc:CMSVC = CMSVC.controller()
+        let vm = CMSViewModel()
+        vc.modalPresentationStyle = .fullScreen
+        vm.type.accept(pageType)
+        vm.image.accept(image)
+        vc.viewModel = vm
+        present(vc, animated: true, completion: nil)
+    }
+}
 
 
 //MARK: - ACTION METHOD
@@ -94,8 +110,34 @@ extension AccountMenuVC{
 extension AccountMenuVC:UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc:CMSVC = CMSVC.controller()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        switch arrOptions[indexPath.item] {
+        case .home:
+            self.dismissLeft()
+        case .terms:
+            self.openCMSPage(pageType: .terms, image: .terms)
+        case .privacy:
+            self.openCMSPage(pageType: .privacy, image: .privacy)
+        case .aboutSwyngs:
+            self.openCMSPage(pageType: .aboutSwyng, image: .aboutSwyng)
+        case .paymentPolicy:
+            self.openCMSPage(pageType: .paymentPolicy, image: .paymentPolicy)
+        case .cancelRules:
+            self.openCMSPage(pageType: .cancellationRules, image: .cancellationRules)
+        case .accountInfo:
+            let vc:AccountInfoVC = AccountInfoVC.controller()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        case .partner:
+            let vc:PartnerWithUsVC = PartnerWithUsVC.controller()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        case .bookings:
+            self.dismissLeft(){ [unowned self] in
+                self.delegate?.didSelectMenu(option: .bookings)
+            }
+            
+        default:
+            break
+        }
     }
 }

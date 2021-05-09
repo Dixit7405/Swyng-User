@@ -22,4 +22,5 @@ extension LoginVC{
     @IBAction func btnNextPressed(_ sender:UIButton){
         self.performSegue(withIdentifier: "OTPSegue", sender: nil)
     }
+    
 }

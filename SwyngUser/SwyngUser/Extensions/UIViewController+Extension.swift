@@ -251,6 +251,7 @@ extension UIViewController{
     
     @objc func leftBarPressed(){
         let vc:AccountMenuVC = AccountMenuVC.controller()
+        vc.delegate = self
         self.presentFromLeft(vc)
     }
     
@@ -358,5 +359,18 @@ extension UIViewController: URLSessionDownloadDelegate{
             }
         }
         
+    }
+}
+
+//MARK: - ACCOUNT MENU DELEGATE
+extension UIViewController:AccountMenuDelegate{
+    func didSelectMenu(option: EventMenuOptions) {
+        switch option {
+        case .bookings:
+            let vc:BookingListVC = BookingListVC.controller()
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
     }
 }
