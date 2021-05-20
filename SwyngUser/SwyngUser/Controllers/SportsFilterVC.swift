@@ -7,11 +7,26 @@
 
 import UIKit
 
+class Filter{
+    var sport:String?
+    var category:String?
+    var gallery:Bool?
+    var filter:Bool?
+}
+
+protocol SportsFilterDelegate:AnyObject {
+    func didApplyFilter(filter:Filter)
+}
+
 class SportsFilterVC: UIViewController {
     @IBOutlet weak var collectionView:UICollectionView!
     @IBOutlet weak var btnApplySelection:UIButton!
     @IBOutlet weak var nslcCollectionHeight:NSLayoutConstraint!
     @IBOutlet weak var btnAllSports:UIButton!
+    @IBOutlet weak var collectionSubCategory:UICollectionView!
+    @IBOutlet weak var btnListGrid:UIButton!
+    @IBOutlet weak var btnByDate:UIButton!
+    @IBOutlet weak var nslcSubCatHeight:NSLayoutConstraint!
     
     var sportsArr:[String] = ["Badminton",
                               "Cricket",
@@ -30,6 +45,11 @@ class SportsFilterVC: UIViewController {
         }
     }
     
+    var selectedSubCategory:Int?
+    var showSubCategory = false
+    
+    weak var delegate:SportsFilterDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layoutIfNeeded()
@@ -37,6 +57,9 @@ class SportsFilterVC: UIViewController {
         selectedIndex = nil
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.addObserver(self, forKeyPath: #keyPath(UICollectionView.contentSize), options: [NSKeyValueObservingOptions.new], context: nil)
+        
+        collectionSubCategory.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        collectionSubCategory.addObserver(self, forKeyPath: #keyPath(UICollectionView.contentSize), options: [NSKeyValueObservingOptions.new], context: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -45,6 +68,11 @@ class SportsFilterVC: UIViewController {
 //MARK: - ACTION METHODS
 extension SportsFilterVC{
     @IBAction func btnApplySelectionPressed(_ sender:UIButton){
+        self.dismissLeft { [unowned self] in
+            let filter = Filter()
+            filter.gallery = true
+            self.delegate?.didApplyFilter(filter: filter)
+        }
     }
     
     @IBAction func btnBackPressed(_ sender:UIButton){
@@ -55,6 +83,20 @@ extension SportsFilterVC{
         selectedIndex = nil
         collectionView.reloadData()
     }
+    
+    @IBAction func btnListGridPressed(_ sender:UIButton){
+        sender.isSelected = !sender.isSelected
+        sender.backgroundColor = sender.isSelected ? UIColor.AppColor.themeColor : UIColor.white
+        sender.setTitleColor(sender.isSelected ? UIColor.white : UIColor.black, for: .normal)
+        sender.setTitleColor(sender.isSelected ? UIColor.white : UIColor.black, for: .selected)
+    }
+    
+    @IBAction func btnFilterByDatePressed(_ sender:UIButton){
+        sender.isSelected = !sender.isSelected
+        sender.backgroundColor = sender.isSelected ? UIColor.AppColor.themeColor : UIColor.white
+        sender.setTitleColor(sender.isSelected ? UIColor.white : UIColor.black, for: .normal)
+        sender.setTitleColor(sender.isSelected ? UIColor.white : UIColor.black, for: .selected)
+    }
 }
 
 //MARK: - COLLECTIONVIEW DELEGATES METHODS
@@ -62,8 +104,9 @@ extension SportsFilterVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(UICollectionView.contentSize),
            let contentSize = change?[NSKeyValueChangeKey.newKey] as? CGSize {
-            print("contentSize:", contentSize)
+            
             nslcCollectionHeight.constant = contentSize.height
+            nslcSubCatHeight.constant = contentSize.height
         }
     }
     
@@ -74,7 +117,8 @@ extension SportsFilterVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityCell", for: indexPath) as! CityCell
         cell.lblCityName.text = sportsArr[indexPath.item]
-        cell.isSelected = indexPath.item == selectedIndex
+        cell.isSelected = indexPath.item == (collectionView == self.collectionView ? selectedIndex : selectedSubCategory)
+        cell.layoutIfNeeded()
         return cell
     }
     
@@ -84,7 +128,12 @@ extension SportsFilterVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = indexPath.item
+        if collectionView == self.collectionView{
+            selectedIndex = indexPath.item
+        }
+        else{
+            selectedSubCategory = indexPath.item
+        }
         collectionView.reloadData()
     }
 }

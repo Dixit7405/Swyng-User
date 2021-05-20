@@ -236,11 +236,14 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47l-VE-AYF">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47l-VE-AYF" customClass="FirstResponderField" customModule="SwyngUser" customModuleProvider="target">
                                 <rect key="frame" x="30" y="129" width="315" height="44"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="36"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMobile" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="2Q8-R6-lah" id="Xc3-d9-n3K"/>
                                 </connections>
@@ -291,7 +294,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-PK-7lX">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-PK-7lX" customClass="FirstResponderField" customModule="SwyngUser" customModuleProvider="target">
                                 <rect key="frame" x="30" y="129" width="315" height="44"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="36"/>
@@ -314,6 +317,23 @@
                                     <action selector="btnBackPressed:" destination="oJI-ZF-ho8" eventType="touchUpInside" id="Ll2-Wl-8w1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W1g-FC-BBX">
+                                <rect key="frame" x="145" y="228" width="85" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Resend OTP">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="btnResendPressed:" destination="oJI-ZF-ho8" eventType="touchUpInside" id="daD-pu-PY8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hn7-lP-9Pn"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -321,10 +341,12 @@
                             <constraint firstItem="PcM-PK-7lX" firstAttribute="leading" secondItem="hn7-lP-9Pn" secondAttribute="leading" constant="30" id="2lN-QX-x01"/>
                             <constraint firstItem="0Mv-0B-hSF" firstAttribute="top" secondItem="hn7-lP-9Pn" secondAttribute="top" constant="80" id="7zn-aa-jrS"/>
                             <constraint firstItem="PcM-PK-7lX" firstAttribute="top" secondItem="0Mv-0B-hSF" secondAttribute="bottom" constant="30" id="AXS-w5-DOx"/>
+                            <constraint firstItem="W1g-FC-BBX" firstAttribute="centerY" secondItem="4hm-hB-wgX" secondAttribute="centerY" id="GxE-bN-Y7A"/>
                             <constraint firstItem="4hm-hB-wgX" firstAttribute="leading" secondItem="hn7-lP-9Pn" secondAttribute="leading" constant="35" id="JzK-qU-GDE"/>
                             <constraint firstItem="hn7-lP-9Pn" firstAttribute="trailing" secondItem="ZEF-lW-f3e" secondAttribute="trailing" constant="35" id="MQZ-hu-VSi"/>
                             <constraint firstItem="4hm-hB-wgX" firstAttribute="top" secondItem="PcM-PK-7lX" secondAttribute="bottom" constant="50" id="RaH-AE-l79"/>
                             <constraint firstItem="ZEF-lW-f3e" firstAttribute="top" secondItem="PcM-PK-7lX" secondAttribute="bottom" constant="50" id="iMg-1R-ShD"/>
+                            <constraint firstItem="W1g-FC-BBX" firstAttribute="centerX" secondItem="D4L-JC-Vwv" secondAttribute="centerX" id="j7Z-Pb-1m0"/>
                             <constraint firstItem="hn7-lP-9Pn" firstAttribute="trailing" secondItem="PcM-PK-7lX" secondAttribute="trailing" constant="30" id="mqL-1E-fWv"/>
                             <constraint firstItem="0Mv-0B-hSF" firstAttribute="leading" secondItem="hn7-lP-9Pn" secondAttribute="leading" constant="35" id="zXR-ea-n0c"/>
                         </constraints>
@@ -358,6 +380,9 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="36"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFirstName" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="GX2-GR-tCL" id="diE-Mc-Liu"/>
                                 </connections>
@@ -384,6 +409,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Rkh-Ng-axx"/>
                     <connections>
+                        <outlet property="txtfFirstName" destination="vcZ-N0-Hes" id="zQd-yM-VW7"/>
                         <segue destination="c7v-eQ-udQ" kind="presentation" identifier="LastNameSegue" modalPresentationStyle="fullScreen" id="2LC-ee-5S4"/>
                     </connections>
                 </viewController>
@@ -410,6 +436,9 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="36"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isLastName" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="c7v-eQ-udQ" id="pxq-5u-MeC"/>
                                 </connections>
@@ -445,6 +474,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hYj-8H-hDh"/>
                     <connections>
+                        <outlet property="txtfLastName" destination="PDm-MB-Bcr" id="zAi-DV-d1p"/>
                         <segue destination="rHY-CX-dn6" kind="presentation" identifier="EmailIdSegue" modalPresentationStyle="fullScreen" id="Eaw-Cm-y71"/>
                     </connections>
                 </viewController>
@@ -471,6 +501,9 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="36"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEmail" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="rHY-CX-dn6" id="cw0-Zx-CE0"/>
                                 </connections>
@@ -506,6 +539,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Rxa-JX-XvN"/>
                     <connections>
+                        <outlet property="txtfEmail" destination="ouB-jY-AyO" id="jJJ-df-cfy"/>
                         <segue destination="Eo4-wO-LWx" kind="presentation" identifier="GetStartedSegue" modalPresentationStyle="fullScreen" id="H8v-Wq-ugr"/>
                     </connections>
                 </viewController>

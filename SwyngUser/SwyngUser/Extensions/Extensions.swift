@@ -124,7 +124,7 @@ extension String {
     }
     
     var toDate:String{
-        return self.convertDate(format: "yyyy-MM-dd HH:mm:ss").toDate(format: "dd MMM yyyy hh:mm a")
+        return self.convertDate(format: "yyyy-MM-dd").toDate(format: "yyyy/MM/dd")
     }
     
     var doubleValue:Double{

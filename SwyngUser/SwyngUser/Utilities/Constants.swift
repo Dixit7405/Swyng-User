@@ -1,16 +1,13 @@
 //
 //  Constants.swift
-//  Goocab
+//  SwyngUser
 //
-//  Created by Dixit Rathod on 20/03/21.
+//  Created by Dixit Rathod on 15/05/21.
 //
 
 import Foundation
-import CoreLocation
 
-let googleApiKey = "AIzaSyCJyUKNCGwglDzBmWhjnTBAUvuRnyMizbY"
-let googleServerKey = "AIzaSyDKEdiTkUK0O9hwN2NyLjRP2Zwmoul0ths"
-let kConstantKey = "Goocab.digital24x7"
-var firebaseToken = ""
-var currentLocation = CLLocation()
-var walletAmount:Double = 0
+struct StoryboardIds{
+    static let main = "Main"
+    static let dashboard = "Dashboard"
+}

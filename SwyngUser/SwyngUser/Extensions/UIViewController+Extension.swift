@@ -22,7 +22,7 @@ extension UIViewController{
         self.navigationItem.leftBarButtonItem  = button1
     }
     
-    class func controller<T: UIViewController>(storyId:String = "Dashboard") -> T {
+    class func controller<T: UIViewController>(storyId:String = StoryboardIds.dashboard) -> T {
         let name = String(describing: T.self)
         let story = UIStoryboard(name: storyId, bundle: nil)
         return story.instantiateViewController(withIdentifier: name) as! T
@@ -36,50 +36,17 @@ extension UIViewController{
         }
     }
     
-    func fetchRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completed:@escaping((String) -> Void)) {
-        
-        let session = URLSession.shared
-        
-        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=false&mode=driving&key=\(googleServerKey)")!
-        
-        let task = session.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            
-            guard let jsonResult = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else {
-                print("error in JSONSerialization")
-                return
-            }
-            let jsonResponse = jsonResult
-            
-            guard let routes = jsonResponse["routes"] as? [Any] else {
-                return
-            }
-            
-            guard let route = routes.first as? [String: Any] else {
-                return
-            }
-            
-            guard let overview_polyline = route["overview_polyline"] as? [String: Any] else {
-                return
-            }
-            
-            guard let polyLineString = overview_polyline["points"] as? String else {
-                return
-            }
-            OperationQueue.main.addOperation {
-                //Call this method to draw path on map
-                completed(polyLineString)
-            }
-            
-        })
-        task.resume()
-    }
     
+    func successBlock<T:Codable>(response:CommonResponse<T>) -> T?{
+        self.stopActivityIndicator()
+        if response.success ?? false{
+            return response.data
+        }
+        else{
+            self.showAlertWith(message: response.message ?? "")
+            return nil
+        }
+    }
     
     
     func showMediaPickerOptions(vc:UIViewController){
@@ -362,12 +329,25 @@ extension UIViewController: URLSessionDownloadDelegate{
     }
 }
 
+//MARK: - COMMON ACTION
+extension UIViewController{
+    @IBAction func backButtonPressed(_ sender:UIButton){
+        navigationController?.popViewController(animated: true)
+    }
+}
+
 //MARK: - ACCOUNT MENU DELEGATE
 extension UIViewController:AccountMenuDelegate{
     func didSelectMenu(option: EventMenuOptions) {
         switch option {
         case .bookings:
             let vc:BookingListVC = BookingListVC.controller()
+            navigationController?.pushViewController(vc, animated: true)
+        case .sportsTournaments:
+            let vc:UpcomingTournamentVC = UpcomingTournamentVC.controller()
+            navigationController?.pushViewController(vc, animated: true)
+        case .tournamenRegistrations:
+            let vc:TournamentListVC = TournamentListVC.controller()
             navigationController?.pushViewController(vc, animated: true)
         default:
             break

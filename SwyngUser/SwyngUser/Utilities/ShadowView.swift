@@ -30,3 +30,15 @@ class ShadowButton: UIButton {
         self.updateShadowPath()
     }
 }
+
+class SelectableButton: UIButton {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.addTarget(self, action: #selector(didSelectButton(sender:)), for: .touchUpInside)
+    }
+    
+    @objc private func didSelectButton(sender:UIButton){
+        sender.isSelected = !sender.isSelected
+    }
+}

@@ -15,13 +15,15 @@ class ViewController: UIViewController {
         self.loginView.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.loginView.isHidden = false
+            if ApplicationManager.authToken != nil{
+                AppUtilities.setRootController()
+            }
         }
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func btnSkipPressed(_ sender:UIButton){
-        let vc = UIStoryboard(name: "Dashboard", bundle: nil)
-        if let window = AppUtilities.shared().getMainWindow(){
+        let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
+        if let window = AppUtilities.getMainWindow(){
             window.rootViewController = vc.instantiateInitialViewController()
         }
     }

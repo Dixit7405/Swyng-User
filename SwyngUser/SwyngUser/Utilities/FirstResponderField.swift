@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirstResponderField: UITextField {
+class FirstResponderField: CustomField {
 
     override func awakeFromNib() {
         super.awakeFromNib()

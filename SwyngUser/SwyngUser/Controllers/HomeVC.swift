@@ -26,6 +26,9 @@ class HomeVC: UIViewController {
     
     var arrOpenEnquiery:[Bool] = Array(repeating: false, count: 2)
     let disposeBag = DisposeBag()
+    var firstTimeOpen = false
+    var cityId = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,17 @@ class HomeVC: UIViewController {
         viewAccountShadow.dropShadow(color: UIColor.black, opacity: 0.5)
         setupUpcomingTable()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if firstTimeOpen{
+            firstTimeOpen = false
+            let vc:AccountInfoVC = AccountInfoVC.controller()
+            vc.cityId = self.cityId
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLayoutSubviews() {

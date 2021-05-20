@@ -13,12 +13,7 @@ class CitySelectionVC: UIViewController {
     @IBOutlet weak var viewBg:UIView!
     @IBOutlet weak var btnApplySelection:UIButton!
     
-    var citiesArr:[String] = ["Bangaluru",
-                              "Chennai",
-                              "Delhi",
-                              "Hyderabad",
-                              "Mumbai",
-                              "Pune"]
+    var citiesArr:[City] = []
     var selectedIndex:Int?{
         didSet{
             btnApplySelection.backgroundColor = selectedIndex != nil ? UIColor.AppColor.themeColor : UIColor.white
@@ -36,6 +31,7 @@ class CitySelectionVC: UIViewController {
         collectionView.addObserver(self, forKeyPath: #keyPath(UICollectionView.contentSize), options: [NSKeyValueObservingOptions.new], context: nil)
         viewBg.dropShadow(color: UIColor.black, opacity: 0.5, offSet: CGSize(width: 0.0, height: 15.0), radius: 10.0)
         btnApplySelection.dropShadow(color: UIColor.black, opacity: 0.5)
+        getCityList()
         // Do any additional setup after loading the view.
     }
     
@@ -49,9 +45,18 @@ class CitySelectionVC: UIViewController {
 //MARK: - ACTION METHODS
 extension CitySelectionVC{
     @IBAction func btnApplySelectionPressed(_ sender:UIButton){
-        let vc = UIStoryboard(name: "Dashboard", bundle: nil)
-        if let window = AppUtilities.shared().getMainWindow(){
-            window.rootViewController = vc.instantiateInitialViewController()
+        if selectedIndex == nil{
+            showAlertWith(message: "Please select city to continue")
+            return
+        }
+        let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
+        if let window = AppUtilities.getMainWindow(){
+            if let tabbar = vc.instantiateInitialViewController() as? UITabBarController, let nav = tabbar.viewControllers?.first as? UINavigationController, let home = nav.viewControllers.first as? HomeVC{
+                home.firstTimeOpen = true
+                home.cityId = citiesArr[selectedIndex ?? 0].cityId ?? 0
+                window.rootViewController = tabbar
+            }
+            
         }
     }
 }
@@ -72,8 +77,9 @@ extension CitySelectionVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityCell", for: indexPath) as! CityCell
-        cell.lblCityName.text = citiesArr[indexPath.item]
+        cell.lblCityName.text = citiesArr[indexPath.item].name
         cell.isSelected = indexPath.item == selectedIndex
+        cell.layoutIfNeeded()
         return cell
     }
     
@@ -85,5 +91,19 @@ extension CitySelectionVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
         collectionView.reloadData()
+    }
+}
+
+//MARK: - API SERVICES
+extension CitySelectionVC{
+    private func getCityList(){
+        self.startActivityIndicator()
+        Webservices().request(with: [:], method: .get, endPoint: EndPoints.getCities, type: CommonResponse<[City]>.self, failer: failureBlock()) {[weak self] (success) in
+            guard let self = self else {return}
+            self.stopActivityIndicator()
+            guard let response = success as? CommonResponse<[City]> else {return}
+            self.citiesArr = response.data ?? []
+            self.collectionView.reloadData()
+        }
     }
 }

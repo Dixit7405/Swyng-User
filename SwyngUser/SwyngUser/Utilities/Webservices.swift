@@ -11,80 +11,36 @@ import Alamofire
 import KDCircularProgress
 
 var authorization = ""
-let baseURL = "http://goocab.com/admin/User_Apis/"
+let baseURL = "http://ec2-54-234-213-111.compute-1.amazonaws.com/"
 let imageBase = "http://goocab.com/admin/"
 
 typealias FailureBlock = ((String) -> Void)
 
 struct Parameters {
-    static let key = "key"
-    static let name = "name"
-    static let last_name = "last_name"
-    static let gender = "gender"
-    static let dob = "dob"
-    static let mobile = "mobile"
+    static let fname = "fname"
+    static let lname = "lname"
     static let email = "email"
-    static let image = "image"
-    static let otp = "otp"
-    static let token = "tokan"
-    static let userId = "user_id"
-    static let id = "id"
-    static let chatText = "chattext"
-    static let lat = "lat"
-    static let long = "longs"
-    static let radius = "radius"
-    static let vehicleType = "vehicle_type"
-    static let vahiclType = "vahicl_type"
-    static let coupons = "coupons"
-    static let fromDate = "from_date"
-    static let fromLocation = "from_location"
-    static let fromLat = "from_latitude"
-    static let fromLong = "from_longitude"
-    static let toLocation = "to_location"
-    static let toLat = "to_latitude"
-    static let toLong = "to_longitude"
-    static let coupon = "coupon"
-    static let couponPrice = "coupon_price"
-    static let paymentId = "payment_id"
-    static let paymentType = "payment_type"
-    static let totalDistance = "total_distance"
-    static let customerId = "bookedby_customer_id"
-    static let cost = "cost"
-    static let status = "status"
-    static let totalTime = "total_time"
-    static let walletAmount = "wallet_amount"
-    static let accessAmount = "access_amount"
-    static let gstAmount = "gst_amount"
-    static let bookingId = "booking_id"
-    static let review = "review"
-    static let rating = "rating"
+    static let mobileNo = "mobileNo"
+    static let otp = "OTP"
+    static let token = "token"
+    static let dateOfBirth = "dateOfBirth"
+    static let gender = "gender"
+    static let bloodGroup = "bloodGroup"
+    static let tShirtSize = "tShirtSize"
+    static let emergencyContactName = "emergencyContactName"
+    static let emergencyContactNumber = "emergencyContactNumber"
+    static let cityId = "cityId"
 }
 
 struct EndPoints {
-    static let registerUser = "user_register_api"
-    static let matchOTP = "user_otp_match_api"
-    static let login = "user_login_api"
-    static let fetchUser = "user_fetch_api"
-    static let updateUser = "user_edit_api"
-    static let fetchWallet = "user_wallet"
-    static let fetchSOS = "user_sos"
-    static let addSOS = "user_sos_add"
-    static let deleteSOS = "user_sos_delete"
-    static let fetchChat = "chat_fetch"
-    static let sendMessage = "chat_add"
-    static let userFAQs = "user_faqs"
-    static let tripHistory = "user_history"
-    static let fetchNotification = "user_notification"
-    static let getAllTypeVehicle = "available_near_by_me"
-    static let getSelectedVehicle = "available_near_by_vehicle"
-    static let getCoupons = "get_coupons_list"
-    static let checkCoupon = "get_coupons_check"
-    static let bookingAPI = "booking_api"
-    static let cancelBooking = "cancel_booking"
-    static let privacy = "user_privacy"
-    static let terms = "user_terms"
-    static let getRunningBookings = "get_running_bookings"
-    static let userRating = "user_rating"
+    static let registerUser = "account/user/signup"
+    static let getCities = "city/getAll"
+    static let sendOTP = "account/user/otp/send"
+    static let resendOTP = "account/user/otp/resend"
+    static let verifyOTP = "account/user/otp/verify"
+    static let getProfile = "account/user/getProfile"
+    static let updateProfile = "account/user/updateProfile"
+    static let getTournaments = "tournament/getAll"
 }
 
 class Webservices {
@@ -94,7 +50,7 @@ class Webservices {
     var progressLabel = UILabel()
     init() {
         base = baseURL
-        guard let view = AppUtilities.shared().getMainWindow() else {return}
+        guard let view = AppUtilities.getMainWindow() else {return}
         view.viewWithTag(12345)?.removeFromSuperview()
         let bgView = UIView(frame: view.bounds)
         bgView.tag = 12345
@@ -143,12 +99,14 @@ class Webservices {
         
         guard let url = URL(string: base) else {return}
         var request        = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-        do {
-            request.httpBody   = try JSONSerialization.data(withJSONObject: params)
-        } catch let error {
-            print("Error : \(error.localizedDescription)")
+        request.httpMethod = method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if method == .post{
+            do {
+                request.httpBody   = try JSONSerialization.data(withJSONObject: params)
+            } catch let error {
+                print("Error : \(error.localizedDescription)")
+            }
         }
         AF.request(request).responseDecodable(of: type.self) { response in
             

@@ -131,13 +131,11 @@ extension AccountMenuVC:UICollectionViewDelegate,UICollectionViewDelegateFlowLay
             let vc:PartnerWithUsVC = PartnerWithUsVC.controller()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
-        case .bookings:
-            self.dismissLeft(){ [unowned self] in
-                self.delegate?.didSelectMenu(option: .bookings)
-            }
             
         default:
-            break
+            self.dismissLeft(){ [unowned self] in
+                self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])
+            }
         }
     }
 }

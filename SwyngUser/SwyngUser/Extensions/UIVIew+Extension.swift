@@ -108,3 +108,11 @@ extension UIView{
         layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.layer.cornerRadius).cgPath
     }
 }
+
+//MARK: - UIBUTTON
+extension UIButton{
+    func setSelected(selected:Bool){
+        self.backgroundColor = selected ? UIColor.AppColor.themeColor : UIColor.white
+        self.setTitleColor(selected ? UIColor.white : UIColor.AppColor.appBlack ?? .clear, for: .normal)
+    }
+}

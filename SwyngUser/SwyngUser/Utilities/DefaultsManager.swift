@@ -10,8 +10,8 @@ import Foundation
 class DefaultsManager{
     struct DefaultKeys {
         static let userData = "UserData"
+        static let authToken = "authToken"
         static let isLoggedIn = "IsLoggedIn"
-        static let myLocation = "myLocation"
     }
 //    
 //    static var userData:Register?{

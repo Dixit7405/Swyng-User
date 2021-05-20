@@ -47,32 +47,15 @@ class AppUtilities{
         }
     }
     
-    func getPlaceDetails(placeId:String, completion:@escaping([String:Any]) -> Void){
-        
-        let Url = String(format: "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&key=\(googleServerKey)").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpMethod = "POST"
-        
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
-            }
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                    if let resp = json as? [String:Any], let result = resp["result"] as? [String:Any]{
-                        completion(result)
-                    }
-                } catch {
-                    print(error)
-                }
-            }
-        }.resume()
-    }
     
+    static func setRootController(){
+        if ApplicationManager.authToken != nil{
+            let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
+            if let window = AppUtilities.getMainWindow(){
+                window.rootViewController = vc.instantiateInitialViewController()
+            }
+        }
+    }
     
     
     
@@ -171,7 +154,7 @@ class AppUtilities{
         }
     }
     
-    func getMainWindow() -> UIWindow?{
+    static func getMainWindow() -> UIWindow?{
         if #available(iOS 13.0, *) {
             if let window = UIApplication.shared.keyWindow?.windowScene?.delegate as? SceneDelegate{
                 return window.window

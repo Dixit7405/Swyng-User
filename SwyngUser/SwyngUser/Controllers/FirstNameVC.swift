@@ -8,7 +8,8 @@
 import UIKit
 
 class FirstNameVC: UIViewController {
-
+    @IBOutlet weak var txtfFirstName:FirstResponderField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,8 +17,16 @@ class FirstNameVC: UIViewController {
     }
 
     @IBAction func btnNextPressed(_ sender:UIButton){
-        
+        if !txtfFirstName.checkValidation() {
+            return
+        }
         performSegue(withIdentifier: "LastNameSegue", sender: nil)
     }
 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? LastNameVC{
+            vc.firstName = txtfFirstName.text!
+        }
+    }
 }
