@@ -11,6 +11,7 @@ import UIKit
 import NVActivityIndicatorView
 import SnapKit
 import Photos
+import MobileCoreServices
 //MARK: - UIViewController
 extension UIViewController{
     func setTitle(_ title:String){
@@ -29,10 +30,23 @@ extension UIViewController{
     }
     
     func failureBlock() -> FailureBlock{
-        return { [weak self] failure in
+        return { [weak self] failure,status  in
             guard let self = self else {return}
             self.stopActivityIndicator()
-            self.showAlertWith(message: failure)
+            if status == nil{
+                self.showAlertWith(message: failure)
+            }
+            else{
+                self.showAlertWith(message: failure) {
+                    ApplicationManager.authToken = nil
+                    ApplicationManager.profileData = nil
+                    
+                    AppUtilities.setRootController()
+                } cancelPressed: {
+                    
+                }
+
+            }
         }
     }
     
@@ -64,6 +78,19 @@ extension UIViewController{
         present(alert, animated: true, completion: nil)
     }
     
+    func openPDFPicker(vc:UIViewController){
+        let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeSpreadsheet]
+        let importMenu = UIDocumentPickerViewController(documentTypes: types as [String], in: .import)
+        
+        if #available(iOS 11.0, *) {
+            importMenu.allowsMultipleSelection = false
+        }
+        
+        importMenu.delegate = vc as? UIDocumentPickerDelegate
+        importMenu.modalPresentationStyle = .formSheet
+        
+        present(importMenu, animated: true)
+    }
     
     func openMediaPicker(with type:UIImagePickerController.SourceType, vc:UIViewController){
         if UIImagePickerController.isSourceTypeAvailable(type){
@@ -222,6 +249,49 @@ extension UIViewController{
         self.presentFromLeft(vc)
     }
     
+    func dropdownPressed(){
+        let tournament = ApplicationManager.sportType == .tournaments
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let participant = UIAlertAction(title: "Participants", style: .default) { (button) in
+            let vc:TournamentsParticipantsVC = TournamentsParticipantsVC.controller()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let fixture = UIAlertAction(title: tournament ? "Fixtures & Schedule" : "Schedule", style: .default) { (button) in
+            let vc:TournamentCMSVC = TournamentCMSVC.controller()
+            vc.pageType = .fixture
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let tournaments = UIAlertAction(title: tournament ? "Tournament Results" : "Results", style: .default) { (button) in
+            let vc:TournamentCMSVC = TournamentCMSVC.controller()
+            vc.pageType = .results
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let photos = UIAlertAction(title: "Photo Gallery", style: .default) { (button) in
+            let vc:TournamentCMSVC = TournamentCMSVC.controller()
+            vc.pageType = .gallery
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let published = UIAlertAction(title: tournament ? "Tournament Published" : "Published", style: .default) { (button) in
+        }
+        
+        let export = UIAlertAction(title: "Export to Mail", style: .default) { (button) in
+        }
+        
+        alert.addAction(participant)
+        alert.addAction(fixture)
+        alert.addAction(tournaments)
+        alert.addAction(photos)
+        alert.addAction(published)
+        alert.addAction(export)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func addRightBarButton(){
         let bar = UIButton()
         bar.setImage(#imageLiteral(resourceName: "menu"), for: .normal)
@@ -231,8 +301,13 @@ extension UIViewController{
     }
     
     
-    @objc func rightBarPressed(){
-        
+    @objc func rightBarPressed(forSportCenter:Bool = false){
+        let vc:SportsFilterVC = SportsFilterVC.controller()
+        vc.delegate = self
+        vc.showSubCategory = false
+        vc.forSportCenter = forSportCenter
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func btnBackPressed(){
@@ -332,25 +407,35 @@ extension UIViewController: URLSessionDownloadDelegate{
 //MARK: - COMMON ACTION
 extension UIViewController{
     @IBAction func backButtonPressed(_ sender:UIButton){
+        if (self.presentingViewController != nil){
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func btnMenuPressed(_ sender:UIButton){
+        dropdownPressed()
+    }
+
 }
 
 //MARK: - ACCOUNT MENU DELEGATE
 extension UIViewController:AccountMenuDelegate{
     func didSelectMenu(option: EventMenuOptions) {
         switch option {
-        case .bookings:
-            let vc:BookingListVC = BookingListVC.controller()
-            navigationController?.pushViewController(vc, animated: true)
         case .sportsTournaments:
-            let vc:UpcomingTournamentVC = UpcomingTournamentVC.controller()
-            navigationController?.pushViewController(vc, animated: true)
-        case .tournamenRegistrations:
-            let vc:TournamentListVC = TournamentListVC.controller()
+            let vc:TournamentListVC = .controller()
             navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
+    }
+}
+
+//MARK: - SPORTS FILTER DELEGATE
+extension UIViewController:SportsFilterDelegate{
+    func didApplyFilter(filter: Filter) {
+        
     }
 }

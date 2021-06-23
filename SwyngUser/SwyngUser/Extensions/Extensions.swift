@@ -103,6 +103,13 @@ extension UITextField{
 }
 
 extension String {
+    enum DateFormats:String {
+        case withDay = "EEE dd MMM yyyy"
+        case dayWithNextLine = "EEE\ndd MMM\nyyyy"
+        case serverDate = "yyyy-MM-dd"
+        case shortDate = "yyyy/MM/dd"
+    }
+    
     var html2AttributedString: NSAttributedString? {
         return Data(utf8).html2AttributedString
     }
@@ -124,7 +131,11 @@ extension String {
     }
     
     var toDate:String{
-        return self.convertDate(format: "yyyy-MM-dd").toDate(format: "yyyy/MM/dd")
+        return self.convertDate(format: DateFormats.serverDate).toDate(format: DateFormats.shortDate.rawValue)
+    }
+    
+    func toCustomDate(from fromFormat:DateFormats = DateFormats.serverDate, _ toFormat:DateFormats) -> String{
+        return self.convertDate(format: fromFormat).toDate(format: toFormat.rawValue)
     }
     
     var doubleValue:Double{

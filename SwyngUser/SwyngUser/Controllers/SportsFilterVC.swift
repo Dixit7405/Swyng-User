@@ -7,18 +7,18 @@
 
 import UIKit
 
-class Filter{
-    var sport:String?
+@objc class Filter:NSObject{
+    var sport:[Sports] = []
     var category:String?
     var gallery:Bool?
     var filter:Bool?
 }
 
-protocol SportsFilterDelegate:AnyObject {
+@objc protocol SportsFilterDelegate:AnyObject {
     func didApplyFilter(filter:Filter)
 }
 
-class SportsFilterVC: UIViewController {
+class SportsFilterVC: BaseVC {
     @IBOutlet weak var collectionView:UICollectionView!
     @IBOutlet weak var btnApplySelection:UIButton!
     @IBOutlet weak var nslcCollectionHeight:NSLayoutConstraint!
@@ -27,26 +27,27 @@ class SportsFilterVC: UIViewController {
     @IBOutlet weak var btnListGrid:UIButton!
     @IBOutlet weak var btnByDate:UIButton!
     @IBOutlet weak var nslcSubCatHeight:NSLayoutConstraint!
+    @IBOutlet weak var viewSubCategorySeprator:UIView!
+    @IBOutlet weak var stackView:UIStackView!
     
-    var sportsArr:[String] = ["Badminton",
-                              "Cricket",
-                              "Running",
-                              "Squash",
-                              "Football",
-                              "Table Tennis"]
-    var selectedIndex:Int?{
+    var sportsArr:[Sports] = []
+    var selectedIndex:[Int] = []{
         didSet{
-            btnApplySelection.backgroundColor = selectedIndex != nil ? UIColor.AppColor.themeColor : UIColor.white
-            btnApplySelection.setTitleColor(selectedIndex != nil ? UIColor.white : UIColor.black, for: .normal)
-            btnApplySelection.isUserInteractionEnabled = selectedIndex != nil
+            if forSportCenter{
+                setApplyEnabled(selectedIndex.count != 0)
+            }
+            else{
+                setApplyEnabled(true)
+            }
             
-            btnAllSports.backgroundColor = selectedIndex == nil ? UIColor.AppColor.themeColor : UIColor.white
-            btnAllSports.setTitleColor(selectedIndex == nil ? UIColor.white : UIColor.black, for: .normal)
+            btnAllSports.backgroundColor = selectedIndex.count == 0 ? UIColor.AppColor.themeColor : UIColor.white
+            btnAllSports.setTitleColor(selectedIndex.count == 0 ? UIColor.white : UIColor.black, for: .normal)
         }
     }
     
     var selectedSubCategory:Int?
     var showSubCategory = false
+    var forSportCenter = false
     
     weak var delegate:SportsFilterDelegate?
     
@@ -54,33 +55,60 @@ class SportsFilterVC: UIViewController {
         super.viewDidLoad()
         view.layoutIfNeeded()
         collectionView.reloadData()
-        selectedIndex = nil
+        selectedIndex = []
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.addObserver(self, forKeyPath: #keyPath(UICollectionView.contentSize), options: [NSKeyValueObservingOptions.new], context: nil)
         
         collectionSubCategory.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionSubCategory.addObserver(self, forKeyPath: #keyPath(UICollectionView.contentSize), options: [NSKeyValueObservingOptions.new], context: nil)
+        
+        viewSubCategorySeprator.isHidden = !showSubCategory
+        collectionSubCategory.isHidden = !showSubCategory
+        
+        stackView.isHidden = forSportCenter
+        getSportsList()
         // Do any additional setup after loading the view.
     }
 
 }
 
+//MARK: - CUSTOM METHODS
+extension SportsFilterVC{
+    private func setApplyEnabled(_ enable:Bool){
+        btnApplySelection.backgroundColor = enable ? UIColor.AppColor.themeColor : UIColor.white
+        btnApplySelection.setTitleColor(enable ? UIColor.white : UIColor.black, for: .normal)
+        btnApplySelection.isUserInteractionEnabled = enable
+    }
+}
+
 //MARK: - ACTION METHODS
 extension SportsFilterVC{
     @IBAction func btnApplySelectionPressed(_ sender:UIButton){
-        self.dismissLeft { [unowned self] in
+        if selectedIndex.count == 0, forSportCenter {
+            showAlertWith(message: "Please select sport for apply filter")
+            return
+        }
+        navigationController?.popViewController(animated: true){ [unowned self] in
             let filter = Filter()
-            filter.gallery = true
+            var arr:[Sports] = []
+            for i in 0..<sportsArr.count{
+                if selectedIndex.contains(i){
+                    arr.append(sportsArr[i])
+                }
+            }
+            filter.sport = arr
+            filter.gallery = btnListGrid.isSelected
+            filter.filter = btnByDate.isSelected
             self.delegate?.didApplyFilter(filter: filter)
         }
     }
     
     @IBAction func btnBackPressed(_ sender:UIButton){
-        self.dismissLeft()
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnAllSportsPressed(_ sender:UIButton){
-        selectedIndex = nil
+        selectedIndex = []
         collectionView.reloadData()
     }
     
@@ -116,8 +144,8 @@ extension SportsFilterVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityCell", for: indexPath) as! CityCell
-        cell.lblCityName.text = sportsArr[indexPath.item]
-        cell.isSelected = indexPath.item == (collectionView == self.collectionView ? selectedIndex : selectedSubCategory)
+        cell.lblCityName.text = sportsArr[indexPath.item].name
+        cell.isSelected = selectedIndex.contains(indexPath.item)
         cell.layoutIfNeeded()
         return cell
     }
@@ -129,11 +157,30 @@ extension SportsFilterVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.collectionView{
-            selectedIndex = indexPath.item
+            if selectedIndex.contains(indexPath.item){
+                selectedIndex.removeAll(where: {$0 == indexPath.item})
+            }
+            else{
+                selectedIndex.append(indexPath.item)
+            }
         }
         else{
             selectedSubCategory = indexPath.item
         }
         collectionView.reloadData()
+    }
+}
+
+//MARK: - API SERVICES
+extension SportsFilterVC{
+    private func getSportsList(){
+        startActivityIndicator()
+        Webservices().request(with: [:], method: .get, endPoint: EndPoints.getAllSports, type: CommonResponse<[Sports]>.self, failer: failureBlock()) {[weak self] success in
+            guard let self = self else {return}
+            if let response = success as? CommonResponse<[Sports]>, let data = self.successBlock(response: response){
+                self.sportsArr = data
+                self.collectionView.reloadData()
+            }
+        }
     }
 }

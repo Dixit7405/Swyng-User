@@ -12,9 +12,21 @@ import KDCircularProgress
 
 var authorization = ""
 let baseURL = "http://ec2-54-234-213-111.compute-1.amazonaws.com/"
-let imageBase = "http://goocab.com/admin/"
+let imageBase = "http://ec2-54-234-213-111.compute-1.amazonaws.com/"
 
-typealias FailureBlock = ((String) -> Void)
+enum ImageBaseURL:String{
+    case tournamentImage = "tournamentsFiles/tournamentImage/"
+    case tournamentResult = "tournamentsFiles/tournamentResult/"
+    case tournamentFixture = "tournamentsFiles/tournamentFixerAndSchedule/"
+    
+    var value: String {
+            get {
+                return imageBase + self.rawValue
+            }
+        }
+}
+
+typealias FailureBlock = ((String, Int?) -> Void)
 
 struct Parameters {
     static let fname = "fname"
@@ -30,6 +42,23 @@ struct Parameters {
     static let emergencyContactName = "emergencyContactName"
     static let emergencyContactNumber = "emergencyContactNumber"
     static let cityId = "cityId"
+    static let fname1 = "fname1"
+    static let lname1 = "lname1"
+    static let email1 = "email1"
+    static let mobileNo1 = "mobileNo1"
+    static let tournamentResult = "tournamentResult"
+    static let runResult = "runResult"
+    static let runPublished = "runPublished"
+    static let fixerAndSchedulePdf = "fixerAndSchedulePdf"
+    static let image = "image"
+    static let id = "id"
+    static let key = "key"
+    static let tournamentCategoryId = "tournament_category_id"
+    static let runsCategoryId = "run_category_id"
+    static let offset = "offset"
+    static let size = "size"
+    static let sport = "sport"
+    static let location = "location"
 }
 
 struct EndPoints {
@@ -39,15 +68,47 @@ struct EndPoints {
     static let resendOTP = "account/user/otp/resend"
     static let verifyOTP = "account/user/otp/verify"
     static let getProfile = "account/user/getProfile"
-    static let updateProfile = "account/user/updateProfile"
-    static let getTournaments = "tournament/getAll"
+    static let getAllSports = "sport/getAllSports"
+    static let createParticipant = "tournament/create/tournamentParticipants"
+    static let uploadTournamentResult = "tournament/update/tournamentResult"
+    static let uploadRunResult = "run/update/run-result"
+    static let uploadTournamentFixture = "tournament/update/tournamentFixerSchedule"
+    static let uploadTournamentGallery = "tournament/update/tournamentGallery"
+    static let uploadRunsPublished = "run/update/run-published"
+    static let getTournamentTypes = "tournamentCategory/getAll"
+    static let getRunsCategory = "runCategory/getAll"
+    static let paymentPolicy = "rules/paymentPolicy/getAll"
+    static let aboutSwyng = "rules/aboutSwyng/getAll"
+    static let partnerWithSwyng = "rules/partnerWithUs/getAll"
+    static let cancellationRules = "rules/cancelation/getAll"
+    static let privacyPolicy = "rules/privacyAndPolicy/getAll"
+    static let termsOfUse = "rules/termsOfUse/getAll"
+    static let getSportCenters = "mobile/vendor/getSportCenter"
+    static let getSportCenterDetails = "mobile/sport-center/getById"
+    static let searchSportCenter = "mobile/sport-center/search"
+    static let getParticipantList = "mobile/tournament/get/tournamentParticipants"
+    static let getRunsParticipants = "mobile/run/get/participants"
+    static let addPartipant = "mobile/tournament/create/tournamentParticipants"
+    static let addRunsPartipant = "mobile/run/create/participants"
+    static let getSportCenterByFilter = "mobile/sport-center/filter"
+    static let getUpPastTournaments = "mobile/tournament/get/"
+    static let filterTournaments = "mobile/tournament/filter"
+    static let filterRuns = "mobile/run/filter"
+    static let getUpPastRuns = "mobile/run/get/"
+    static let updateProfile = "mobile/user/update/profile"
 }
 
 class Webservices {
+    
     var base = ""
     var request: Alamofire.Request?
     var progress = KDCircularProgress()
     var progressLabel = UILabel()
+    
+    enum MimeType:String {
+        case pdf = "application/pdf"
+        case image = "image/png"
+    }
     init() {
         base = baseURL
         guard let view = AppUtilities.getMainWindow() else {return}
@@ -110,22 +171,10 @@ class Webservices {
         }
         AF.request(request).responseDecodable(of: type.self) { response in
             
-            if response.response?.statusCode == 400, let data = response.data{
-                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any], let data = json["data"] as? [String:Any]{
-                    debugPrint(json)
-                    for (_,value) in data{
-                        if let val = value as? [String], let str = val.first{
-                            failer(str)
-                            break
-                        }
-                    }
-                }
-                return
-            }
             if let error = response.error{
                 print(error)
                 debugPrint(error.localizedDescription)
-                failer(error.localizedDescription)
+                failer(error.localizedDescription, nil)
             }
             
             if let data = response.data{
@@ -136,15 +185,16 @@ class Webservices {
                     let resp = try decoder.decode(type, from: data)
                     if let jsn = json as? [String:Any]{
                         if let message = jsn["message"] as? String{
-                            if let status = jsn["status"] as? String, status == "0"{
-                                failer(message)
+                            if let status = jsn["status"] as? Int, status != 200{
+                                failer(message, status)
+                                
                             }
                             else{
                                 success(resp)
                             }
                         }else{
-                            if let status = jsn["status"] as? String, status == "0"{
-                                failer("Something went wrong")
+                            if let status = jsn["status"] as? Int, status != 200{
+                                failer("Something went wrong", status)
                             }
                             else{
                                 success(resp)
@@ -155,14 +205,14 @@ class Webservices {
                     success(resp)
                 }
                 catch{
-                    debugPrint(error.localizedDescription)
-                    failer(error.localizedDescription)
+                    debugPrint(error)
+                    failer(error.localizedDescription, nil)
                 }
             }
         }
     }
     
-    func upload<T:Decodable>(with params:[String:Any], method:HTTPMethod, endPoint:String, type:T.Type, showProgress:Bool = false, failer:@escaping(String) -> Void, success:@escaping(Any) -> Void){
+    func upload<T:Decodable>(with params:[String:Any], method:HTTPMethod, endPoint:String, type:T.Type, mimeType:MimeType = .image, showProgress:Bool = false, failer:@escaping FailureBlock, success:@escaping(Any) -> Void){
         
         var headers:HTTPHeaders = [:]
         
@@ -177,13 +227,13 @@ class Webservices {
         
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params{
-                if let data = value as? Data, key == "image"{
-                    multipartFormData.append(data, withName: key, fileName: "\(Date()).jpg", mimeType: "image/png")
-                }else if let data = value as? Data, key == "video"{
+                if let data = value as? Data/*, key == "image"*/{
+                    multipartFormData.append(data, withName: key, fileName: mimeType == .pdf ? "\(Date()).pdf" : "\(Date()).jpg", mimeType: mimeType.rawValue)
+                }/*else if let data = value as? Data, key == "video"{
                     multipartFormData.append(data, withName: "file", fileName: "\(Date()).mp4", mimeType: "video/mp4")
                 }else if let data = value as? Data, key == "music"{
                     multipartFormData.append(data, withName: "file", fileName: "\(Date()).mp3", mimeType: "audio/mpeg")
-                }
+                }*/
                 else{
                     let data = String(describing: value)
                     multipartFormData.append(Data((data).utf8), withName: key)
@@ -204,20 +254,9 @@ class Webservices {
         .responseDecodable(of: type.self) { response in
             debugPrint("Response: \(response)")
             self.progress.superview?.isHidden = true
-            if response.response?.statusCode == 400, let data = response.data{
-                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]{
-                    for (_,value) in json{
-                        if let val = value as? [String], let str = val.first{
-                            failer(str)
-                            break
-                        }
-                    }
-                }
-                return
-            }
             if let error = response.error{
                 debugPrint(error.localizedDescription)
-                failer(error.localizedDescription)
+                failer(error.localizedDescription, nil)
             }
             if let data = response.data{
                 do{
@@ -225,11 +264,29 @@ class Webservices {
                     print(json ?? "")
                     let decoder = JSONDecoder()
                     let resp = try decoder.decode(type, from: data)
+                    if let jsn = json as? [String:Any]{
+                        if let message = jsn["message"] as? String{
+                            if let status = jsn["status"] as? Int, status != 200{
+                                failer(message, status)
+                            }
+                            else{
+                                success(resp)
+                            }
+                        }else{
+                            if let status = jsn["status"] as? Int, status != 200{
+                                failer("Something went wrong", status)
+                            }
+                            else{
+                                success(resp)
+                            }
+                        }
+                        return
+                    }
                     success(resp)
                 }
                 catch{
                     debugPrint(error.localizedDescription)
-                    failer(error.localizedDescription)
+                    failer(error.localizedDescription, nil)
                 }
             }
             

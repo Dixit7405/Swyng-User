@@ -12,6 +12,9 @@ class DefaultsManager{
         static let userData = "UserData"
         static let authToken = "authToken"
         static let isLoggedIn = "IsLoggedIn"
+        static let selectedSport = "SelectedSport"
+        static let selectedCenter = "SelectedCenter"
+        static let sportType = "SportType"
     }
 //    
 //    static var userData:Register?{

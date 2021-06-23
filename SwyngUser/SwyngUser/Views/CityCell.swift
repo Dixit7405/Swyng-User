@@ -10,19 +10,27 @@ import UIKit
 class CityCell: UICollectionViewCell {
     @IBOutlet weak var lblCityName:UILabel!
     @IBOutlet weak var viewBg:UIView!
+    @IBOutlet weak var optionView:OptionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        viewBg.dropShadow(color: UIColor.black, opacity: 0.5)
+        if viewBg != nil{
+            viewBg.dropShadow(color: UIColor.black, opacity: 0.5)
+        }
     }
     
     override func layoutSubviews() {
-        viewBg.updateShadowPath()
+        if viewBg != nil{
+            viewBg.updateShadowPath()
+        }
     }
     
     override var isSelected: Bool{
         didSet{
-            viewBg.backgroundColor = isSelected ? UIColor.AppColor.themeColor : UIColor.white
-            lblCityName.textColor = isSelected ? UIColor.white : UIColor.black
+            if viewBg != nil{
+                viewBg.backgroundColor = isSelected ? UIColor.AppColor.themeColor : UIColor.white
+                lblCityName.textColor = isSelected ? UIColor.white : UIColor.black
+            }
         }
     }
 }

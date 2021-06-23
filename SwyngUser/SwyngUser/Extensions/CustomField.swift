@@ -186,9 +186,9 @@ extension String{
         return Test.evaluate(with: self)
     }
     
-    func convertDate(format:String) -> Date {
+    func convertDate(format:DateFormats) -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = format
+        formatter.dateFormat = format.rawValue
         return formatter.date(from: self) ?? Date()
     }
     

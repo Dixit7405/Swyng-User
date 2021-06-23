@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum SportType {
+    case tournaments
+    case run
+}
+
 class ApplicationManager {
     static var authToken:String?{
         set{
@@ -25,13 +30,50 @@ class ApplicationManager {
             }
         }
         get{
-            
+
             return DefaultsManager.getData(type: Profile.self, key: DefaultsManager.DefaultKeys.userData)
         }
     }
     
-    static let googleApiKey = "AIzaSyCJyUKNCGwglDzBmWhjnTBAUvuRnyMizbY"
-    static var googleServerKey = "AIzaSyDKEdiTkUK0O9hwN2NyLjRP2Zwmoul0ths"
     static var firebaseToken = ""
     
+    
+    static var sportType:SportType?{
+        set{
+            if let sport = newValue{
+                UserDefaults.standard.setValue(sport == .tournaments ? 1 : 2, forKey: DefaultsManager.DefaultKeys.sportType)
+            }
+        }
+        get{
+            if let type = UserDefaults.standard.value(forKey: DefaultsManager.DefaultKeys.sportType) as? Int{
+                return type == 1 ? .tournaments : .run
+            }
+            return nil
+        }
+    }
+    
+    static var selectedSport:Sports?{
+        set{
+            if let sport = newValue{
+                DefaultsManager.saveData(data: sport, type: Sports.self, key: DefaultsManager.DefaultKeys.selectedSport)
+            }
+        }
+        get{
+            DefaultsManager.getData(type: Sports.self, key: DefaultsManager.DefaultKeys.selectedSport)
+        }
+    }
+    
+    static var selectedCenter:SportCenters?{
+        set{
+            if let center = newValue{
+                DefaultsManager.saveData(data: center, type: SportCenters.self, key: DefaultsManager.DefaultKeys.selectedCenter)
+            }
+        }
+        get{
+            DefaultsManager.getData(type: SportCenters.self, key: DefaultsManager.DefaultKeys.selectedCenter)
+        }
+    }
+    
+    static var tournament:Tournaments?
+    static var runs:Run?
 }

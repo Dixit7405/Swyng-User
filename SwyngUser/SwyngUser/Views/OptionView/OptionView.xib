@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptionView" customModule="Swyng" customModuleProvider="target">
+            <connections>
+                <outlet property="lblTitle" destination="9bt-MS-Vkc" id="tyL-Pv-5EC"/>
+                <outlet property="roundView" destination="bjG-sv-uPZ" id="9HL-id-i3K"/>
+                <outlet property="view" destination="iN0-l3-epB" id="pgc-Zl-bbP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjG-sv-uPZ" customClass="ShadowView" customModule="Swyng" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9bt-MS-Vkc">
+                            <rect key="frame" x="5" y="0.0" width="310" height="100"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                            <color key="textColor" name="textBlack"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="9bt-MS-Vkc" firstAttribute="leading" secondItem="bjG-sv-uPZ" secondAttribute="leading" constant="5" id="FXU-dE-TKt"/>
+                        <constraint firstItem="9bt-MS-Vkc" firstAttribute="top" secondItem="bjG-sv-uPZ" secondAttribute="top" id="H5B-Em-Eld"/>
+                        <constraint firstAttribute="bottom" secondItem="9bt-MS-Vkc" secondAttribute="bottom" id="cLS-PP-1Lf"/>
+                        <constraint firstAttribute="trailing" secondItem="9bt-MS-Vkc" secondAttribute="trailing" constant="5" id="ood-VT-H3T"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="bjG-sv-uPZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4zZ-8C-gAe"/>
+                <constraint firstAttribute="bottom" secondItem="bjG-sv-uPZ" secondAttribute="bottom" id="Akg-Mc-eOX"/>
+                <constraint firstItem="bjG-sv-uPZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="XtR-U4-yiF"/>
+                <constraint firstAttribute="trailing" secondItem="bjG-sv-uPZ" secondAttribute="trailing" id="ld7-bE-SBU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-163.125" y="-150"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="textBlack">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

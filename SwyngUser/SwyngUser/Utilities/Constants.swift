@@ -11,3 +11,8 @@ struct StoryboardIds{
     static let main = "Main"
     static let dashboard = "Dashboard"
 }
+
+struct AppDetails {
+    static let appId = "284882215"
+    static let appURL = "https://apps.apple.com/in/app/id\(appId)"
+}

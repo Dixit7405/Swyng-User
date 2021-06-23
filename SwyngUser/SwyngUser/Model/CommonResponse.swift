@@ -32,3 +32,25 @@ struct CommonResponse<T:Codable> : Codable {
     }
     
 }
+
+struct PagingData<T:Codable>:Codable {
+    let currentPage:Int?
+    let totalItems:Int?
+    let totalPages:Int?
+    let data:[T]?
+    
+    enum CodingKeys: String, CodingKey {
+        case currentPage = "currentPage"
+        case totalItems = "totalItems"
+        case totalPages = "totalPages"
+        case data = "data"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        currentPage = try values.decodeIfPresent(Int.self, forKey: .currentPage)
+        totalPages = try values.decodeIfPresent(Int.self, forKey: .totalPages)
+        totalItems = try values.decodeIfPresent(Int.self, forKey: .totalItems)
+        data = try values.decodeIfPresent([T].self, forKey: .data)
+    }
+}

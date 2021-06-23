@@ -9,6 +9,15 @@ import UIKit
 
 class AllSportsCell: UITableViewCell {
     @IBOutlet weak var imgStar:UIImageView!
+    @IBOutlet weak var lblTitle:UILabel!
+    @IBOutlet weak var lblAddress:UILabel!
+    
+    var sportCenter:SportCenters?{
+        didSet{
+            lblTitle.text = sportCenter?.centerTitle
+            lblAddress.text = sportCenter?.sportCenter
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -11,6 +11,10 @@ class ParticipantCell: UITableViewCell {
     @IBOutlet weak var lblIndex:UILabel!
     @IBOutlet weak var viewParticipant1:UIView!
     @IBOutlet weak var viewParticipant2:UIView!
+    @IBOutlet weak var lblParticipant1:UILabel!
+    @IBOutlet weak var lblParticipant2:UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

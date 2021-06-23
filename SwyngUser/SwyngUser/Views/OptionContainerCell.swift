@@ -1,20 +1,20 @@
 //
-//  UpcommingCourtBookingCell.swift
-//  SwyngUser
+//  OptionContainerCell.swift
+//  Swyng
 //
-//  Created by Dixit Rathod on 26/04/21.
+//  Created by Dixit Rathod on 04/06/21.
 //
 
 import UIKit
 
-class UpcommingCourtBookingCell: UITableViewCell {
-    @IBOutlet weak var tournamentView:TournamentListView!
+class OptionContainerCell: UITableViewCell {
+    @IBOutlet weak var optionView:OptionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

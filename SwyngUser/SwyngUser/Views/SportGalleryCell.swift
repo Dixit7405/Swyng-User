@@ -8,5 +8,5 @@
 import UIKit
 
 class SportGalleryCell: UICollectionViewCell {
-    
+    @IBOutlet weak var imgGallery:UIImageView!
 }

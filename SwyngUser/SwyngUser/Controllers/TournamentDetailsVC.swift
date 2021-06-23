@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TournamentDetailsVC: UIViewController {
+class TournamentDetailsVC: BaseVC {
     @IBOutlet weak var lblAbout:UILabel!
     @IBOutlet weak var lblDateTime:UILabel!
     @IBOutlet weak var lblRegisterBefore:UILabel!
@@ -22,12 +22,27 @@ class TournamentDetailsVC: UIViewController {
     @IBOutlet weak var lblPastUpcomingEventsFrom:UILabel!
     @IBOutlet weak var lblAboutOrganizationHeader:UILabel!
     @IBOutlet weak var lblEventsFromHeader:UILabel!
+    @IBOutlet weak var lblAboutTitle:UILabel!
+    @IBOutlet weak var lblTournamentInfoTitle:UILabel!
+    @IBOutlet weak var stackBidCollection:UIStackView!
+    @IBOutlet weak var stackRouteMap:UIStackView!
+    @IBOutlet weak var lblBidCollection:UILabel!
+    @IBOutlet weak var lblRouteMap:UILabel!
+    @IBOutlet weak var btnRegister:UIButton!
+    
     
     var tournament:Tournaments?
+    var runs:Run?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupData()
+        if runs != nil{
+            setupRunspData()
+            btnRegister.isHidden = true
+        }
+        else{
+            setuTournamentpData()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -35,9 +50,11 @@ class TournamentDetailsVC: UIViewController {
 
 //MARK: - CUSTOM FUNCTIONS
 extension TournamentDetailsVC{
-    private func setupData(){
+    private func setuTournamentpData(){
+        stackRouteMap.isHidden = true
+        stackBidCollection.isHidden = true
         lblAbout.text = tournament?.aboutTournament
-        let startDate = tournament?.dates?.first?.convertDate(format: "yyyy-MM-dd").toDate(format: "EEEE dd MMM yyyy") ?? ""
+        let startDate = tournament?.dates?.first?.toCustomDate(.withDay) ?? ""
         let startTime = tournament?.eventStartTime ?? ""
         let reportTime = tournament?.reportingTime ?? ""
         lblDateTime.text = startDate + " " + startTime + "\n" + reportTime
@@ -54,45 +71,55 @@ extension TournamentDetailsVC{
         lblAboutOrganizationHeader.text = "About " + (tournament?.organizer ?? "")
         lblEventsFromHeader.text = "Past/Upcomming events from " + (tournament?.organizer ?? "")
     }
+    
+    private func setupRunspData(){
+        stackRouteMap.isHidden = false
+        stackBidCollection.isHidden = false
+        lblBidCollection.text = runs?.bidCollection
+        lblRouteMap.text = runs?.routeMap
+        lblAboutTitle.text = "About \(runs?.runName ?? "")"
+        lblTournamentInfoTitle.text = "Run Information"
+        lblAbout.text = runs?.aboutRun
+        let startDate = runs?.dates?.first?.toCustomDate(.withDay) ?? ""
+        let startTime = runs?.eventStartTime ?? ""
+        let reportTime = runs?.reportingTime ?? ""
+        lblDateTime.text = startDate + " " + startTime + "\n" + reportTime
+        lblRegisterBefore.text = runs?.registerBeforeFromStartTime
+        lblVenue.text = (runs?.venueAddress ?? "") + (tournament?.venue ?? "")
+        lblParticipationFees.text = runs?.participationFees?.toString()
+        lblRewards.text = runs?.rewards
+        lblTournamentsInfo.text = runs?.runInformation
+        lblPleaseNote.text = runs?.pleaseNote
+        lblFAQ.text = runs?.frequentlyAsked
+        lblTerms.text = runs?.termsAndCondition
+        lblAboutOrganization.text = runs?.aboutOrganizer
+//        lblPastUpcomingEventsFrom.text = tournament.
+        lblAboutOrganizationHeader.text = "About " + (runs?.organizer ?? "")
+        lblEventsFromHeader.text = "Past/Upcomming events from " + (runs?.organizer ?? "")
+    }
 }
 
 //MARK: - ACTION METHODS
 extension TournamentDetailsVC{
-    @IBAction func btnMenuPressed(_ sender:UIButton){
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let participant = UIAlertAction(title: "Participants", style: .default) { (button) in
-            let vc:TournamentsParticipantsVC = TournamentsParticipantsVC.controller()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        let fixture = UIAlertAction(title: "Fixtures & Schedule", style: .default) { (button) in
-            let vc:TournamentCMSVC = TournamentCMSVC.controller()
-            vc.pageTitle = "SWYNG Badminton\nOpen\nTournament\nFixtures & Schedule"
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        let tournaments = UIAlertAction(title: "Tournament Results", style: .default) { (button) in
-            let vc:TournamentCMSVC = TournamentCMSVC.controller()
-            vc.pageTitle = "SWYNG Badminton\nOpen Tournament\nResults"
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        let photos = UIAlertAction(title: "Photo Gallery", style: .default) { (button) in
-            let vc:TournamentGalleryVC = TournamentGalleryVC.controller()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        alert.addAction(participant)
-        alert.addAction(fixture)
-        alert.addAction(tournaments)
-        alert.addAction(photos)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
     
     @IBAction func btnRegisterPressed(_ sender:UIButton){
         let vc:TournamentRegisterVC = TournamentRegisterVC.controller()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func btnMapTapped(_ sender:UIButton){
+        if isTournament{
+            guard let url = URL(string: tournament?.venueGoogleMap ?? "") else {return}
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        else{
+            guard let url = URL(string: runs?.venueGoogleMap ?? "") else {return}
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @IBAction func btnRouteMapTapped(_ sender:UIButton){
+        guard let url = URL(string: runs?.routeMap ?? "") else {return}
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
