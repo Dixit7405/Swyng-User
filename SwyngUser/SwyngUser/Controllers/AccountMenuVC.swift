@@ -16,16 +16,17 @@ protocol AccountMenuDelegate:AnyObject {
 
 class AccountMenuVC: UIViewController {
     @IBOutlet weak var collectionView:UICollectionView!
+    @IBOutlet weak var btnCity:UIButton!
     
     var arrOptions:[EventMenuOptions] = [.home,
                                          .accountInfo,
                                          .sportsCenter,
-                                         .bookings,
-                                         .bulkbookings,
                                          .sportsTournaments,
-                                         .tournamenRegistrations,
                                          .runs,
-                                         .runRegistrations,
+                                         /*.bookings,
+                                         .bulkbookings,
+                                         .tournamenRegistrations,
+                                         .runRegistrations,*/
                                          .cancelRules,
                                          .paymentPolicy,
                                          .aboutSwyngs,
@@ -41,6 +42,8 @@ class AccountMenuVC: UIViewController {
         self.collectionView.register(UINib(nibName: "EventMenuFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "EventMenuFooter")
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
         view.layoutIfNeeded()
+        
+        btnCity.setTitle(ApplicationManager.selectedCity?.name, for: .normal)
         
         setupCollectionView()
         // Do any additional setup after loading the view.
@@ -131,7 +134,16 @@ extension AccountMenuVC:UICollectionViewDelegate,UICollectionViewDelegateFlowLay
             let vc:PartnerWithUsVC = PartnerWithUsVC.controller()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
-            
+        case .sportsTournaments:
+            ApplicationManager.sportType = .tournaments
+            self.dismissLeft(){ [unowned self] in
+                self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])
+            }
+        case .runs:
+            ApplicationManager.sportType = .run
+            self.dismissLeft(){ [unowned self] in
+                self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])
+            }
         default:
             self.dismissLeft(){ [unowned self] in
                 self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])

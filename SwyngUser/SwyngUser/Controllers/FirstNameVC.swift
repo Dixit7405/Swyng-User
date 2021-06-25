@@ -26,7 +26,9 @@ class FirstNameVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? LastNameVC{
-            vc.firstName = txtfFirstName.text!
+            let data = RegisterParams()
+            data.firstName = txtfFirstName.text
+            vc.registerData = data
         }
     }
 }

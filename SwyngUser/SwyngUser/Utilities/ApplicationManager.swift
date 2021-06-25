@@ -48,7 +48,31 @@ class ApplicationManager {
             if let type = UserDefaults.standard.value(forKey: DefaultsManager.DefaultKeys.sportType) as? Int{
                 return type == 1 ? .tournaments : .run
             }
+            return .tournaments
+        }
+    }
+    
+    static var cityId:Int?{
+        set{
+            if let cityId = newValue{
+                UserDefaults.standard.setValue(cityId, forKey: DefaultsManager.DefaultKeys.cityId)
+            }
+        }
+        get{
+            if let id = UserDefaults.standard.value(forKey: DefaultsManager.DefaultKeys.cityId) as? Int{
+                return id
+            }
             return nil
+        }
+    }
+    
+    static var selectedCity:City?{
+        set{
+            guard let city = newValue else {return}
+            DefaultsManager.saveData(data: city, type: City.self, key: DefaultsManager.DefaultKeys.selectedCity)
+        }
+        get{
+            return DefaultsManager.getData(type: City.self, key: DefaultsManager.DefaultKeys.selectedCity)
         }
     }
     

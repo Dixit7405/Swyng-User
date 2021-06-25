@@ -26,23 +26,21 @@ class EmailVC: UIViewController {
         if !txtfEmail.checkValidation() {
             return
         }
-        signUpUser()
+        updateEmail()
     }
 
 }
 
 //MARK: - API SERVICES
 extension EmailVC{
-    fileprivate func signUpUser(){
-        let params:[String:Any] = [Parameters.fname:firstName,
-                                   Parameters.lname:lastName,
-                                   Parameters.email:txtfEmail.text!]
+    fileprivate func updateEmail(){
+        let params:[String:Any] = [Parameters.email:txtfEmail.text!,
+                                   Parameters.token:ApplicationManager.authToken ?? ""]
         self.startActivityIndicator()
-        Webservices().request(with: params, method: .post, endPoint: EndPoints.registerUser, type: CommonResponse<Register>.self, failer: failureBlock()) {[weak self] (success) in
+        Webservices().request(with: params, method: .post, endPoint: EndPoints.updateEmail, type: CommonResponse<Profile>.self, failer: failureBlock()) {[weak self] (success) in
             guard let self = self else {return}
-            guard let response = success as? CommonResponse<Register> else {return}
-            if let data = self.successBlock(response: response){
-                ApplicationManager.authToken = data.token
+            guard let response = success as? CommonResponse<Profile> else {return}
+            if let _ = self.successBlock(response: response){
                 self.performSegue(withIdentifier: "GetStartedSegue", sender: nil)
             }
             

@@ -27,7 +27,6 @@ class HomeVC: UIViewController {
     var arrOpenEnquiery:[Bool] = Array(repeating: false, count: 2)
     let disposeBag = DisposeBag()
     var firstTimeOpen = false
-    var cityId = 0
     
     
     override func viewDidLoad() {
@@ -49,13 +48,24 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if firstTimeOpen{
+        if ApplicationManager.cityId == nil{
+            let vc:CitySelectionVC = .controller(storyId: "Main")
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+        else if firstTimeOpen{
             firstTimeOpen = false
             let vc:AccountInfoVC = AccountInfoVC.controller()
-            vc.cityId = self.cityId
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
+        /*else if ApplicationManager.sportType == nil{
+            let vc:ManageCenterVC = .controller()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+            return
+        }*/
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidLayoutSubviews() {

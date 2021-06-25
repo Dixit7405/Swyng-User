@@ -15,6 +15,8 @@ class DefaultsManager{
         static let selectedSport = "SelectedSport"
         static let selectedCenter = "SelectedCenter"
         static let sportType = "SportType"
+        static let cityId = "CityId"
+        static let selectedCity = "SelectedCity"
     }
 //    
 //    static var userData:Register?{

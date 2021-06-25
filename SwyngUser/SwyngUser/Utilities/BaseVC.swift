@@ -24,6 +24,18 @@ class BaseVC:UIViewController{
         }
     }
     
+    var selectedTournament:Tournaments?{
+        get{
+            return ApplicationManager.tournament
+        }
+    }
+    
+    var selectedRun:Run?{
+        get{
+            return ApplicationManager.runs
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

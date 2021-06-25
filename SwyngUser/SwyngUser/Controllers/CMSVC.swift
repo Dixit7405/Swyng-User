@@ -32,6 +32,16 @@ class CMSVC: UIViewController {
             .bind(to: imgHeader.rx.image)
             .disposed(by: disposeBag)
         
+        viewModel.alert.subscribe { alert in
+            self.showAlertWith(message: alert)
+        }.disposed(by: disposeBag)
+        
+        viewModel.content.asObservable().bind(to: txtvContent.rx.text).disposed(by: disposeBag)
+        
+        startActivityIndicator()
+        viewModel.getCMSPageData { [weak self] in
+            self?.stopActivityIndicator()
+        }
         
         // Do any additional setup after loading the view.
     }

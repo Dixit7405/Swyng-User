@@ -23,6 +23,7 @@ class TournamentGridCell: UICollectionViewCell {
     @IBOutlet weak var lblPlayerCount:UILabel!
     @IBOutlet weak var imgTournament:UIImageView!
     @IBOutlet weak var viewButtons:UIView!
+    @IBOutlet weak var btnFavorite:UIButton!
     weak var delegate:TournamentGridDelegate?
     
     var categories:[TournamentsType] = []
@@ -30,13 +31,14 @@ class TournamentGridCell: UICollectionViewCell {
     var tournament:Tournaments?{
         didSet{
             lblCategory.text = "Tournament"
-            lblName.text = tournament?.eventName
+            lblName.text = tournament?.tournamentName
             let startDate = tournament?.dates?.first?.toCustomDate(.withDay) ?? ""
             lblAddressTime.text = startDate + " " + (tournament?.venueAddress ?? "")
             let openFor = categories.filter({tournament?.categoryId?.contains(($0.tournamentCategoryId ?? 0).toString()) ?? false})
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
             lblRegisterBefore.text = "Register before \(tournament?.registerBeforeFromStartTime ?? "")"
             lblPlayerCount.text = "\(tournament?.noOfPlayers ?? 0) players have registerd"
+            imgTournament.setImage(from: ImageBase.imagePath + (tournament?.thumbnailImage ?? ""))
             viewButtons.isHidden = false
         }
     }
@@ -51,6 +53,7 @@ class TournamentGridCell: UICollectionViewCell {
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
             lblRegisterBefore.text = "Register before \(runs?.registerBeforeFromStartTime ?? "")"
             lblPlayerCount.text = "\(0) players have registerd"
+            imgTournament.setImage(from: ImageBase.imagePath + (runs?.thumbnailImage ?? ""))
             viewButtons.isHidden = true
         }
     }
@@ -89,5 +92,23 @@ class TournamentGridCell: UICollectionViewCell {
             controller.present(activityViewController, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func btnFavoritePressed(_ sender:UIButton){
+        addToFavorite(favorite: !sender.isSelected)
+    }
 }
 
+//MARK: - API SERVICES
+extension TournamentGridCell{
+    private func addToFavorite(favorite:Bool){
+        let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
+                                   Parameters.tournament_id:tournament?.tournamentId ?? runs?.id ?? "",
+                                   Parameters.favourite:favorite]
+        Webservices().request(with: params, method: .post, endPoint: EndPoints.favorite, type: CommonResponse<Favorite>.self) { response, status in
+            
+        } success: { success in
+            self.btnFavorite.isSelected = favorite
+        }
+
+    }
+}

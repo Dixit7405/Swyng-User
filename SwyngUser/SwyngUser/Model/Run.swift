@@ -42,6 +42,7 @@ struct Run : Codable {
     let rewards:String?
     let runPublished:String?
     let fixerAndSchedulePdf:String?
+    let tblRunRegistrationTickets:[RunsTicket]?
     
         enum CodingKeys: String, CodingKey {
                 case aboutOrganizer = "aboutOrganizer"
@@ -79,6 +80,7 @@ struct Run : Codable {
             case rewards = "rewards"
             case runPublished = "runPublished"
             case fixerAndSchedulePdf = "fixerAndSchedulePdf"
+            case tblRunRegistrationTickets = "tbl_run_registration_tickets"
         }
     
         init(from decoder: Decoder) throws {
@@ -118,6 +120,58 @@ struct Run : Codable {
             rewards = try values.decodeIfPresent(String.self, forKey: .rewards)
             runPublished = try values.decodeIfPresent(String.self, forKey: .runPublished)
             fixerAndSchedulePdf = try values.decodeIfPresent(String.self, forKey: .fixerAndSchedulePdf)
+            tblRunRegistrationTickets = try values.decodeIfPresent([RunsTicket].self, forKey: .tblRunRegistrationTickets)
+        }
+
+}
+
+struct RunsTicket : Codable {
+
+        let allowedEntries : Int?
+        let allowGST : Bool?
+        let createdAt : String?
+        let eventName : String?
+        let genderAllowed : String?
+        let id : Int?
+        let noOfPlayers : Int?
+        let participationFees : String?
+        let rewards : String?
+        let runCategory : RunsCategory?
+        let runCategoryId : Int?
+        let runId : Int?
+        let updatedAt : String?
+
+        enum CodingKeys: String, CodingKey {
+                case allowedEntries = "allowedEntries"
+                case allowGST = "allowGST"
+                case createdAt = "createdAt"
+                case eventName = "eventName"
+                case genderAllowed = "genderAllowed"
+                case id = "id"
+                case noOfPlayers = "noOfPlayers"
+                case participationFees = "participationFees"
+                case rewards = "rewards"
+                case runCategory = "run_category"
+                case runCategoryId = "run_category_id"
+                case runId = "run_id"
+                case updatedAt = "updatedAt"
+        }
+    
+        init(from decoder: Decoder) throws {
+                let values = try decoder.container(keyedBy: CodingKeys.self)
+                allowedEntries = try values.decodeIfPresent(Int.self, forKey: .allowedEntries)
+                allowGST = try values.decodeIfPresent(Bool.self, forKey: .allowGST)
+                createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
+                eventName = try values.decodeIfPresent(String.self, forKey: .eventName)
+                genderAllowed = try values.decodeIfPresent(String.self, forKey: .genderAllowed)
+                id = try values.decodeIfPresent(Int.self, forKey: .id)
+                noOfPlayers = try values.decodeIfPresent(Int.self, forKey: .noOfPlayers)
+                participationFees = try values.decodeIfPresent(String.self, forKey: .participationFees)
+                rewards = try values.decodeIfPresent(String.self, forKey: .rewards)
+                runCategory = try values.decodeIfPresent(RunsCategory.self, forKey: .runCategory)
+                runCategoryId = try values.decodeIfPresent(Int.self, forKey: .runCategoryId)
+                runId = try values.decodeIfPresent(Int.self, forKey: .runId)
+                updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
         }
 
 }

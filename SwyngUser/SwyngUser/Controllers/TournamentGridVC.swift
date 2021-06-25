@@ -224,6 +224,7 @@ extension TournamentGridVC{
 extension TournamentGridVC:TournamentGridDelegate{
     func didTapRegister(run: Run?) {
         let vc:TournamentRegisterVC = TournamentRegisterVC.controller()
+        ApplicationManager.runs = run
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -236,6 +237,7 @@ extension TournamentGridVC:TournamentGridDelegate{
     
     func didTapRegister(tournament: Tournaments?) {
         let vc:TournamentRegisterVC = TournamentRegisterVC.controller()
+        ApplicationManager.tournament = tournament
         navigationController?.pushViewController(vc, animated: true)
     }
     

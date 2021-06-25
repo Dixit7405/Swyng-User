@@ -9,6 +9,10 @@ import UIKit
 
 class LoginVC: UIViewController {
     @IBOutlet weak var txtfMobileNumber:FirstResponderField!
+    
+    var fromRegister = false
+    var registerData:RegisterParams?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -16,6 +20,7 @@ class LoginVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? OTPVC{
+            vc.fromRegister = self.fromRegister
             vc.mobileNumber = txtfMobileNumber.text!
         }
     }
@@ -28,12 +33,17 @@ extension LoginVC{
         if !txtfMobileNumber.checkValidation(){
             return
         }
-        self.sendOTP()
+        if fromRegister{
+            signupUser()
+        }
+        else{
+            self.sendOTP()
+        }
     }
     
 }
 
-//MARK: - API Services
+//MARK: - API Servicesg
 extension LoginVC{
     private func sendOTP(){
         startActivityIndicator()
@@ -55,6 +65,20 @@ extension LoginVC{
                 }
                 
                 
+            }
+        }
+    }
+    
+    private func signupUser(){
+        startActivityIndicator()
+        let params:[String:Any] = [Parameters.fname:registerData?.firstName ?? "",
+                                   Parameters.lname:registerData?.lastName ?? "",
+                                   Parameters.mobileNo:txtfMobileNumber.text!]
+        Webservices().request(with: params, method: .post, endPoint: EndPoints.registerUser, type: CommonResponse<Register>.self, failer: failureBlock()) {[weak self] (success) in
+            guard let self = self else {return}
+            guard let response = success as? CommonResponse<Register> else {return}
+            if let _ = self.successBlock(response: response){
+                self.performSegue(withIdentifier: "OTPSegue", sender: nil)
             }
         }
     }

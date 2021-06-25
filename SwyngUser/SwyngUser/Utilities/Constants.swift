@@ -16,3 +16,11 @@ struct AppDetails {
     static let appId = "284882215"
     static let appURL = "https://apps.apple.com/in/app/id\(appId)"
 }
+
+struct ImageBase {
+    static var imagePath = "/tournamentsFiles/tournamentImage/"
+    static var galleryPath = ""
+    static var publishedPath = ""
+    static var resultPath = ""
+    static var fixerAndSchedulePath = ""
+}

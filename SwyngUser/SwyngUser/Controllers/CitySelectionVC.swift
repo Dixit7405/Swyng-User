@@ -49,11 +49,16 @@ extension CitySelectionVC{
             showAlertWith(message: "Please select city to continue")
             return
         }
+        ApplicationManager.cityId = citiesArr[selectedIndex ?? 0].cityId
+        ApplicationManager.selectedCity = citiesArr[selectedIndex ?? 0]
+        if self.isBeingPresented{
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
         if let window = AppUtilities.getMainWindow(){
             if let tabbar = vc.instantiateInitialViewController() as? UITabBarController, let nav = tabbar.viewControllers?.first as? UINavigationController, let home = nav.viewControllers.first as? HomeVC{
                 home.firstTimeOpen = true
-                home.cityId = citiesArr[selectedIndex ?? 0].cityId ?? 0
                 window.rootViewController = tabbar
             }
             

@@ -9,6 +9,24 @@ import UIKit
 
 class TournamentRegisterCell: UITableViewCell {
     @IBOutlet weak var btnSelection:UIButton!
+    @IBOutlet weak var lblCategory:UILabel!
+    @IBOutlet weak var lblPrice:UILabel!
+    
+    var tournamentTicket:TournamentTicket?{
+        didSet{
+            lblPrice.text =  tournamentTicket?.participationFees
+            lblCategory.text = tournamentTicket?.tournamentCategory?.name
+            lblPrice.textColor = (tournamentTicket?.isBookingAvailable ?? false) ? UIColor.black : UIColor.lightGray
+            lblCategory.textColor = (tournamentTicket?.isBookingAvailable ?? false) ? UIColor.black : UIColor.lightGray
+        }
+    }
+    
+    var runsTicket:RunsTicket?{
+        didSet{
+            lblPrice.text =  runsTicket?.participationFees
+            lblCategory.text = runsTicket?.runCategory?.name
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -53,8 +53,6 @@ class TabbarVC: UITabBarController {
         nav4.tabBarItem = tabbar4
         self.viewControllers?.append(nav4)
         
-//        self.viewControllers = [nav1, nav2, nav4]
-        
     }
 
 }

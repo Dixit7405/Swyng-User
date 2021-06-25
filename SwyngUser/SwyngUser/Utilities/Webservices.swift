@@ -11,20 +11,8 @@ import Alamofire
 import KDCircularProgress
 
 var authorization = ""
-let baseURL = "http://ec2-54-234-213-111.compute-1.amazonaws.com/"
-let imageBase = "http://ec2-54-234-213-111.compute-1.amazonaws.com/"
-
-enum ImageBaseURL:String{
-    case tournamentImage = "tournamentsFiles/tournamentImage/"
-    case tournamentResult = "tournamentsFiles/tournamentResult/"
-    case tournamentFixture = "tournamentsFiles/tournamentFixerAndSchedule/"
-    
-    var value: String {
-            get {
-                return imageBase + self.rawValue
-            }
-        }
-}
+let baseURL = "http://localhost:20049/"//"http://ec2-54-234-213-111.compute-1.amazonaws.com/"
+let imageBase = "http://localhost:20049" //"http://ec2-54-234-213-111.compute-1.amazonaws.com"
 
 typealias FailureBlock = ((String, Int?) -> Void)
 
@@ -59,15 +47,24 @@ struct Parameters {
     static let size = "size"
     static let sport = "sport"
     static let location = "location"
+    static let tournament_id = "tournament_id"
+    static let favourite = "favourite"
+    static let amount = "amount"
+    static let run_id = "run_id"
+    static let orderId = "orderId"
+    static let signature = "signature"
+    static let txnToken = "txnToken"
+    static let booking_id = "booking_id"
+    static let ticket_id = "ticket_id"
 }
 
 struct EndPoints {
-    static let registerUser = "account/user/signup"
+    static let registerUser = "mobile/user/signUp"
     static let getCities = "city/getAll"
     static let sendOTP = "account/user/otp/send"
     static let resendOTP = "account/user/otp/resend"
     static let verifyOTP = "account/user/otp/verify"
-    static let getProfile = "account/user/getProfile"
+    static let getProfile = "mobile/user/getProfile"
     static let getAllSports = "sport/getAllSports"
     static let createParticipant = "tournament/create/tournamentParticipants"
     static let uploadTournamentResult = "tournament/update/tournamentResult"
@@ -96,6 +93,12 @@ struct EndPoints {
     static let filterRuns = "mobile/run/filter"
     static let getUpPastRuns = "mobile/run/get/"
     static let updateProfile = "mobile/user/update/profile"
+    static let updateEmail = "mobile/user/update/email"
+    static let favorite = "mobile/tournament/favourite"
+    static let initTournamentTransaction = "mobile/tournament/initiate/transaction"
+    static let initRunsTransaction = "mobile/run/initiate/transaction"
+    static let tournamentRegistration = "mobile/tournament/registration"
+    static let runsRegistration = "mobile/run/registration"
 }
 
 class Webservices {

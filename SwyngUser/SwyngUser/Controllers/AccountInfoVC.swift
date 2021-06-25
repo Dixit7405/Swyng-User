@@ -21,7 +21,6 @@ class AccountInfoVC: UIViewController {
     @IBOutlet weak var mainStackView:UIStackView!
     @IBOutlet weak var lblTopText:UILabel!
     
-    var cityId = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         txtfGender.arrPicker = ["Male", "Female"]
@@ -94,7 +93,6 @@ extension AccountInfoVC{
         let params:[String:Any] = [
             Parameters.fname:txtfFirstName.text!,
             Parameters.lname:txtfLastName.text!,
-            Parameters.email:txtfEmail.text!,
             Parameters.mobileNo:txtfMobile.text!,
             Parameters.token:ApplicationManager.authToken ?? "",
             Parameters.dateOfBirth:txtfDOB.text!.toDate,
@@ -103,7 +101,7 @@ extension AccountInfoVC{
             Parameters.tShirtSize:txtfTshirtSize.text!,
             Parameters.emergencyContactName:txtfEmergencyContactName.text!,
             Parameters.emergencyContactNumber:txtfEmergencyContactNo.text!,
-            Parameters.cityId:self.cityId
+            Parameters.cityId:ApplicationManager.cityId ?? 0
         ]
         startActivityIndicator()
         Webservices().request(with: params, method: .post, endPoint: EndPoints.updateProfile, type: CommonResponse<Profile>.self, failer: failureBlock()) {[weak self] (success) in

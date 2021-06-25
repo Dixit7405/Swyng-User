@@ -427,6 +427,9 @@ extension UIViewController:AccountMenuDelegate{
         case .sportsTournaments:
             let vc:TournamentListVC = .controller()
             navigationController?.pushViewController(vc, animated: true)
+        case .runs:
+            let vc:TournamentListVC = .controller()
+            navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

@@ -163,7 +163,7 @@ extension AllSportsVC{
     
     private func filterSportCenters(){
         startActivityIndicator()
-        let params:[String:Any] = [Parameters.offset:"",
+        let params:[String:Any] = [Parameters.offset:0,
                                    Parameters.size:10,
                                    Parameters.sport:filterSports.compactMap({$0.id}),
                                    Parameters.location:[]]

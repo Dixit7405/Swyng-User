@@ -51,7 +51,8 @@ class TournamentCMSVC: BaseVC {
                                 """
             lblUploadType.text = "Upload A PDF Document Only"
             btnUpload.setTitle("Upload Fixtures & Schedule", for: .normal)
-            fileString = isTournament ? tournament?.fixerAndSchedulePdf : runs?.fixerAndSchedulePdf
+            fileString = ImageBase.fixerAndSchedulePath + "/"
+            fileString! += (isTournament ? tournament?.fixerAndSchedulePdf : runs?.fixerAndSchedulePdf) ?? ""
         case .results:
             headerView.lblHeader.text = "\(name) Results"
             lblUploadTime.text = """
@@ -61,13 +62,15 @@ class TournamentCMSVC: BaseVC {
                                 """
             lblUploadType.text = "Upload A PDF Document Only"
             btnUpload.setTitle("Upload Results", for: .normal)
-            fileString = isTournament ? tournament?.tournamentResult : runs?.runResult
+            fileString = ImageBase.resultPath + "/"
+            fileString! += (isTournament ? tournament?.tournamentResult : runs?.runResult) ?? ""
         case .gallery:
             headerView.lblHeader.text = "\(name) Photo Gallery"
             lblUploadTime.text = ""
             lblUploadType.text = "Upload .png or .jpeg images Only"
             btnUpload.setTitle("Upload Photos", for: .normal)
-            fileString = isTournament ? tournament?.galleryImage : runs?.galleryImage
+            fileString = ImageBase.galleryPath
+            fileString! += (isTournament ? tournament?.galleryImage : runs?.galleryImage) ?? ""
         case .published:
             headerView.lblHeader.text = "\(name) Published"
             lblUploadTime.text = """
@@ -77,7 +80,8 @@ class TournamentCMSVC: BaseVC {
                                 """
             lblUploadType.text = "Upload A PDF Document Only"
             btnUpload.setTitle("Upload Results", for: .normal)
-            fileString = isTournament ? tournament?.tournamentPublished : runs?.runPublished
+            fileString = ImageBase.publishedPath + "/"
+            fileString! += (isTournament ? tournament?.tournamentPublished : runs?.runPublished) ?? ""
         }
         if let fileString = fileString{
             viewUploadFiles.isHidden = true
@@ -96,7 +100,7 @@ class TournamentCMSVC: BaseVC {
             webView.snp.makeConstraints({
                 $0.edges.equalToSuperview()
             })
-            if let url = URL(string: fileString){
+            if let url = URL(string:imageBase + fileString){
                 webView.load(URLRequest(url: url))
             }
         }

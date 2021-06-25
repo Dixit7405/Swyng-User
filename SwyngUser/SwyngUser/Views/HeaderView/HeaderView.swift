@@ -38,11 +38,11 @@ class HeaderView: UIView {
     
     private func setupPageData(){
         if ApplicationManager.sportType == .tournaments{
-            imgHeader.setImage(from: ApplicationManager.tournament?.headerImage)
+            imgHeader.setImage(from: ImageBase.imagePath + (ApplicationManager.tournament?.headerImage ?? ""))
             lblHeader.text = ApplicationManager.tournament?.tournamentName
         }
         else{
-            imgHeader.setImage(from: ApplicationManager.runs?.headerImage)
+            imgHeader.setImage(from: ImageBase.imagePath + (ApplicationManager.runs?.headerImage ?? ""))
             lblHeader.text = ApplicationManager.runs?.runName
         }
     }

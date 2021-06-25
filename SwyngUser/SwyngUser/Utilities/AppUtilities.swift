@@ -49,11 +49,14 @@ class AppUtilities{
     
     
     static func setRootController(){
+        guard let window = AppUtilities.getMainWindow() else {return}
         if ApplicationManager.authToken != nil{
-            let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
-            if let window = AppUtilities.getMainWindow(){
-                window.rootViewController = vc.instantiateInitialViewController()
-            }
+            let vc = TabbarVC()
+            window.rootViewController = vc
+        }
+        else{
+            let vc:LoginVC = .controller(storyId: StoryboardIds.main)
+            window.rootViewController = vc
         }
     }
     
