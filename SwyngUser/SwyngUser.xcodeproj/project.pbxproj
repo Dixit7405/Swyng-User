@@ -98,6 +98,7 @@
 		1BA53B0F2685C0F50050E725 /* InitTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA53B0E2685C0F50050E725 /* InitTransaction.swift */; };
 		1BA53B1126860A090050E725 /* TournamentRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA53B1026860A090050E725 /* TournamentRegister.swift */; };
 		1BA53B13268642CA0050E725 /* RunRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA53B12268642C90050E725 /* RunRegister.swift */; };
+		1BA91DDB26873E6B009245C4 /* TournamentGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA91DDA26873E6B009245C4 /* TournamentGallery.swift */; };
 		1BA927002645B61000748307 /* BookingReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA926FF2645B61000748307 /* BookingReviewVC.swift */; };
 		1BB7021826328CCF00B66B62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7021726328CCF00B66B62 /* AppDelegate.swift */; };
 		1BB7021C26328CCF00B66B62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7021B26328CCF00B66B62 /* ViewController.swift */; };
@@ -220,6 +221,7 @@
 		1BA53B0E2685C0F50050E725 /* InitTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitTransaction.swift; sourceTree = "<group>"; };
 		1BA53B1026860A090050E725 /* TournamentRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentRegister.swift; sourceTree = "<group>"; };
 		1BA53B12268642C90050E725 /* RunRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunRegister.swift; sourceTree = "<group>"; };
+		1BA91DDA26873E6B009245C4 /* TournamentGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentGallery.swift; sourceTree = "<group>"; };
 		1BA926FF2645B61000748307 /* BookingReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingReviewVC.swift; sourceTree = "<group>"; };
 		1BB7021426328CCF00B66B62 /* SwyngUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwyngUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB7021726328CCF00B66B62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 		1BEA4FC0264FAE84004C7171 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1BA91DDA26873E6B009245C4 /* TournamentGallery.swift */,
 				1BA53B12268642C90050E725 /* RunRegister.swift */,
 				1BA53B1026860A090050E725 /* TournamentRegister.swift */,
 				1BA53B0E2685C0F50050E725 /* InitTransaction.swift */,
@@ -744,6 +747,7 @@
 				1B0C30BD2633EB7A004793D5 /* Extensions.swift in Sources */,
 				1B0C30B32633EB53004793D5 /* AppUtilities.swift in Sources */,
 				1B1E42B92683B43C006F3063 /* ManageCenterVC.swift in Sources */,
+				1BA91DDB26873E6B009245C4 /* TournamentGallery.swift in Sources */,
 				1B7D8ECA2643ACED00C5F2EF /* BookingSlotView.swift in Sources */,
 				1B0C30B02633EB53004793D5 /* NavController.swift in Sources */,
 				1B9FBCE7263C787D00AF1D0E /* AllSportsVC.swift in Sources */,

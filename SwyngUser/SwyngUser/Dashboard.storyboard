@@ -2117,10 +2117,10 @@ Focused</string>
                                 <rect key="frame" x="0.0" y="200" width="375" height="467"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtC-vx-ddm">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2533"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2537"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2zE-WG-fkc">
-                                                <rect key="frame" x="16" y="0.0" width="343" height="2433"/>
+                                                <rect key="frame" x="16" y="0.0" width="343" height="2437"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inL-My-zg5">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -2397,25 +2397,25 @@ Koramangala Bengaluru</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="o4y-Cy-612">
-                                                        <rect key="frame" x="0.0" y="492.5" width="343" height="501.5"/>
+                                                        <rect key="frame" x="0.0" y="492.5" width="343" height="505.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7X-87-0Vs">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="491"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="495"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Zkj-ed-lch">
-                                                                        <rect key="frame" x="0.0" y="10" width="343" height="471"/>
+                                                                        <rect key="frame" x="0.0" y="10" width="343" height="475"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="FyB-hr-Vur">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="152"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="156"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swO-Qa-Jb6">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="152"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="156"/>
                                                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                                                         <color key="textColor" name="textBlack"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNt-Nq-kjV">
-                                                                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="152"/>
+                                                                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="156"/>
                                                                                         <string key="text">Cancelation 
 Charges</string>
                                                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
@@ -2425,7 +2425,7 @@ Charges</string>
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="fJt-27-leo">
-                                                                                <rect key="frame" x="0.0" y="157" width="343" height="56"/>
+                                                                                <rect key="frame" x="0.0" y="161" width="343" height="56"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ja-fg-qYg">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="56"/>
@@ -2444,7 +2444,7 @@ Charges</string>
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Af2-29-7PS">
-                                                                                <rect key="frame" x="0.0" y="218" width="343" height="93.5"/>
+                                                                                <rect key="frame" x="0.0" y="222" width="343" height="93.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geN-Wy-lTN">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="93.5"/>
@@ -2464,7 +2464,7 @@ Thu 28 Oct 2019 &amp; before
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Dh2-CB-eVO">
-                                                                                <rect key="frame" x="0.0" y="316.5" width="343" height="93.5"/>
+                                                                                <rect key="frame" x="0.0" y="320.5" width="343" height="93.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsH-Id-5QT">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="93.5"/>
@@ -2484,7 +2484,7 @@ Thu 28 Oct 2019 &amp; before
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="eHB-qc-53E">
-                                                                                <rect key="frame" x="0.0" y="415" width="343" height="56"/>
+                                                                                <rect key="frame" x="0.0" y="419" width="343" height="56"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxU-Xu-I1e">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="56"/>
@@ -2514,7 +2514,7 @@ Thu 28 Oct 2019 &amp; before
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMp-Lf-Idt">
-                                                                <rect key="frame" x="0.0" y="501" width="343" height="0.5"/>
+                                                                <rect key="frame" x="0.0" y="505" width="343" height="0.5"/>
                                                                 <color key="backgroundColor" name="textBlack"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="0.5" id="Pti-5t-vCT"/>
@@ -2523,7 +2523,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jt6-pe-mhP">
-                                                        <rect key="frame" x="0.0" y="1004" width="343" height="190.5"/>
+                                                        <rect key="frame" x="0.0" y="1008" width="343" height="190.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IlY-wq-p8m" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="65"/>
@@ -2619,7 +2619,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jdf-iN-WPi" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1204.5" width="343" height="200"/>
+                                                        <rect key="frame" x="0.0" y="1208.5" width="343" height="200"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YpJ-gU-yHg">
                                                                 <rect key="frame" x="10" y="10" width="323" height="180"/>
@@ -2683,7 +2683,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppe-kx-AkZ" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1414.5" width="343" height="200"/>
+                                                        <rect key="frame" x="0.0" y="1418.5" width="343" height="200"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wf6-WE-Bwj">
                                                                 <rect key="frame" x="10" y="10" width="323" height="180"/>
@@ -2739,7 +2739,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOD-ep-Cpy" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1624.5" width="343" height="200"/>
+                                                        <rect key="frame" x="0.0" y="1628.5" width="343" height="200"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Dne-rM-CIp">
                                                                 <rect key="frame" x="10" y="10" width="323" height="180"/>
@@ -2795,14 +2795,14 @@ Thu 28 Oct 2019 &amp; before
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEb-6g-8J4">
-                                                        <rect key="frame" x="0.0" y="1834.5" width="343" height="0.5"/>
+                                                        <rect key="frame" x="0.0" y="1838.5" width="343" height="0.5"/>
                                                         <color key="backgroundColor" name="textBlack"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.5" id="Ymy-8y-KNh"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-BF-brH">
-                                                        <rect key="frame" x="0.0" y="1845" width="343" height="150.5"/>
+                                                        <rect key="frame" x="0.0" y="1849" width="343" height="150.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2h-vR-2LU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
@@ -2924,7 +2924,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doy-VG-VW7">
-                                                        <rect key="frame" x="0.0" y="2005.5" width="343" height="427.5"/>
+                                                        <rect key="frame" x="0.0" y="2009.5" width="343" height="427.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eIg-Gc-QF4">
                                                                 <rect key="frame" x="0.0" y="15" width="343" height="407.5"/>
@@ -3478,6 +3478,9 @@ Registrations</string>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="102" height="94"/>
+                                        <connections>
+                                            <outlet property="imgGallery" destination="Qkh-6J-6fQ" id="l1y-QZ-lZQ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -5037,10 +5040,10 @@ Tournament</string>
                                 <rect key="frame" x="0.0" y="200" width="375" height="467"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDq-rU-RF1">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2485.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2487.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q6s-14-Xq4">
-                                                <rect key="frame" x="16" y="0.0" width="343" height="2385.5"/>
+                                                <rect key="frame" x="16" y="0.0" width="343" height="2387.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2t-XX-0dI">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -5211,25 +5214,25 @@ Koramangala Bengaluru</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HvB-f1-0wM">
-                                                        <rect key="frame" x="0.0" y="372" width="343" height="606.5"/>
+                                                        <rect key="frame" x="0.0" y="372" width="343" height="608.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujN-fX-qaQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="596"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="598"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="c2S-uM-UcU">
-                                                                        <rect key="frame" x="0.0" y="10" width="343" height="576"/>
+                                                                        <rect key="frame" x="0.0" y="10" width="343" height="578"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="5gC-Sn-QZn">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="257"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="259"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5t-v7-Esk">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="257"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="259"/>
                                                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                                                         <color key="textColor" name="textBlack"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLs-FV-JKa">
-                                                                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="257"/>
+                                                                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="259"/>
                                                                                         <string key="text">Cancelation 
 Charges</string>
                                                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
@@ -5239,7 +5242,7 @@ Charges</string>
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-Tv-kL0">
-                                                                                <rect key="frame" x="0.0" y="262" width="343" height="56"/>
+                                                                                <rect key="frame" x="0.0" y="264" width="343" height="56"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehi-zv-InP">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="56"/>
@@ -5258,7 +5261,7 @@ Charges</string>
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="UuN-8Q-aTD">
-                                                                                <rect key="frame" x="0.0" y="323" width="343" height="93.5"/>
+                                                                                <rect key="frame" x="0.0" y="325" width="343" height="93.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ef-m7-JO8">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="93.5"/>
@@ -5278,7 +5281,7 @@ Thu 28 Oct 2019 &amp; before
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="KZr-OL-EC5">
-                                                                                <rect key="frame" x="0.0" y="421.5" width="343" height="93.5"/>
+                                                                                <rect key="frame" x="0.0" y="423.5" width="343" height="93.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32J-PQ-j9m">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="93.5"/>
@@ -5298,7 +5301,7 @@ Thu 28 Oct 2019 &amp; before
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yKQ-gv-ina">
-                                                                                <rect key="frame" x="0.0" y="520" width="343" height="56"/>
+                                                                                <rect key="frame" x="0.0" y="522" width="343" height="56"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS6-Nh-OTr">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="56"/>
@@ -5328,7 +5331,7 @@ Thu 28 Oct 2019 &amp; before
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-SG-JXt">
-                                                                <rect key="frame" x="0.0" y="606" width="343" height="0.5"/>
+                                                                <rect key="frame" x="0.0" y="608" width="343" height="0.5"/>
                                                                 <color key="backgroundColor" name="textBlack"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="0.5" id="mnl-bg-2xi"/>
@@ -5337,7 +5340,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p64-Nw-UkI">
-                                                        <rect key="frame" x="0.0" y="988.5" width="343" height="115.5"/>
+                                                        <rect key="frame" x="0.0" y="990.5" width="343" height="115.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAN-t1-dLc" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="65"/>
@@ -5399,7 +5402,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNm-He-rvh" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1114" width="343" height="231"/>
+                                                        <rect key="frame" x="0.0" y="1116" width="343" height="231"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wVA-5F-E8U">
                                                                 <rect key="frame" x="10" y="10" width="323" height="211"/>
@@ -5463,7 +5466,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ntM-dO-w7b" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1355" width="343" height="206"/>
+                                                        <rect key="frame" x="0.0" y="1357" width="343" height="206"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z2e-65-vq7">
                                                                 <rect key="frame" x="10" y="10" width="323" height="186"/>
@@ -5519,7 +5522,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLM-dp-mgB" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1571" width="343" height="206"/>
+                                                        <rect key="frame" x="0.0" y="1573" width="343" height="206"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o2X-Ex-LcR">
                                                                 <rect key="frame" x="10" y="10" width="323" height="186"/>
@@ -5575,14 +5578,14 @@ Thu 28 Oct 2019 &amp; before
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppI-iG-9df">
-                                                        <rect key="frame" x="0.0" y="1787" width="343" height="0.5"/>
+                                                        <rect key="frame" x="0.0" y="1789" width="343" height="0.5"/>
                                                         <color key="backgroundColor" name="textBlack"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.5" id="9CG-cS-2Z3"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cMH-T9-bhC">
-                                                        <rect key="frame" x="0.0" y="1797.5" width="343" height="150.5"/>
+                                                        <rect key="frame" x="0.0" y="1799.5" width="343" height="150.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QA4-jT-e37">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
@@ -5704,7 +5707,7 @@ Thu 28 Oct 2019 &amp; before
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyJ-K9-FQd">
-                                                        <rect key="frame" x="0.0" y="1958" width="343" height="427.5"/>
+                                                        <rect key="frame" x="0.0" y="1960" width="343" height="427.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ejC-4y-aK2">
                                                                 <rect key="frame" x="0.0" y="15" width="343" height="407.5"/>
@@ -7202,7 +7205,7 @@ order and the order is not the seeding for the tournament</string>
                                         <rect key="frame" x="175" y="0.0" width="200" height="200"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NA0-0r-uQC">
-                                        <rect key="frame" x="30" y="108.5" width="213.5" height="84.5"/>
+                                        <rect key="frame" x="30" y="109" width="209" height="84"/>
                                         <string key="text">Upcoming
 Tournaments</string>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="36"/>
@@ -7488,7 +7491,7 @@ Thank you!</string>
                                         <color key="textColor" name="textBlack"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-0Q-ZF6" customClass="ShadowButton" customModule="Swyng" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-0Q-ZF6" customClass="ShadowButton" customModule="SwyngUser" customModuleProvider="target">
                                         <rect key="frame" x="16" y="384.5" width="343" height="40"/>
                                         <color key="backgroundColor" name="appBlue"/>
                                         <constraints>
@@ -7528,7 +7531,7 @@ Thank you!</string>
                                     <constraint firstItem="Ngd-fn-yIa" firstAttribute="top" secondItem="Ln8-Iq-C7T" secondAttribute="top" constant="10" id="riF-31-ELW"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSx-x6-R5C" customClass="HeaderView" customModule="Swyng" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSx-x6-R5C" customClass="HeaderView" customModule="SwyngUser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>

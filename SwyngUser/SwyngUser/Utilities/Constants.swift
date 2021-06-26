@@ -23,4 +23,5 @@ struct ImageBase {
     static var publishedPath = ""
     static var resultPath = ""
     static var fixerAndSchedulePath = ""
+    static var commonPath = "/tournamentsFiles/tournamentImage/"
 }

@@ -270,12 +270,14 @@ extension UIViewController{
         }
         
         let photos = UIAlertAction(title: "Photo Gallery", style: .default) { (button) in
-            let vc:TournamentCMSVC = TournamentCMSVC.controller()
-            vc.pageType = .gallery
+            let vc:TournamentGalleryVC = .controller()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
         let published = UIAlertAction(title: tournament ? "Tournament Published" : "Published", style: .default) { (button) in
+            let vc:TournamentCMSVC = TournamentCMSVC.controller()
+            vc.pageType = .published
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         let export = UIAlertAction(title: "Export to Mail", style: .default) { (button) in

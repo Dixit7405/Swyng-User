@@ -70,7 +70,7 @@ struct EndPoints {
     static let uploadTournamentResult = "tournament/update/tournamentResult"
     static let uploadRunResult = "run/update/run-result"
     static let uploadTournamentFixture = "tournament/update/tournamentFixerSchedule"
-    static let uploadTournamentGallery = "tournament/update/tournamentGallery"
+    static let uploadTournamentGallery = "tournament/update/gallery"
     static let uploadRunsPublished = "run/update/run-published"
     static let getTournamentTypes = "tournamentCategory/getAll"
     static let getRunsCategory = "runCategory/getAll"
@@ -99,6 +99,9 @@ struct EndPoints {
     static let initRunsTransaction = "mobile/run/initiate/transaction"
     static let tournamentRegistration = "mobile/tournament/registration"
     static let runsRegistration = "mobile/run/registration"
+    static let uploadRunsGallery = "run/update/gallery"
+    static let getRunsGallery = "run/get/gallery"
+    static let getTournamentGallery = "tournament/get/gallery"
 }
 
 class Webservices {
