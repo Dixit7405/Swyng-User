@@ -316,6 +316,12 @@ extension UIViewController{
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func btnSkipTapped(_ sender:UIButton){
+        let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
+        if let window = AppUtilities.getMainWindow(){
+            window.rootViewController = vc.instantiateInitialViewController()
+        }
+    }
     
     func downloadVideo(url:URL){
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil);

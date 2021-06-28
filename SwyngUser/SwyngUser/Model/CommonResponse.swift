@@ -12,6 +12,7 @@ struct CommonResponse<T:Codable> : Codable {
     let success : Bool?
     let suceess : Bool?
     let filesPath : FilesPath?
+    let path : String?
     
     enum CodingKeys: String, CodingKey {
         case data = "data"
@@ -19,6 +20,7 @@ struct CommonResponse<T:Codable> : Codable {
         case success = "success"
         case suceess = "suceess"
         case filesPath = "filesPath"
+        case path = "path"
     }
     
     init(from decoder: Decoder) throws {
@@ -33,6 +35,8 @@ struct CommonResponse<T:Codable> : Codable {
         }
         suceess = try values.decodeIfPresent(Bool.self, forKey: .suceess)
         filesPath = try values.decodeIfPresent(FilesPath.self, forKey: .filesPath)
+        path = try values.decodeIfPresent(String.self, forKey: .path)
+        ImageBase.commonPath = path ?? ""
     }
     
 }
@@ -65,12 +69,14 @@ struct FilesPath : Codable {
     let galleryPath : String?
     let publishedPath : String?
     let resultPath : String?
+    let imagePath:String?
     
     enum CodingKeys: String, CodingKey {
         case fixerAndSchedulePath = "fixerAndSchedulePath"
         case galleryPath = "galleryPath"
         case publishedPath = "publishedPath"
         case resultPath = "resultPath"
+        case imagePath = "imagePath"
     }
     
     init(from decoder: Decoder) throws {
@@ -79,10 +85,18 @@ struct FilesPath : Codable {
         galleryPath = try values.decodeIfPresent(String.self, forKey: .galleryPath)
         publishedPath = try values.decodeIfPresent(String.self, forKey: .publishedPath)
         resultPath = try values.decodeIfPresent(String.self, forKey: .resultPath)
+        imagePath = try values.decodeIfPresent(String.self, forKey: .imagePath)
         ImageBase.fixerAndSchedulePath = fixerAndSchedulePath ?? ""
         ImageBase.galleryPath = galleryPath ?? ""
         ImageBase.publishedPath = publishedPath ?? ""
         ImageBase.resultPath = resultPath ?? ""
+        if let imgPath = imagePath, imgPath.last != "/"{
+            ImageBase.imagePath = (imagePath ?? "") + "/"
+        }
+        else{
+            ImageBase.imagePath = (imagePath ?? "")
+        }
+        
     }
     
 }

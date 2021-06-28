@@ -84,7 +84,6 @@
 		1B6276A926367B3300F46B15 /* HomeBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6276A826367B3300F46B15 /* HomeBannerCell.swift */; };
 		1B66847B264C4C8C00DB3EAB /* TournamentGalleryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B66847A264C4C8C00DB3EAB /* TournamentGalleryVC.swift */; };
 		1B66847E264C501300DB3EAB /* TournamentCMSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B66847D264C501300DB3EAB /* TournamentCMSVC.swift */; };
-		1B6898D52684FC29006845FA /* AppInvokeSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6898D42684FC29006845FA /* AppInvokeSDK.xcframework */; };
 		1B6898D726850395006845FA /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6898D626850395006845FA /* Favorite.swift */; };
 		1B6A79AA2649AE7C001550CE /* TournamentDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A79A92649AE7C001550CE /* TournamentDetailsVC.swift */; };
 		1B6EDC152637CEFA0081B2AA /* SportsCoachingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6EDC142637CEFA0081B2AA /* SportsCoachingCell.swift */; };
@@ -117,6 +116,8 @@
 		1BCF6BB7264AFC7B00524814 /* TournamentConfirmationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF6BB6264AFC7B00524814 /* TournamentConfirmationVC.swift */; };
 		1BCF6BBA264AFC9900524814 /* TournamentListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF6BB9264AFC9900524814 /* TournamentListVC.swift */; };
 		1BCFD4B9264254DA0072A753 /* SportsFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD4B8264254DA0072A753 /* SportsFilterVC.swift */; };
+		1BD65A0F26879FF40038BF7B /* AppInvokeSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6898D42684FC29006845FA /* AppInvokeSDK.xcframework */; };
+		1BD65A1026879FF40038BF7B /* AppInvokeSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6898D42684FC29006845FA /* AppInvokeSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1BEA4FC2264FAF66004C7171 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA4FC1264FAF66004C7171 /* CommonResponse.swift */; };
 		1BEA4FC5264FAFBD004C7171 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA4FC4264FAFBD004C7171 /* Register.swift */; };
 		1BEA4FC8264FB0CB004C7171 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA4FC7264FB0CB004C7171 /* ApplicationManager.swift */; };
@@ -128,6 +129,20 @@
 		1BF1C89F264AF13E0061BD6F /* TournamentRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF1C89E264AF13E0061BD6F /* TournamentRegisterVC.swift */; };
 		FBC0394DA5121389F85116FB /* Pods_SwyngUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1BD65A1126879FF40038BF7B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1BD65A1026879FF40038BF7B /* AppInvokeSDK.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B0C30AA2633EB50004793D5 /* NavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
@@ -261,7 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B6898D52684FC29006845FA /* AppInvokeSDK.xcframework in Frameworks */,
+				1BD65A0F26879FF40038BF7B /* AppInvokeSDK.xcframework in Frameworks */,
 				FBC0394DA5121389F85116FB /* Pods_SwyngUser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,6 +562,7 @@
 				1BB7021126328CCF00B66B62 /* Frameworks */,
 				1BB7021226328CCF00B66B62 /* Resources */,
 				F40FB58C5A7504686A32D5E1 /* [CP] Embed Pods Frameworks */,
+				1BD65A1126879FF40038BF7B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

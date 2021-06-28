@@ -39,7 +39,6 @@ class TournamentGridCell: UICollectionViewCell {
             lblRegisterBefore.text = "Register before \(tournament?.registerBeforeFromStartTime ?? "")"
             lblPlayerCount.text = "\(tournament?.noOfPlayers ?? 0) players have registerd"
             imgTournament.setImage(from: ImageBase.imagePath + (tournament?.thumbnailImage ?? ""))
-            viewButtons.isHidden = false
         }
     }
     
@@ -54,7 +53,6 @@ class TournamentGridCell: UICollectionViewCell {
             lblRegisterBefore.text = "Register before \(runs?.registerBeforeFromStartTime ?? "")"
             lblPlayerCount.text = "\(0) players have registerd"
             imgTournament.setImage(from: ImageBase.imagePath + (runs?.thumbnailImage ?? ""))
-            viewButtons.isHidden = true
         }
     }
     
@@ -94,7 +92,7 @@ class TournamentGridCell: UICollectionViewCell {
     }
     
     @IBAction func btnFavoritePressed(_ sender:UIButton){
-        addToFavorite(favorite: !sender.isSelected)
+        ApplicationManager.sportType == .tournaments ? addToFavorite(favorite: !sender.isSelected) : addToFavoriteRuns(favorite: !sender.isSelected)
     }
 }
 
@@ -102,9 +100,21 @@ class TournamentGridCell: UICollectionViewCell {
 extension TournamentGridCell{
     private func addToFavorite(favorite:Bool){
         let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
-                                   Parameters.tournament_id:tournament?.tournamentId ?? runs?.id ?? "",
+                                   Parameters.tournament_id:tournament?.tournamentId ?? "",
                                    Parameters.favourite:favorite]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.favorite, type: CommonResponse<Favorite>.self) { response, status in
+            
+        } success: { success in
+            self.btnFavorite.isSelected = favorite
+        }
+
+    }
+    
+    private func addToFavoriteRuns(favorite:Bool){
+        let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
+                                   Parameters.run_id:runs?.id ?? "",
+                                   Parameters.favourite:favorite]
+        Webservices().request(with: params, method: .post, endPoint: EndPoints.favoriteRuns, type: CommonResponse<Favorite>.self) { response, status in
             
         } success: { success in
             self.btnFavorite.isSelected = favorite

@@ -18,7 +18,7 @@ struct AppDetails {
 }
 
 struct ImageBase {
-    static var imagePath = "/tournamentsFiles/tournamentImage/"
+    static var imagePath = ""
     static var galleryPath = ""
     static var publishedPath = ""
     static var resultPath = ""

@@ -35,7 +35,13 @@ struct TournamentRegister : Codable {
     
         init(from decoder: Decoder) throws {
                 let values = try decoder.container(keyedBy: CodingKeys.self)
+            do{
                 amount = try values.decodeIfPresent(String.self, forKey: .amount)
+            }
+            catch{
+                let amt = try values.decodeIfPresent(Int.self, forKey: .amount) ?? 0
+                amount = String(format: "%d", amt)
+            }
                 bookingId = try values.decodeIfPresent(String.self, forKey: .bookingId)
                 createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
                 id = try values.decodeIfPresent(Int.self, forKey: .id)

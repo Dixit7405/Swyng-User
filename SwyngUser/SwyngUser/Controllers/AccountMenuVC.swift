@@ -136,14 +136,10 @@ extension AccountMenuVC:UICollectionViewDelegate,UICollectionViewDelegateFlowLay
             present(vc, animated: true, completion: nil)
         case .sportsTournaments:
             ApplicationManager.sportType = .tournaments
-            self.dismissLeft(){ [unowned self] in
-                self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])
-            }
+            AppUtilities.setRootController(selectedTab: 2)
         case .runs:
             ApplicationManager.sportType = .run
-            self.dismissLeft(){ [unowned self] in
-                self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])
-            }
+            AppUtilities.setRootController(selectedTab: 2)
         default:
             self.dismissLeft(){ [unowned self] in
                 self.delegate?.didSelectMenu(option: arrOptions[indexPath.item])

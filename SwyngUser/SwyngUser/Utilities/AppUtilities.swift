@@ -48,10 +48,11 @@ class AppUtilities{
     }
     
     
-    static func setRootController(){
+    static func setRootController(selectedTab:Int = 0){
         guard let window = AppUtilities.getMainWindow() else {return}
         if ApplicationManager.authToken != nil{
             let vc = TabbarVC()
+            vc.selectedIndex = selectedTab
             window.rootViewController = vc
         }
         else{

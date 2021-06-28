@@ -33,19 +33,25 @@ struct RunRegister : Codable {
                 case userId = "userId"
         }
     
-        init(from decoder: Decoder) throws {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                amount = try values.decodeIfPresent(String.self, forKey: .amount)
-                bookingId = try values.decodeIfPresent(String.self, forKey: .bookingId)
-                createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
-                id = try values.decodeIfPresent(Int.self, forKey: .id)
-                orderId = try values.decodeIfPresent(String.self, forKey: .orderId)
-                runId = try values.decodeIfPresent(Int.self, forKey: .runId)
-                signature = try values.decodeIfPresent(String.self, forKey: .signature)
-                ticketId = try values.decodeIfPresent([Int].self, forKey: .ticketId)
-                txnToken = try values.decodeIfPresent(String.self, forKey: .txnToken)
-                updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
-                userId = try values.decodeIfPresent(Int.self, forKey: .userId)
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        do{
+            amount = try values.decodeIfPresent(String.self, forKey: .amount)
         }
+        catch{
+            let amt = try values.decodeIfPresent(Int.self, forKey: .amount) ?? 0
+            amount = String(format: "%d", amt)
+        }
+        bookingId = try values.decodeIfPresent(String.self, forKey: .bookingId)
+        createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
+        id = try values.decodeIfPresent(Int.self, forKey: .id)
+        orderId = try values.decodeIfPresent(String.self, forKey: .orderId)
+        runId = try values.decodeIfPresent(Int.self, forKey: .runId)
+        signature = try values.decodeIfPresent(String.self, forKey: .signature)
+        ticketId = try values.decodeIfPresent([Int].self, forKey: .ticketId)
+        txnToken = try values.decodeIfPresent(String.self, forKey: .txnToken)
+        updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
+        userId = try values.decodeIfPresent(Int.self, forKey: .userId)
+    }
 
 }

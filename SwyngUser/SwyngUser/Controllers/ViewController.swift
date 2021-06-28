@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BaseVC {
     @IBOutlet weak var loginView:UIView!
     
     override func viewDidLoad() {
@@ -20,14 +20,27 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func btnSkipPressed(_ sender:UIButton){
-        let vc = UIStoryboard(name: StoryboardIds.dashboard, bundle: nil)
-        if let window = AppUtilities.getMainWindow(){
-            window.rootViewController = vc.instantiateInitialViewController()
-        }
-    }
 
+    @IBAction func btnTermsPressed(_ sender:UIButton){
+        let vc:CMSVC = CMSVC.controller()
+        let vm = CMSViewModel()
+        vc.modalPresentationStyle = .fullScreen
+        vm.type.accept(.terms)
+        vm.image.accept(.terms)
+        vc.viewModel = vm
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func btnPrivacyPressed(_ sender:UIButton){
+        let vc:CMSVC = CMSVC.controller()
+        let vm = CMSViewModel()
+        vc.modalPresentationStyle = .fullScreen
+        vm.type.accept(.privacy)
+        vm.image.accept(.privacy)
+        vc.viewModel = vm
+        present(vc, animated: true, completion: nil)
+    }
 
 }
 

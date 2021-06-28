@@ -38,7 +38,6 @@ class TournamentDetailsVC: BaseVC {
         super.viewDidLoad()
         if runs != nil{
             setupRunspData()
-            btnRegister.isHidden = true
         }
         else{
             setuTournamentpData()

@@ -11,8 +11,8 @@ import Alamofire
 import KDCircularProgress
 
 var authorization = ""
-let baseURL = "http://localhost:20049/"//"http://ec2-54-234-213-111.compute-1.amazonaws.com/"
-let imageBase = "http://localhost:20049" //"http://ec2-54-234-213-111.compute-1.amazonaws.com"
+let baseURL = "http://ec2-54-234-213-111.compute-1.amazonaws.com/"
+let imageBase = "http://ec2-54-234-213-111.compute-1.amazonaws.com"
 
 typealias FailureBlock = ((String, Int?) -> Void)
 
@@ -95,6 +95,7 @@ struct EndPoints {
     static let updateProfile = "mobile/user/update/profile"
     static let updateEmail = "mobile/user/update/email"
     static let favorite = "mobile/tournament/favourite"
+    static let favoriteRuns = "mobile/run/favourite"
     static let initTournamentTransaction = "mobile/tournament/initiate/transaction"
     static let initRunsTransaction = "mobile/run/initiate/transaction"
     static let tournamentRegistration = "mobile/tournament/registration"
