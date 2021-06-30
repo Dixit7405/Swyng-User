@@ -38,8 +38,7 @@ extension UIViewController{
             }
             else{
                 self.showAlertWith(message: failure) {
-                    ApplicationManager.authToken = nil
-                    ApplicationManager.profileData = nil
+                    AppUtilities.logoutUser()
                     
                     AppUtilities.setRootController()
                 } cancelPressed: {
@@ -437,6 +436,18 @@ extension UIViewController:AccountMenuDelegate{
             navigationController?.pushViewController(vc, animated: true)
         case .runs:
             let vc:TournamentListVC = .controller()
+            navigationController?.pushViewController(vc, animated: true)
+        case .tournamenRegistrations:
+            let vc:BookingListVC = .controller()
+            vc.sportType = .tournaments
+//            vc.registration = true
+//            vc.registerFrom = .tournaments
+            navigationController?.pushViewController(vc, animated: true)
+        case .runRegistrations:
+            let vc:BookingListVC = .controller()
+            vc.sportType = .run
+//            vc.registration = true
+//            vc.registerFrom = .run
             navigationController?.pushViewController(vc, animated: true)
         default:
             break

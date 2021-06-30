@@ -35,15 +35,7 @@ class EventMenuFooter: UICollectionReusableView {
     }
     
     @IBAction func btnLogoutPressed(_ sender:UIButton){
-        ApplicationManager.authToken = nil
-        ApplicationManager.profileData = nil
-        ApplicationManager.cityId = nil
-        ApplicationManager.runs = nil
-        ApplicationManager.tournament = nil
-        ApplicationManager.selectedCenter = nil
-        ApplicationManager.selectedSport = nil
-        ApplicationManager.profileData = nil
-        ApplicationManager.sportType = nil
+        AppUtilities.logoutUser()
         AppUtilities.setRootController()
     }
     

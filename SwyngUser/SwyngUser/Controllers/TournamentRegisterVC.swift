@@ -116,7 +116,7 @@ extension TournamentRegisterVC{
             return
         }
         self.orderId = random(digits: 6)
-        initiateTournamentTransaction()
+        isTournament ? initiateTournamentTransaction() : initiateRunsTransaction()
     }
 }
 
@@ -204,7 +204,7 @@ extension TournamentRegisterVC{
     
     private func initiateRunsTransaction(){
         let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
-                                   Parameters.run_id:selectedTournament?.tournamentId ?? "",
+                                   Parameters.run_id:selectedRun?.id ?? 0,
                                    Parameters.amount:Double(amount) ?? 0,
                                    Parameters.orderId:orderId]
         startActivityIndicator()

@@ -24,9 +24,9 @@ class AccountMenuVC: UIViewController {
                                          .sportsTournaments,
                                          .runs,
                                          /*.bookings,
-                                         .bulkbookings,
+                                         .bulkbookings,*/
                                          .tournamenRegistrations,
-                                         .runRegistrations,*/
+                                         .runRegistrations,
                                          .cancelRules,
                                          .paymentPolicy,
                                          .aboutSwyngs,
@@ -130,6 +130,10 @@ extension AccountMenuVC:UICollectionViewDelegate,UICollectionViewDelegateFlowLay
             let vc:AccountInfoVC = AccountInfoVC.controller()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
+        case .tournamenRegistrations, .runRegistrations:
+            self.dismissLeft { [self] in
+                delegate?.didSelectMenu(option: arrOptions[indexPath.item])
+            }
         case .partner:
             let vc:PartnerWithUsVC = PartnerWithUsVC.controller()
             vc.modalPresentationStyle = .fullScreen

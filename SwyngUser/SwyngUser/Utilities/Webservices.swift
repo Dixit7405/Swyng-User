@@ -56,6 +56,9 @@ struct Parameters {
     static let txnToken = "txnToken"
     static let booking_id = "booking_id"
     static let ticket_id = "ticket_id"
+    static let cancel_category_id = "cancel_category_id"
+    static let refund_amount = "refund_amount"
+    static let remain_ticket_id = "remain_ticket_id"
 }
 
 struct EndPoints {
@@ -103,6 +106,12 @@ struct EndPoints {
     static let uploadRunsGallery = "run/update/gallery"
     static let getRunsGallery = "run/get/gallery"
     static let getTournamentGallery = "tournament/get/gallery"
+    static let getTournamentRegistrations = "mobile/tournament/get/user/registration-list"
+    static let getRunsRegistrations = "mobile/run/get/user/registration-list"
+    static let tournamentRegistrationData = "mobile/tournament/get/user/registration-data"
+    static let runRegistrationData = "mobile/run/get/user/registration-data"
+    static let cancelTicket = "mobile/tournament/cancel/tournament-ticket"
+    static let cancelRunsTicket = "mobile/run/cancel/run-ticket"
 }
 
 class Webservices {

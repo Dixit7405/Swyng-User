@@ -28,6 +28,9 @@ class ApplicationManager {
             if let profile = newValue{
                 DefaultsManager.saveData(data: profile, type: Profile.self, key: DefaultsManager.DefaultKeys.userData)
             }
+            else{
+                UserDefaults.standard.setValue(nil, forKey: DefaultsManager.DefaultKeys.userData)
+            }
         }
         get{
 
@@ -40,9 +43,7 @@ class ApplicationManager {
     
     static var sportType:SportType?{
         set{
-            if let sport = newValue{
-                UserDefaults.standard.setValue(sport == .tournaments ? 1 : 2, forKey: DefaultsManager.DefaultKeys.sportType)
-            }
+            UserDefaults.standard.setValue(newValue == .tournaments ? 1 : 2, forKey: DefaultsManager.DefaultKeys.sportType)
         }
         get{
             if let type = UserDefaults.standard.value(forKey: DefaultsManager.DefaultKeys.sportType) as? Int{
@@ -54,9 +55,7 @@ class ApplicationManager {
     
     static var cityId:Int?{
         set{
-            if let cityId = newValue{
-                UserDefaults.standard.setValue(cityId, forKey: DefaultsManager.DefaultKeys.cityId)
-            }
+            UserDefaults.standard.setValue(newValue, forKey: DefaultsManager.DefaultKeys.cityId)
         }
         get{
             if let id = UserDefaults.standard.value(forKey: DefaultsManager.DefaultKeys.cityId) as? Int{
@@ -68,8 +67,12 @@ class ApplicationManager {
     
     static var selectedCity:City?{
         set{
-            guard let city = newValue else {return}
-            DefaultsManager.saveData(data: city, type: City.self, key: DefaultsManager.DefaultKeys.selectedCity)
+            if let city = newValue{
+                DefaultsManager.saveData(data: city, type: City.self, key: DefaultsManager.DefaultKeys.selectedCity)
+            }
+            else{
+                UserDefaults.standard.setValue(nil, forKey: DefaultsManager.DefaultKeys.selectedCity)
+            }
         }
         get{
             return DefaultsManager.getData(type: City.self, key: DefaultsManager.DefaultKeys.selectedCity)
@@ -81,6 +84,9 @@ class ApplicationManager {
             if let sport = newValue{
                 DefaultsManager.saveData(data: sport, type: Sports.self, key: DefaultsManager.DefaultKeys.selectedSport)
             }
+            else{
+                UserDefaults.standard.setValue(nil, forKey: DefaultsManager.DefaultKeys.selectedSport)
+            }
         }
         get{
             DefaultsManager.getData(type: Sports.self, key: DefaultsManager.DefaultKeys.selectedSport)
@@ -91,6 +97,9 @@ class ApplicationManager {
         set{
             if let center = newValue{
                 DefaultsManager.saveData(data: center, type: SportCenters.self, key: DefaultsManager.DefaultKeys.selectedCenter)
+            }
+            else{
+                UserDefaults.standard.setValue(nil, forKey: DefaultsManager.DefaultKeys.selectedCenter)
             }
         }
         get{

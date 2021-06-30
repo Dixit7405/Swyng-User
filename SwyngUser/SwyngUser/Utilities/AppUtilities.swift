@@ -62,6 +62,18 @@ class AppUtilities{
     }
     
     
+    static func logoutUser(){
+        ApplicationManager.authToken = nil
+        ApplicationManager.profileData = nil
+        ApplicationManager.cityId = nil
+        ApplicationManager.runs = nil
+        ApplicationManager.tournament = nil
+        ApplicationManager.selectedCenter = nil
+        ApplicationManager.selectedSport = nil
+        ApplicationManager.profileData = nil
+        ApplicationManager.sportType = nil
+    }
+    
     
     func getSizeText(size:Double) -> String{
         if size > 1048576{

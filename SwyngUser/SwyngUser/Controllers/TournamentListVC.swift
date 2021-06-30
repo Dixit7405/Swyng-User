@@ -19,12 +19,19 @@ class TournamentListVC: BaseVC {
     var runs:[Run] = []
     var arrCategories:[TournamentsType] = []
     var sports:[Sports] = []
+    var registration = false
+    var registerFrom:SportType = .tournaments
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pastName = isTournament ? "Past Tournaments" : "Past Runs"
-        upcomming = isTournament ? "Upcomming Tournaments" : "Upcomming Runs"
+        if registration{
+            pastName = "Past Registration"
+            upcomming = "Upcomming Registration"
+        }
+        else{
+            pastName = isTournament ? "Past Tournaments" : "Past Runs"
+            upcomming = isTournament ? "Upcomming Tournaments" : "Upcomming Runs"
+        }
         lblSelectedTab.text = upcomming
         lblNonSelectedTab.text = pastName
         self.getTournamentCategories()
@@ -68,22 +75,41 @@ extension TournamentListVC{
 //MARK: - TABLEVIEW DELEGATES
 extension TournamentListVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if registration{
+            return registerFrom == .tournaments ? tournaments.count : runs.count
+        }
         return sportType == .tournaments ? tournaments.count : runs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpcommingCourtBookingCell", for: indexPath) as! UpcommingCourtBookingCell
         cell.tournamentView.categories = arrCategories
-        if sportType == .tournaments{
-            cell.tournamentView.tournament = tournaments[indexPath.row]
+        if registration{
+            if registerFrom == .tournaments{
+                cell.tournamentView.tournament = tournaments[indexPath.row]
+            }
+            else{
+                cell.tournamentView.runs = runs[indexPath.row]
+            }
         }
         else{
-            cell.tournamentView.runs = runs[indexPath.row]
+            if sportType == .tournaments{
+                cell.tournamentView.tournament = tournaments[indexPath.row]
+            }
+            else{
+                cell.tournamentView.runs = runs[indexPath.row]
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if registration{
+            let vc:BookingReviewVC = .controller()
+            vc.pageType = isUpcoming ? .upcoming : .past
+            navigationController?.pushViewController(vc, animated: true)
+            return
+        }
         let vc:TournamentDetailsVC = TournamentDetailsVC.controller()
         
         if isTournament{

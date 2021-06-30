@@ -38,6 +38,21 @@ class TournamentListView:UIView{
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
         }
     }
+    
+    var tournamentRegistration:UpcomingRegistration?{
+        didSet{
+            guard let data = tournamentRegistration else {return}
+            lblDateTime.text = data.dates?.first?.toCustomDate(.dayWithNextLine)
+            lblTournamentName.text = data.tournamentName != nil ? data.tournamentName : data.runName
+            lblAddress.text = data.address
+            if data.tournamentId != nil{
+                lblOpenFor.text = data.ticketCategory?.compactMap({$0.tournamentCategory?.name}).joined(separator: ",")
+            }
+            else{
+                lblOpenFor.text = data.ticketCategory?.compactMap({$0.runCategory?.name}).joined(separator: ",")
+            }
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
