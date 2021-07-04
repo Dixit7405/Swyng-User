@@ -16,7 +16,7 @@ class BookingListVC: UIViewController {
     var isUpcoming = true
     var sportType:SportType = .tournaments
     var pastName = "Past Registration"
-    var upcomingName = "Upcomming Registration"
+    var upcomingName = "Upcoming Registration"
     var upcomingRegistrations:[UpcomingRegistration] = []
     var pastRegistrations:[UpcomingRegistration] = []
     
@@ -61,19 +61,21 @@ extension BookingListVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpcommingCourtBookingCell", for: indexPath) as! UpcommingCourtBookingCell
-        cell.tournamentView.tournamentRegistration = isUpcoming ? upcomingRegistrations[indexPath.row] : pastRegistrations[indexPath.row]
+        let tournament = isUpcoming ? upcomingRegistrations[indexPath.row] : pastRegistrations[indexPath.row]
+        cell.tournamentView.tournamentRegistration = tournament
+        cell.cancelledView.isHidden = (tournament.ticketCategory?.count != 0 && tournament.cancelTicketCategory?.count == 0)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc:BookingReviewVC = BookingReviewVC.controller()
         if sportType == .tournaments{
-            vc.pageType = isUpcoming ? .upcoming : .past
+            vc.pageType = isUpcoming ? .upcoming : .confirmed
             vc.tournamentId = isUpcoming ? upcomingRegistrations[indexPath.row].tournamentId : pastRegistrations[indexPath.row].tournamentId
             vc.tournamentName = isUpcoming ? upcomingRegistrations[indexPath.row].tournamentName : pastRegistrations[indexPath.row].tournamentName
         }
         else{
-            vc.pageType = isUpcoming ? .upcoming : .past
+            vc.pageType = isUpcoming ? .upcoming : .confirmed
             vc.runId = isUpcoming ? upcomingRegistrations[indexPath.row].runId : pastRegistrations[indexPath.row].runId
             vc.runName = isUpcoming ? upcomingRegistrations[indexPath.row].runName : pastRegistrations[indexPath.row].runName
         }

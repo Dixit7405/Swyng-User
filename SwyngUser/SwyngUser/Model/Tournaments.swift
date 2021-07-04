@@ -27,7 +27,7 @@ struct Tournaments : Codable {
     let noOfPlayers : Int?
     let organizer : String?
     let participationFee : String?
-    let peopleMobileNumber : String?
+//    let peopleMobileNumber : String?
     let pleaseNote : String?
     let registerBeforeFromStartTime : String?
     let reportingTime : String?
@@ -70,7 +70,7 @@ struct Tournaments : Codable {
             case noOfPlayers = "noOfPlayers"
             case organizer = "organizer"
             case participationFee = "participationFee"
-            case peopleMobileNumber = "peopleMobileNumber"
+//            case peopleMobileNumber = "peopleMobileNumber"
             case pleaseNote = "pleaseNote"
             case registerBeforeFromStartTime = "register_before_from_start_time"
             case reportingTime = "reporting_time"
@@ -115,7 +115,7 @@ struct Tournaments : Codable {
         noOfPlayers = try values.decodeIfPresent(Int.self, forKey: .noOfPlayers)
         organizer = try values.decodeIfPresent(String.self, forKey: .organizer)
         participationFee = try values.decodeIfPresent(String.self, forKey: .participationFee)
-        peopleMobileNumber = try values.decodeIfPresent(String.self, forKey: .peopleMobileNumber)
+//        peopleMobileNumber = try values.decodeIfPresent(String.self, forKey: .peopleMobileNumber)
         pleaseNote = try values.decodeIfPresent(String.self, forKey: .pleaseNote)
         registerBeforeFromStartTime = try values.decodeIfPresent(String.self, forKey: .registerBeforeFromStartTime)
         reportingTime = try values.decodeIfPresent(String.self, forKey: .reportingTime)

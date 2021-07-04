@@ -39,16 +39,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                             <color key="tintColor" name="textBlack"/>
                                             <state key="normal" image="call"/>
+                                            <connections>
+                                                <action selector="btnCallPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="w9d-0v-seX"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCI-Q0-ERc">
                                             <rect key="frame" x="105.5" y="0.0" width="30" height="30"/>
                                             <color key="tintColor" name="textBlack"/>
                                             <state key="normal" image="whatsapp"/>
+                                            <connections>
+                                                <action selector="btnWhatsappPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="qfC-QS-Mt3"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fw-FH-p3X">
                                             <rect key="frame" x="211" y="0.0" width="30" height="30"/>
                                             <color key="tintColor" name="textBlack"/>
                                             <state key="normal" image="email"/>
+                                            <connections>
+                                                <action selector="btnEmailPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="yos-d4-e8g"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -75,18 +84,30 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCy-N3-DaT">
                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                             <state key="normal" image="facebook"/>
+                                            <connections>
+                                                <action selector="btnFacebookPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="uvR-gZ-GY3"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r65-iu-JNP">
                                             <rect key="frame" x="77" y="0.0" width="30" height="30"/>
                                             <state key="normal" image="twitter"/>
+                                            <connections>
+                                                <action selector="btnTwitterPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="2Xv-sq-gCl"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FeR-Nf-vfR">
                                             <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                             <state key="normal" image="instagram"/>
+                                            <connections>
+                                                <action selector="btnInstagramPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="t7b-aB-tTG"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dv3-CR-IHR">
                                             <rect key="frame" x="231" y="0.0" width="30" height="30"/>
                                             <state key="normal" image="youtube"/>
+                                            <connections>
+                                                <action selector="btnYoutubePressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="9uz-Eh-0pG"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -113,6 +134,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFP-Ib-et8">
                                     <rect key="frame" x="301" y="25" width="30" height="30"/>
                                     <state key="normal" image="share"/>
+                                    <connections>
+                                        <action selector="btnSharePressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="riT-4M-Krd"/>
+                                    </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="79M-qQ-vCp">
                                     <rect key="frame" x="120" y="18.5" width="176" height="43"/>

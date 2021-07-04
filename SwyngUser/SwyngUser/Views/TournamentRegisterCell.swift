@@ -11,6 +11,7 @@ class TournamentRegisterCell: UITableViewCell {
     @IBOutlet weak var btnSelection:UIButton!
     @IBOutlet weak var lblCategory:UILabel!
     @IBOutlet weak var lblPrice:UILabel!
+    @IBOutlet weak var stepperView:StepperView!
     
     var tournamentTicket:TournamentTicket?{
         didSet{
@@ -25,6 +26,8 @@ class TournamentRegisterCell: UITableViewCell {
         didSet{
             lblPrice.text =  runsTicket?.participationFees
             lblCategory.text = runsTicket?.runCategory?.name
+            stepperView.maxValue = runsTicket?.allowedEntries ?? 0
+            stepperView.currentIndex = 0
         }
     }
     

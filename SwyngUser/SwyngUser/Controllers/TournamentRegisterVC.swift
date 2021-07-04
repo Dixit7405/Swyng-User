@@ -33,6 +33,7 @@ class TournamentRegisterVC: BaseVC {
     private var amount : String = "0"
     private var callBackURL : String = ""
     private var makeSubscriptionPayment : Bool = false
+    var observation : NSKeyValueObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,9 @@ class TournamentRegisterVC: BaseVC {
         lblTerms.text = isTournament ? selectedTournament?.termsAndCondition : selectedRun?.termsAndCondition
         lblSlots.text = String(format: "%d Slots", selectedIndex.count)
         lblRegisterFees.text = String(format: "Rs. %.2f", 0)
-        
+        observation = btnAcceptTerms.observe(\.isSelected, options: [.old, .new], changeHandler: { _, change in
+            self.setFeesData()
+        })
         // Do any additional setup after loading the view.
     }
 }
@@ -84,7 +87,7 @@ extension TournamentRegisterVC{
             lblRegisterFees.text = String(format: "Rs. %.1f", fees+GST)
             amount = (fees+GST).toString()
         }
-        registerView.backgroundColor = selectedIndex.count == 0 ? .lightGray : UIColor.AppColor.themeColor
+        registerView.backgroundColor = selectedIndex.count != 0 && btnAcceptTerms.isSelected ? UIColor.AppColor.themeColor : .lightGray
     }
     
     func makePayment(){
@@ -112,11 +115,10 @@ extension TournamentRegisterVC{
 //MARK: - ACTION METHODS
 extension TournamentRegisterVC{
     @IBAction func btnRegisterPressed(_ sender:UIButton){
-        if selectedIndex.count == 0{
-            return
+        if selectedIndex.count != 0 && btnAcceptTerms.isSelected{
+            self.orderId = random(digits: 6)
+            isTournament ? initiateTournamentTransaction() : initiateRunsTransaction()
         }
-        self.orderId = random(digits: 6)
-        isTournament ? initiateTournamentTransaction() : initiateRunsTransaction()
     }
 }
 
@@ -124,19 +126,13 @@ extension TournamentRegisterVC{
 extension TournamentRegisterVC: AIDelegate {
     func didFinish(with status: AIPaymentStatus, response: [String : Any]) {
         print("🔶 Paytm Callback Response: ", response)
-        let alert = UIAlertController(title: "\(status)", message: String(describing: response), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { ok in
-            if status == .success{
-                if self.isTournament{
-                    self.registerData()
-                }
-                else{
-                    self.runsRegisterData()
-                }
+        if status == .success{
+            if self.isTournament{
+                self.registerData()
             }
-        }))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
+            else{
+                self.runsRegisterData()
+            }
         }
     }
     
@@ -170,6 +166,9 @@ extension TournamentRegisterVC:UITableViewDelegate, UITableViewDataSource{
         }
         cell.btnSelection.isSelected = selectedIndex.contains(indexPath.row)
         return cell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "RunCell", for: indexPath) as! TournamentRegisterCell
+//        cell.runsTicket = selectedRun?.tblRunRegistrationTickets?[indexPath.row]
+//        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -223,18 +222,17 @@ extension TournamentRegisterVC{
                                    Parameters.tournament_id:selectedTournament?.tournamentId ?? 0,
                                    Parameters.signature:signature,
                                    Parameters.txnToken:txnToken,
-                                   Parameters.booking_id:orderId,
+                                   Parameters.booking_id:"T-"+orderId,
                                    Parameters.ticket_id:myTournaments.compactMap({$0?.id}),
                                    Parameters.orderId:orderId]
         startActivityIndicator()
         Webservices().request(with: params, method: .post, endPoint: EndPoints.tournamentRegistration, type: TournamentRegister.self, failer: failureBlock()) {[self] success in
             stopActivityIndicator()
             guard let _ = success as? TournamentRegister else {return}
-            showAlertWith(message: "Booking Successful", isConfirmation: false, okTitle: "Ok", cancelTitle: "") {
-                self.navigationController?.popViewController(animated: true)
-            } cancelPressed: {
-                print("")
-            }
+            let vc:SuccessVC = .controller()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
 
         }
     }
@@ -245,19 +243,36 @@ extension TournamentRegisterVC{
                                    Parameters.run_id:selectedRun?.id ?? 0,
                                    Parameters.signature:signature,
                                    Parameters.txnToken:txnToken,
-                                   Parameters.booking_id:orderId,
+                                   Parameters.booking_id:"R-"+orderId,
                                    Parameters.ticket_id:myRuns.compactMap({$0?.id}),
                                    Parameters.orderId:orderId]
         startActivityIndicator()
         Webservices().request(with: params, method: .post, endPoint: EndPoints.runsRegistration, type: CommonResponse<RunRegister>.self, failer: failureBlock()) {[self] success in
             stopActivityIndicator()
             guard let _ = success as? CommonResponse<RunRegister> else {return}
-            showAlertWith(message: "Booking Successful", isConfirmation: false, okTitle: "Ok", cancelTitle: "") {
-                self.navigationController?.popViewController(animated: true)
-            } cancelPressed: {
-                print("")
-            }
+            let vc:SuccessVC = .controller()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
 
         }
+    }
+}
+
+//MARK: - SUCCESS DELEGATE
+extension TournamentRegisterVC:SuccessDelegate{
+    func didDismissSuccess() {
+        let vc:BookingReviewVC = BookingReviewVC.controller()
+        if sportType == .tournaments{
+            vc.pageType = .confirmed
+            vc.tournamentId = selectedTournament?.tournamentId
+            vc.tournamentName = selectedTournament?.tournamentName
+        }
+        else{
+            vc.pageType =  .confirmed
+            vc.runId = selectedRun?.id
+            vc.runName = selectedRun?.runName
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -22,7 +22,7 @@ class TabbarVC: UITabBarController {
         nav1.tabBarItem = tabbar1
         self.viewControllers = [nav1]
         
-        let vc2:AllSportsVC = .controller()
+        let vc2:MenuVC = .controller()
         let nav2 = NavController(rootViewController: vc2)
         nav2.setNavigationBarHidden(true, animated: false)
         let tabbar2 = UITabBarItem(title: nil, image: #imageLiteral(resourceName: "booking_dis"), selectedImage: #imageLiteral(resourceName: "booking_sel"))

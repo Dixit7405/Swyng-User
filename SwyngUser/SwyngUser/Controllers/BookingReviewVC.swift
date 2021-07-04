@@ -33,6 +33,14 @@ class BookingReviewVC: UIViewController {
     @IBOutlet weak var viewCancelButtons:UIView!
     @IBOutlet weak var lblHeader:UILabel!
     @IBOutlet weak var imgHeader:UIImageView!
+    @IBOutlet weak var btnCancelReschedule:UIButton!
+    @IBOutlet weak var lblPleaseNote:UILabel!
+    @IBOutlet weak var lblOrganizerTC:UILabel!
+    @IBOutlet weak var clctnBanners:UICollectionView!
+    @IBOutlet weak var pageControlBanner:UIPageControl!
+    @IBOutlet weak var lblOrganizerHeading:UILabel!
+    @IBOutlet weak var lblCancelBooking:UILabel!
+    @IBOutlet weak var headerView:HeaderView!
     
     enum PageType {
         case review
@@ -40,6 +48,7 @@ class BookingReviewVC: UIViewController {
         case upcoming
         case past
     }
+    
     
     var pageType:PageType = .review
     var tournamentId:Int?
@@ -49,11 +58,21 @@ class BookingReviewVC: UIViewController {
     var tournamentData:TournamentRegistrationData?
     var selectedTickets:[Int] = []
     var refundAmount:Double = 0
+    var tournaments:[Tournaments] = []
+    var runs:[Run] = []
+    var arrCategories:[TournamentsType] = []
+    var arrRunsCategories:[RunsCategory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        headerView.backBlock = { [weak self] in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+        headerView.menuBlock = { [weak self] in
+            self?.btnMenuPressed(self?.headerView.btnMenu ?? UIButton())
+        }
         tableView.addObserver(self, forKeyPath: #keyPath(UITableView.contentSize), options: .new, context: nil)
-        if pageType == .review{
+        /*if pageType == .review{
             viewBookingId.isHidden = true
             stackCancelBooking.isHidden = true
             viewAvailableOnRent.isHidden = true
@@ -70,7 +89,7 @@ class BookingReviewVC: UIViewController {
             viewCenterGuidelines.isHidden = true
             stackCancelCharges.isHidden = true
         }
-        else if pageType == .upcoming{
+        else */if pageType == .upcoming{
             viewAvailableOnRent.isHidden = true
             viewAvailableForSale.isHidden = true
             stackNeedHelp.isHidden = true
@@ -78,9 +97,20 @@ class BookingReviewVC: UIViewController {
             viewBanners.isHidden = true
             viewCancel.isHidden = true
             viewReschedule.isHidden = true
+            headerView.isHidden = true
+        }
+        else if pageType == .confirmed{
+            stackFees.isHidden = true
+            stackCancelCharges.isHidden = true
+            viewReschedule.isHidden = true
+            btnCancelReschedule.isHidden = true
+            viewCenterGuidelines.isHidden = true
+            viewCancelButtons.isHidden = true
+            headerView.isHidden = false
         }
         setupCancelFees()
         tournamentId != nil ? getRegistrationData() : getRunsRegistrationData()
+        tournamentId != nil ? getTournamentCategories() : getRunsCategories()
         // Do any additional setup after loading the view.
     }
     
@@ -89,8 +119,20 @@ class BookingReviewVC: UIViewController {
         lblHeader.text = tournamentId != nil ? tournamentName : runName
         
         lblBookingId.text = String(format: "Booking Id: %@", data.bookingId ?? "")
-        lblAddress.text = data.tournament?.venueAddress
         
+        if ApplicationManager.sportType == .tournaments{
+            lblPleaseNote.text = data.tournament?.pleaseNote
+            lblOrganizerTC.text = data.tournament?.aboutOrganizer
+            lblAddress.text = data.tournament?.venueAddress
+            lblCancelBooking.text = String(format: "You can cancel this booking before %@", ApplicationManager.tournament?.registerBeforeFromStartTime ?? "")
+        }
+        else{
+            lblPleaseNote.text = data.run?.pleaseNote
+            lblOrganizerHeading.text = "Route Map"
+            lblOrganizerTC.text = data.run?.routeMap
+            lblAddress.text = data.run?.venueAddress
+            lblCancelBooking.text = String(format: "You can cancel this booking before %@", ApplicationManager.runs?.registerBeforeFromStartTime ?? "")
+        }
         tableView.reloadData()
     }
 
@@ -113,7 +155,13 @@ class BookingReviewVC: UIViewController {
 //MARK: - ACTION METHODS
 extension BookingReviewVC{
     @IBAction func btnNextPressed(_ sender:UIButton){
-        tournamentId != nil ? cancelRegistrationData() : cancelRunsRegistrationData()
+        showAlertWith(message: "Are you sure you want to cancel this booking?", isConfirmation: true, okTitle: "Yes", cancelTitle: "No") { [self] in
+            tournamentId != nil ? cancelRegistrationData() : cancelRunsRegistrationData()
+        } cancelPressed: {
+            
+        }
+
+        
     }
     
     @IBAction func btnBackPressed(_ sender:UIButton){
@@ -121,8 +169,14 @@ extension BookingReviewVC{
     }
     
     @IBAction func btnDirectionTapped(_ sender:UIButton){
-        guard let urlString = tournamentData?.tournament?.venueGoogleMap, let url = URL(string: urlString) else {return}
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if tournamentId != nil{
+            guard let urlString = tournamentData?.tournament?.venueGoogleMap, let url = URL(string: urlString) else {return}
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        else{
+            guard let urlString = tournamentData?.run?.venueGoogleMap, let url = URL(string: urlString) else {return}
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @IBAction func btnCancelationRules(_ sender:UIButton){
@@ -158,6 +212,10 @@ extension BookingReviewVC:UITableViewDelegate,UITableViewDataSource{
             cell.btnClose.setImage(#imageLiteral(resourceName: "radio_empty"), for: .normal)
             cell.btnClose.setImage(#imageLiteral(resourceName: "confirm_red 5"), for: .selected)
         }
+        else if pageType == .confirmed{
+            cell.btnClose.setImage(nil, for: .normal)
+            cell.btnClose.setImage(#imageLiteral(resourceName: "cancel_red"), for: .selected)
+        }
         else{
             cell.btnClose.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             cell.btnClose.setImage(#imageLiteral(resourceName: "close"), for: .selected)
@@ -178,6 +236,9 @@ extension BookingReviewVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if pageType == .confirmed{
+            return
+        }
         var ticket:CancelTicket?
         if indexPath.row < tournamentData?.tickets?.count ?? 0{
             ticket = tournamentData?.tickets?[indexPath.row]
@@ -186,7 +247,7 @@ extension BookingReviewVC:UITableViewDelegate,UITableViewDataSource{
         else{
             let allTicket = tournamentData?.tickets?.count ?? 0
             ticket = tournamentData?.cancelTickets?[indexPath.row - allTicket]
-            
+            return
         }
         if selectedTickets.contains(ticket?.ticketId ?? 0){
             selectedTickets.removeAll(where: {$0 == ticket?.ticketId ?? 0})
@@ -202,16 +263,37 @@ extension BookingReviewVC:UITableViewDelegate,UITableViewDataSource{
 //MARK: - COLLECTIONVIEW DELEGATES
 extension BookingReviewVC:UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return tournamentId != nil ? tournaments.count : runs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeBannerCell", for: indexPath) as! HomeBannerCell
+        if tournamentId != nil{
+            cell.categories = arrCategories
+            cell.tournament = tournaments[indexPath.item]
+        }
+        else{
+            cell.runsCategories = arrRunsCategories
+            cell.runs = runs[indexPath.row]
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        /*let vc:TournamentDetailsVC = TournamentDetailsVC.controller()
+        if tournamentId != nil{
+            vc.tournament = tournaments[indexPath.row]
+            ApplicationManager.tournament = tournaments[indexPath.row]
+        }
+        else{
+            ApplicationManager.runs = runs[indexPath.row]
+            vc.runs = runs[indexPath.row]
+        }
+        navigationController?.pushViewController(vc, animated: true)*/
     }
 }
 
@@ -265,11 +347,10 @@ extension BookingReviewVC{
         ]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.cancelTicket, type: CommonResponse<CancelTicketResponse>.self, failer: failureBlock()) { success in
             guard let response = success as? CommonResponse<CancelTicketResponse> else {return}
-            self.showAlertWith(message: response.message ?? "") {
-                self.navigationController?.popToRootViewController(animated: true)
-            } cancelPressed: {
-                print("Nothing")
-            }
+            let vc:CancelledVC = .controller()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
 
         }
     }
@@ -289,12 +370,70 @@ extension BookingReviewVC{
         ]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.cancelRunsTicket, type: CommonResponse<CancelTicketResponse>.self, failer: failureBlock()) { success in
             guard let response = success as? CommonResponse<CancelTicketResponse> else {return}
-            self.showAlertWith(message: response.message ?? "") {
-                self.navigationController?.popToRootViewController(animated: true)
-            } cancelPressed: {
-                print("Nothing")
-            }
+            let vc:CancelledVC = .controller()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
 
         }
+    }
+    
+    private func getAllTournaments(){
+        startActivityIndicator()
+        let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? ""]
+        Webservices().request(with: params, method: .post, endPoint: EndPoints.getUpPastTournaments + "upcoming", type: CommonResponse<[Tournaments]>.self, failer: failureBlock()) {[weak self] (success) in
+            guard let self = self else {return}
+            guard let response = success as? CommonResponse<[Tournaments]> else {return}
+            if let data = self.successBlock(response: response){
+                self.tournaments = data
+                self.clctnBanners.reloadData()
+                self.pageControlBanner.numberOfPages = data.count
+            }
+        }
+    }
+    
+    private func getUpcomingRuns(){
+        let endPoint = EndPoints.getUpPastRuns + "upcoming"
+        let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? ""]
+        self.startActivityIndicator()
+        Webservices().request(with: params, method: .post, endPoint: endPoint, type: CommonResponse<[Run]>.self, failer: failureBlock()) {[weak self] success in
+            guard let self = self else {return}
+            if let response = success as? CommonResponse<[Run]>, let data = self.successBlock(response: response){
+                self.runs = data
+                self.clctnBanners.reloadData()
+                self.pageControlBanner.numberOfPages = data.count
+            }
+        }
+    }
+    
+    private func getTournamentCategories(){
+        startActivityIndicator()
+        let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? ""]
+        Webservices().request(with: params, method: .get, endPoint: EndPoints.getTournamentTypes, type: CommonResponse<[TournamentsType]>.self, failer: failureBlock()) { success in
+            guard let response = success as? CommonResponse<[TournamentsType]> else {return}
+            if let data = self.successBlock(response: response){
+                self.arrCategories = data
+                self.getAllTournaments()
+            }
+        }
+    }
+    
+    private func getRunsCategories(){
+        startActivityIndicator()
+        let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? ""]
+        Webservices().request(with: params, method: .get, endPoint: EndPoints.getRunsCategory, type: CommonResponse<[RunsCategory]>.self, failer: failureBlock()) { success in
+            guard let response = success as? CommonResponse<[RunsCategory]> else {return}
+            if let data = self.successBlock(response: response){
+                self.arrRunsCategories = data
+                self.getUpcomingRuns()
+            }
+        }
+    }
+}
+
+//MARK: - CANCELLED DELEGATE
+extension BookingReviewVC:CancelledDelegate{
+    func didDismissVC() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }

@@ -47,6 +47,7 @@ struct Tournament : Codable {
         let venue : String?
         let venueAddress : String?
         let venueGoogleMap : String?
+    let routeMap:String?
 
         enum CodingKeys: String, CodingKey {
                 case aboutOrganizer = "aboutOrganizer"
@@ -59,6 +60,7 @@ struct Tournament : Codable {
                 case venue = "venue"
                 case venueAddress = "venue_address"
                 case venueGoogleMap = "venue_google_map"
+            case routeMap = "routeMap"
         }
     
         init(from decoder: Decoder) throws {
@@ -73,6 +75,7 @@ struct Tournament : Codable {
                 venue = try values.decodeIfPresent(String.self, forKey: .venue)
                 venueAddress = try values.decodeIfPresent(String.self, forKey: .venueAddress)
                 venueGoogleMap = try values.decodeIfPresent(String.self, forKey: .venueGoogleMap)
+            routeMap = try values.decodeIfPresent(String.self, forKey: .routeMap)
         }
 
 }

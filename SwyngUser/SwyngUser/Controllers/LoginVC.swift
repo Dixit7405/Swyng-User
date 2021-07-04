@@ -15,6 +15,9 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if registerData != nil{
+            txtfMobileNumber.text = registerData?.mobile
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -43,7 +46,7 @@ extension LoginVC{
     
 }
 
-//MARK: - API Servicesg
+//MARK: - API Servicg
 extension LoginVC{
     private func sendOTP(){
         startActivityIndicator()
@@ -56,13 +59,21 @@ extension LoginVC{
                 self.performSegue(withIdentifier: "OTPSegue", sender: nil)
             }
             else{
-                self.showAlertWith(message: response.message ?? "", isConfirmation: false, okTitle: "Ok", cancelTitle: "") { [unowned self] in
+//                self.showAlertWith(message: response.message ?? "", isConfirmation: false, okTitle: "Ok", cancelTitle: "") { [unowned self] in
+                if !self.fromRegister{
                     let vc:FirstNameVC = FirstNameVC.controller(storyId: StoryboardIds.main)
+                    let registerData = RegisterParams()
+                    registerData.mobile = self.txtfMobileNumber.text!
+                    vc.registerData = registerData
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
-                } cancelPressed: {
-                    print("None")
                 }
+                else{
+                    self.showAlertWith(message: response.message ?? "")
+                }
+//                } cancelPressed: {
+//                    print("None")
+//                }
                 
                 
             }

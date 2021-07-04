@@ -157,6 +157,14 @@ extension UIViewController{
     
     func showNoDataLabel(){
         view.viewWithTag(100)?.removeFromSuperview()
+        let noDataView = NoDataView()
+        view.addSubview(noDataView)
+        noDataView.tag = 100
+        view.sendSubviewToBack(noDataView)
+        noDataView.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        /*view.viewWithTag(100)?.removeFromSuperview()
         let lbl = UILabel()
         lbl.text = "Your collection is empty "
         lbl.textColor = UIColor.lightGray
@@ -167,7 +175,7 @@ extension UIViewController{
             $0.leading.equalToSuperview().offset(5)
             $0.trailing.equalToSuperview().offset(5)
             $0.centerY.equalToSuperview()
-        })
+        })*/
     }
     
     func hideNoDataLabel(){
@@ -322,6 +330,34 @@ extension UIViewController{
         }
     }
     
+    @IBAction func btnCallPressed(_ sender:UIButton){
+        if let url = URL(string: "tel://+919108475471"){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @IBAction func btnEmailPressed(_ sender:UIButton){
+        if let url = URL(string: "mailto:hello@swyng.in"){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @IBAction func btnWhatsappPressed(_ sender:UIButton){
+        let phoneNumber =  "+919108475471" // you need to change this number
+        let appURL = URL(string: "https://api.whatsapp.com/send?phone=\(phoneNumber)")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+            }
+            else {
+                UIApplication.shared.openURL(appURL)
+            }
+        } else {
+            self.showAlertWith(message: "Whatsapp is not installed.")
+        }
+
+    }
+    
     func downloadVideo(url:URL){
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil);
         let downloadTask  =  session.downloadTask(with: url);
@@ -367,6 +403,15 @@ extension UIViewController{
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0))
+    }
+    
+    var isModal: Bool {
+        
+        let presentingIsModal = presentingViewController != nil
+        let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
+        let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
+        
+        return presentingIsModal || presentingIsNavigation || presentingIsTabBar
     }
 }
 

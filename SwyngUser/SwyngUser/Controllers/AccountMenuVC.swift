@@ -43,10 +43,13 @@ class AccountMenuVC: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
         view.layoutIfNeeded()
         
-        btnCity.setTitle(ApplicationManager.selectedCity?.name, for: .normal)
-        
         setupCollectionView()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        btnCity.setTitle(ApplicationManager.selectedCity?.name, for: .normal)
     }
     
 }
@@ -64,6 +67,7 @@ extension AccountMenuVC{
           }) { (datasource, collectionView, item, indexPath) -> UICollectionReusableView in
             
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "EventMenuFooter", for: indexPath) as! EventMenuFooter
+            cell.controller = self
             return cell
             
         }
@@ -106,6 +110,12 @@ extension AccountMenuVC{
 extension AccountMenuVC{
     @IBAction func btnBackPressed(_ sender:UIButton){
         self.dismissLeft()
+    }
+    
+    @IBAction func btnCitySelectionTapped(_ sender:UIButton){
+        let vc:CitySelectionVC = .controller(storyId: StoryboardIds.main)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }
 

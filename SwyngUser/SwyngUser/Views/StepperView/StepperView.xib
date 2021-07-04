@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepperView" customModule="SwyngUser" customModuleProvider="target">
+            <connections>
+                <outlet property="btnMinus" destination="E0q-kb-hwm" id="VY4-5J-ipr"/>
+                <outlet property="btnPlus" destination="zVN-GY-4kk" id="9Zx-aw-yc8"/>
+                <outlet property="lblValue" destination="Tpi-Oo-7rS" id="NNm-7G-D6T"/>
+                <outlet property="view" destination="iN0-l3-epB" id="sLq-4s-Fys"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="219" height="66"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c1o-9y-LMY">
+                    <rect key="frame" x="55.5" y="15.5" width="108" height="35"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0q-kb-hwm">
+                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="E0q-kb-hwm" secondAttribute="height" multiplier="1:1" id="b7T-r3-Bdg"/>
+                                <constraint firstAttribute="width" constant="35" id="wFI-Gl-tCb"/>
+                            </constraints>
+                            <state key="normal" image="minus"/>
+                            <connections>
+                                <action selector="btnMinusPressed:" destination="-1" eventType="touchUpInside" id="sn6-si-Hka"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Tpi-Oo-7rS">
+                            <rect key="frame" x="45" y="0.0" width="18" height="35"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                            <color key="textColor" name="textBlack"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVN-GY-4kk">
+                            <rect key="frame" x="73" y="0.0" width="35" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="zVN-GY-4kk" secondAttribute="height" id="Acu-pj-iYV"/>
+                            </constraints>
+                            <state key="normal" image="plus"/>
+                            <connections>
+                                <action selector="btnPlusPressed:" destination="-1" eventType="touchUpInside" id="g7W-Jh-gCs"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="c1o-9y-LMY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="34B-tF-BiQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="c1o-9y-LMY" secondAttribute="bottom" id="SKv-O9-qg2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c1o-9y-LMY" secondAttribute="trailing" id="Uwm-Of-h2L"/>
+                <constraint firstItem="c1o-9y-LMY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eST-As-gP3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="36.5625" y="-193.30985915492957"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="minus" width="30" height="30"/>
+        <image name="plus" width="30" height="30"/>
+        <namedColor name="textBlack">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

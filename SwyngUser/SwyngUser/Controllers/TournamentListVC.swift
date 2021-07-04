@@ -26,11 +26,11 @@ class TournamentListVC: BaseVC {
         super.viewDidLoad()
         if registration{
             pastName = "Past Registration"
-            upcomming = "Upcomming Registration"
+            upcomming = "Upcoming Registration"
         }
         else{
             pastName = isTournament ? "Past Tournaments" : "Past Runs"
-            upcomming = isTournament ? "Upcomming Tournaments" : "Upcomming Runs"
+            upcomming = isTournament ? "Upcoming Tournaments" : "Upcoming Runs"
         }
         lblSelectedTab.text = upcomming
         lblNonSelectedTab.text = pastName

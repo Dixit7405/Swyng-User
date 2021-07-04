@@ -29,12 +29,12 @@ class UpcomingTournamentVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         if sportType == .tournaments{
-            lblHeaderName.text = "Upcomming Tournaments"
+            lblHeaderName.text = "Upcoming Tournaments"
             imgHeader.image = #imageLiteral(resourceName: "header_tournaments")
         }
         else{
             lblHeaderName.text = "Upcoming Runs"
-            imgHeader.image = #imageLiteral(resourceName: "header_run")
+            imgHeader.image = #imageLiteral(resourceName: "goal_blue 1")
         }
         
         if isTournament{
@@ -156,12 +156,12 @@ extension UpcomingTournamentVC{
             guard let response = success as? CommonResponse<[TournamentsType]> else {return}
             if let data = self.successBlock(response: response){
                 self.arrCategories = data
-                if self.filter == nil{
-                    self.getAllTournaments()
-                }
-                else{
+//                if self.filter == nil{
+//                    self.getAllTournaments()
+//                }
+//                else{
                     self.filterTournamentData()
-                }
+//                }
                 
             }
         }
@@ -174,12 +174,12 @@ extension UpcomingTournamentVC{
             guard let response = success as? CommonResponse<[RunsCategory]> else {return}
             if let data = self.successBlock(response: response){
                 self.arrRunsCategories = data
-                if self.filter == nil{
-                    self.getUpcomingRuns()
-                }
-                else{
+//                if self.filter == nil{
+//                    self.getUpcomingRuns()
+//                }
+//                else{
                     self.filterRunsData()
-                }
+//                }
                 
             }
         }
@@ -190,7 +190,7 @@ extension UpcomingTournamentVC{
         let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
                                    Parameters.sport:filter?.sport.compactMap({$0.id}) ?? [],
                                    Parameters.offset:0,
-                                   Parameters.size:10]
+                                   Parameters.size:100]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.filterTournaments, type: CommonResponse<PagingData<Tournaments>>.self, failer: failureBlock()) {[weak self] (success) in
             guard let self = self else {return}
             guard let response = success as? CommonResponse<PagingData<Tournaments>> else {return}
@@ -200,6 +200,14 @@ extension UpcomingTournamentVC{
                     self.tournaments.sort(by: {($0.dates?.first?.convertDate(format: .serverDate) ?? Date()) > ($1.dates?.first?.convertDate(format: .serverDate) ?? Date())})
                 }
                 self.tableView.reloadData()
+                if self.tournaments.count == 0{
+                    self.tableView.isHidden = true
+                    self.showNoDataLabel()
+                }
+                else{
+                    self.tableView.isHidden = false
+                    self.hideNoDataLabel()
+                }
             }
         }
     }
@@ -209,7 +217,7 @@ extension UpcomingTournamentVC{
         let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
                                    Parameters.sport:filter?.sport.compactMap({$0.id}) ?? [],
                                    Parameters.offset:0,
-                                   Parameters.size:10]
+                                   Parameters.size:100]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.filterRuns, type: CommonResponse<PagingData<Run>>.self, failer: failureBlock()) {[weak self] (success) in
             guard let self = self else {return}
             guard let response = success as? CommonResponse<PagingData<Run>> else {return}
@@ -219,6 +227,14 @@ extension UpcomingTournamentVC{
                     self.runs.sort(by: {($0.dates?.first?.convertDate(format: .serverDate) ?? Date()) > ($1.dates?.first?.convertDate(format: .serverDate) ?? Date())})
                 }
                 self.tableView.reloadData()
+                if self.runs.count == 0{
+                    self.tableView.isHidden = true
+                    self.showNoDataLabel()
+                }
+                else{
+                    self.tableView.isHidden = false
+                    self.hideNoDataLabel()
+                }
             }
         }
     }
