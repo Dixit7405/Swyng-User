@@ -11,6 +11,9 @@ class BookingReviewCell: UITableViewCell {
     @IBOutlet weak var btnClose:UIButton!
     @IBOutlet weak var lblCategoryName:UILabel!
     @IBOutlet weak var lblPrice:UILabel!
+    @IBOutlet weak var stepperView:StepperView!
+    
+    var stepperUpdateBlock:((Int) -> Void)?
     
     var setSelected:Bool?{
         didSet{
@@ -24,6 +27,13 @@ class BookingReviewCell: UITableViewCell {
             guard let ticket = ticket else {return}
             lblCategoryName.text = ticket.category?.name
             lblPrice.text = String(format: "Rs. %@", ticket.category?.amount ?? "")
+            if stepperView != nil{
+                stepperView.stepperUpdateBlock = {[self] index in
+                    if let stepper = stepperUpdateBlock{
+                        stepper(index)
+                    }
+                }
+            }
         }
     }
     

@@ -72,11 +72,14 @@ extension TournamentRegisterVC{
         }
         else{
             myRuns = []
-            for index in 0..<(selectedRun?.tblRunRegistrationTickets ?? []).count{
-                if selectedIndex.contains(index){
-                    myRuns.append(selectedRun?.tblRunRegistrationTickets?[index])
-                }
+            for index in selectedIndex{
+                myRuns.append(selectedRun?.tblRunRegistrationTickets?[index])
             }
+//            for index in 0..<(selectedRun?.tblRunRegistrationTickets ?? []).count{
+//                if selectedIndex.contains(index){
+//                    myRuns.append(selectedRun?.tblRunRegistrationTickets?[index])
+//                }
+//            }
             bottomViews.forEach({$0.isHidden = selectedIndex.count == 0})
             let fees = myRuns.compactMap({Double($0?.participationFees ?? "0")}).reduce(0, +)
             let GST:Double = 0
@@ -157,21 +160,34 @@ extension TournamentRegisterVC:UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TournamentRegisterCell", for: indexPath) as! TournamentRegisterCell
         if isTournament{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TournamentRegisterCell", for: indexPath) as! TournamentRegisterCell
             cell.tournamentTicket = selectedTournament?.tblTournamentRegistrationTickets?[indexPath.row]
+            cell.btnSelection.isSelected = selectedIndex.contains(indexPath.row)
+            return cell
         }
-        else{
-            cell.runsTicket = selectedRun?.tblRunRegistrationTickets?[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RunCell", for: indexPath) as! TournamentRegisterCell
+        cell.runsTicket = selectedRun?.tblRunRegistrationTickets?[indexPath.row]
+        cell.stepperView.currentIndex = self.selectedIndex.compactMap({$0 == indexPath.row}).count
+        cell.stepperUpdateBlock = { index in
+            
+            self.selectedIndex.removeAll(where: {$0 == indexPath.row})
+            
+            var arr:[Int] = []
+            for _ in 0..<index{
+                arr.append(indexPath.row)
+            }
+            
+            self.selectedIndex.append(contentsOf: arr)
+            self.setFeesData()
         }
-        cell.btnSelection.isSelected = selectedIndex.contains(indexPath.row)
         return cell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "RunCell", for: indexPath) as! TournamentRegisterCell
-//        cell.runsTicket = selectedRun?.tblRunRegistrationTickets?[indexPath.row]
-//        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !isTournament{
+            return
+        }
         if selectedIndex.contains(indexPath.row){
             let index = selectedIndex.firstIndex(where: {$0 == indexPath.row}) ?? 0
             selectedIndex.remove(at: index)

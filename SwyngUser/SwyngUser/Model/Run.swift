@@ -43,6 +43,8 @@ struct Run : Codable {
     let runPublished:String?
     let fixerAndSchedulePdf:String?
     let tblRunRegistrationTickets:[RunsTicket]?
+    let tbl_favourite_runs:[Favourite]?
+    let tbl_run_registrations:[RegisterCount]?
     
         enum CodingKeys: String, CodingKey {
                 case aboutOrganizer = "aboutOrganizer"
@@ -81,6 +83,8 @@ struct Run : Codable {
             case runPublished = "runPublished"
             case fixerAndSchedulePdf = "fixerAndSchedulePdf"
             case tblRunRegistrationTickets = "tbl_run_registration_tickets"
+            case tbl_favourite_runs = "tbl_favourite_runs"
+            case tbl_run_registrations = "tbl_run_registrations"
         }
     
         init(from decoder: Decoder) throws {
@@ -121,6 +125,8 @@ struct Run : Codable {
             runPublished = try values.decodeIfPresent(String.self, forKey: .runPublished)
             fixerAndSchedulePdf = try values.decodeIfPresent(String.self, forKey: .fixerAndSchedulePdf)
             tblRunRegistrationTickets = try values.decodeIfPresent([RunsTicket].self, forKey: .tblRunRegistrationTickets)
+            tbl_favourite_runs = try values.decodeIfPresent([Favourite].self, forKey: .tbl_favourite_runs)
+            tbl_run_registrations = try values.decodeIfPresent([RegisterCount].self, forKey: .tbl_run_registrations)
         }
 
 }

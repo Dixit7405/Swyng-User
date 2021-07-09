@@ -41,6 +41,7 @@ class BookingReviewVC: UIViewController {
     @IBOutlet weak var lblOrganizerHeading:UILabel!
     @IBOutlet weak var lblCancelBooking:UILabel!
     @IBOutlet weak var headerView:HeaderView!
+    @IBOutlet weak var cancelationRuleStack:UIStackView!
     
     enum PageType {
         case review
@@ -62,6 +63,28 @@ class BookingReviewVC: UIViewController {
     var runs:[Run] = []
     var arrCategories:[TournamentsType] = []
     var arrRunsCategories:[RunsCategory] = []
+    var confirmedArr:[CancelTicket]{
+        get{
+            var arr:[CancelTicket] = []
+            tournamentData?.tickets?.forEach({
+                if !arr.compactMap({$0.ticketId}).contains($0.ticketId){
+                    arr.append($0)
+                }
+            })
+            return arr
+        }
+    }
+    var cancelledArr:[CancelTicket]{
+        get{
+            var arr:[CancelTicket] = []
+            tournamentData?.cancelTickets?.forEach({
+                if !arr.compactMap({$0.ticketId}).contains($0.ticketId){
+                    arr.append($0)
+                }
+            })
+            return arr
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,17 +153,64 @@ class BookingReviewVC: UIViewController {
             lblPleaseNote.text = data.run?.pleaseNote
             lblOrganizerHeading.text = "Route Map"
             lblOrganizerTC.text = data.run?.routeMap
-            lblAddress.text = data.run?.venueAddress
+            let address = String(format:"%@\n%@\n%@",(data.run?.venue ?? ""), (data.run?.address ?? ""), (data.run?.city ?? ""))
+            lblAddress.text = address
             lblCancelBooking.text = String(format: "You can cancel this booking before %@", ApplicationManager.runs?.registerBeforeFromStartTime ?? "")
         }
+        
+//        cancelationRuleStack.arrangedSubviews.forEach({$0.removeFromSuperview()})
+        for rule in data.cancelationRules ?? []{
+            let lastDate = data.tournament?.dates?.last?.convertDate(format: .serverDate) ?? Date()
+            var beforeDate:Date?
+            var afterDate:Date?
+            let dateFormat = "hh.mm a EEE dd MMM yyyy"
+            if rule.time?.contains("+") ?? false{
+                let afterValue = rule.time?.replacingOccurrences(of: "+", with: "").doubleValue
+                afterDate = lastDate.addingTimeInterval(-((afterValue ?? 0)*3600))
+            }
+            else if rule.time?.contains("-") ?? false{
+                let split = rule.time?.split(separator: "-")
+                let before = split?.first
+                let after = split?.last
+                beforeDate = lastDate.addingTimeInterval(-((Double(before ?? "0") ?? 0)*3600))
+                afterDate = lastDate.addingTimeInterval(-((Double(after ?? "0") ?? 0)*3600))
+            }
+            if beforeDate == nil, afterDate != nil{
+                let ruleView = CancelationRuleView()
+                let afterD = afterDate?.toDate(format: dateFormat) ?? ""
+                ruleView.lblRule.text = String(format: "Cancelation before %@", afterD)
+                ruleView.lblPercentage.text = String(format: "%@ %%", rule.age ?? "0")
+                cancelationRuleStack.addArrangedSubview(ruleView)
+            }
+            else if beforeDate != nil, afterDate != nil{
+                let ruleView = CancelationRuleView()
+                let afterD = afterDate?.toDate(format: dateFormat) ?? ""
+                let beforeD = beforeDate?.toDate(format: dateFormat) ?? ""
+                ruleView.lblRule.text = String(format: "Cancel after %@ & before %@", afterD, beforeD)
+                ruleView.lblPercentage.text = String(format: "%@ %%", rule.age ?? "")
+                cancelationRuleStack.addArrangedSubview(ruleView)
+            }
+        }
+        
         tableView.reloadData()
     }
 
     func setupCancelFees(){
         stackFees.isHidden = selectedTickets.count == 0
         viewCancelButtons.isHidden = selectedTickets.count == 0
-        let selectedTournaments = tournamentData?.tickets?.filter({selectedTickets.contains($0.ticketId ?? 0)})
-        let fees = selectedTournaments?.compactMap({Double($0.category?.amount ?? "0")}).reduce(0, +) ?? 0
+        var selectedTournaments:[CancelTicket] = []
+        if tournamentId != nil{
+            selectedTournaments = tournamentData?.tickets?.filter({selectedTickets.contains($0.ticketId ?? 0)}) ?? []
+        }
+        else{
+            
+            for ticket in selectedTickets{
+                if let tickt = tournamentData?.tickets?.first(where: {$0.ticketId == ticket}){
+                    selectedTournaments.append(tickt)
+                }
+            }
+        }
+        let fees = selectedTournaments.compactMap({Double($0.category?.amount ?? "0")}).reduce(0, +)
         let gst:Double = 0
         let cancelationCharge:Double = 0
         refundAmount = fees+gst-cancelationCharge
@@ -198,45 +268,82 @@ extension BookingReviewVC:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let ticket = tournamentData?.tickets?.count ?? 0
-        let cancelTicket = tournamentData?.cancelTickets?.count ?? 0
-        return ticket + cancelTicket
+        if tournamentId != nil{
+            let ticket = tournamentData?.tickets?.count ?? 0
+            let cancelTicket = tournamentData?.cancelTickets?.count ?? 0
+            return ticket + cancelTicket
+        }
+        if pageType == .upcoming{
+            return confirmedArr.count
+        }
+        return confirmedArr.count + cancelledArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BookingReviewCell", for: indexPath) as! BookingReviewCell
-        cell.btnClose.isHidden = pageType == .past
-        
-        
-        if pageType == .upcoming{
-            cell.btnClose.setImage(#imageLiteral(resourceName: "radio_empty"), for: .normal)
-            cell.btnClose.setImage(#imageLiteral(resourceName: "confirm_red 5"), for: .selected)
-        }
-        else if pageType == .confirmed{
-            cell.btnClose.setImage(nil, for: .normal)
-            cell.btnClose.setImage(#imageLiteral(resourceName: "cancel_red"), for: .selected)
-        }
-        else{
-            cell.btnClose.setImage(#imageLiteral(resourceName: "close"), for: .normal)
-            cell.btnClose.setImage(#imageLiteral(resourceName: "close"), for: .selected)
-        }
-        if indexPath.item < tournamentData?.tickets?.count ?? 0{
-            let ticket = tournamentData?.tickets?[indexPath.row]
-            cell.setSelected = selectedTickets.contains(ticket?.ticketId ?? 0)
-            cell.ticket = ticket
+        if tournamentId != nil{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BookingReviewCell", for: indexPath) as! BookingReviewCell
+            cell.btnClose.isHidden = pageType == .past
             
+            
+            if pageType == .upcoming{
+                cell.btnClose.setImage(#imageLiteral(resourceName: "radio_empty"), for: .normal)
+                cell.btnClose.setImage(#imageLiteral(resourceName: "confirm_red 5"), for: .selected)
+            }
+            else if pageType == .confirmed{
+                cell.btnClose.setImage(nil, for: .normal)
+                cell.btnClose.setImage(#imageLiteral(resourceName: "cancel_red"), for: .selected)
+            }
+            else{
+                cell.btnClose.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+                cell.btnClose.setImage(#imageLiteral(resourceName: "close"), for: .selected)
+            }
+            if indexPath.item < tournamentData?.tickets?.count ?? 0{
+                let ticket = tournamentData?.tickets?[indexPath.row]
+                cell.setSelected = selectedTickets.contains(ticket?.ticketId ?? 0)
+                cell.ticket = ticket
+                
+            }
+            else{
+                let ticket = tournamentData?.tickets?.count ?? 0
+                let cancelTicket = tournamentData?.cancelTickets?[indexPath.row - ticket]
+                cell.setSelected = true
+                cell.ticket = cancelTicket
+            }
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RunCell", for: indexPath) as! BookingReviewCell
+        if indexPath.item < confirmedArr.count{
+            let ticket = confirmedArr[indexPath.row]
+            let max = tournamentData?.tickets?.filter({ticket.ticketId == $0.ticketId}).count ?? 0
+            cell.stepperView.maxValue = max
+            let selected = selectedTickets.filter({$0 == ticket.ticketId}).count
+            cell.stepperView.currentIndex = max - selected
+            cell.stepperUpdateBlock = {[self] index in
+                let total = max - index
+                selectedTickets.removeAll(where: {$0 == ticket.ticketId})
+                let selectedArr = Array(repeating: ticket.ticketId ?? 0, count: total)
+                selectedTickets.append(contentsOf: selectedArr)
+                setupCancelFees()
+            }
+            cell.stepperView.btnPlus.isHidden = pageType == .confirmed
+            cell.stepperView.btnMinus.isHidden = pageType == .confirmed
+            cell.ticket = ticket
+            cell.btnClose.isHidden = true
         }
         else{
-            let ticket = tournamentData?.tickets?.count ?? 0
-            let cancelTicket = tournamentData?.cancelTickets?[indexPath.row - ticket]
-            cell.setSelected = true
+            let cancelTicket = cancelledArr[indexPath.row - confirmedArr.count]
+            let max = tournamentData?.cancelTickets?.filter({cancelTicket.ticketId == $0.ticketId}).count ?? 0
+            cell.stepperView.btnPlus.isHidden = true
+            cell.stepperView.btnMinus.isHidden = true
+            cell.stepperView.currentIndex = max
             cell.ticket = cancelTicket
+            cell.btnClose.isHidden = false
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if pageType == .confirmed{
+        if pageType == .confirmed || tournamentId == nil{
             return
         }
         var ticket:CancelTicket?
@@ -347,34 +454,44 @@ extension BookingReviewVC{
         ]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.cancelTicket, type: CommonResponse<CancelTicketResponse>.self, failer: failureBlock()) { success in
             guard let response = success as? CommonResponse<CancelTicketResponse> else {return}
-            let vc:CancelledVC = .controller()
-            vc.delegate = self
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            if response.success == true{
+                let vc:CancelledVC = .controller()
+                vc.delegate = self
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
 
         }
     }
     
     private func cancelRunsRegistrationData(){
         var selectedTickets = self.selectedTickets
-        selectedTickets.append(contentsOf: tournamentData?.cancelTickets?.compactMap({$0.ticketId}) ?? [])
         var remain = tournamentData?.tickets?.compactMap({$0.ticketId}) ?? []
-        remain = remain.filter({!selectedTickets.contains($0)})
+        
+        selectedTickets.append(contentsOf: tournamentData?.cancelTickets?.compactMap({$0.ticketId}) ?? [])
+        for ticket in selectedTickets{
+            if remain.contains(ticket){
+                if let index = remain.firstIndex(of: ticket){
+                    remain.remove(at: index)
+                }
+            }
+        }
         
         let params:[String:Any] = [Parameters.token:ApplicationManager.authToken ?? "",
                                    Parameters.run_id:runId ?? 0,
-                                   Parameters.cancel_category_id:selectedTickets,
+                                   Parameters.cancel_category_id:[],
                                    Parameters.txnToken:tournamentData?.tickets?.compactMap({$0.txnToken}).first ?? "",
                                    Parameters.refund_amount:refundAmount,
                                    Parameters.remain_ticket_id:remain
         ]
         Webservices().request(with: params, method: .post, endPoint: EndPoints.cancelRunsTicket, type: CommonResponse<CancelTicketResponse>.self, failer: failureBlock()) { success in
             guard let response = success as? CommonResponse<CancelTicketResponse> else {return}
-            let vc:CancelledVC = .controller()
-            vc.delegate = self
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-
+            if response.success == true{
+                let vc:CancelledVC = .controller()
+                vc.delegate = self
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
         }
     }
     

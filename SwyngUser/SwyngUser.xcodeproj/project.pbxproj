@@ -96,6 +96,11 @@
 		1B7D8ED12643AE5C00C5F2EF /* BookingSlotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D8ECF2643AE5C00C5F2EF /* BookingSlotCell.swift */; };
 		1B7D8ED22643AE5C00C5F2EF /* BookingSlotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D8ED02643AE5C00C5F2EF /* BookingSlotCell.xib */; };
 		1B80EDD126354A950017A06B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B80EDD026354A950017A06B /* HomeVC.swift */; };
+		1B92AE5226921E1A00F9C86E /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5126921E1A00F9C86E /* Favourite.swift */; };
+		1B92AE5426921F7600F9C86E /* RegisterCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5326921F7600F9C86E /* RegisterCount.swift */; };
+		1B92AE5626922B4900F9C86E /* CancelationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5526922B4900F9C86E /* CancelationRule.swift */; };
+		1B92AE5926922D3600F9C86E /* CancelationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5826922D3600F9C86E /* CancelationRuleView.swift */; };
+		1B92AE5B26922D4500F9C86E /* CancelationRuleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B92AE5A26922D4500F9C86E /* CancelationRuleView.xib */; };
 		1B98498A2641023E006E8914 /* AllSportsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9849892641023E006E8914 /* AllSportsCell.swift */; };
 		1B9DFC97268B4C1900D29E2B /* RegistrationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9DFC96268B4C1900D29E2B /* RegistrationList.swift */; };
 		1B9DFC99268B59F700D29E2B /* TournamentRegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9DFC98268B59F700D29E2B /* TournamentRegistrationData.swift */; };
@@ -244,6 +249,11 @@
 		1B7D8ECF2643AE5C00C5F2EF /* BookingSlotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSlotCell.swift; sourceTree = "<group>"; };
 		1B7D8ED02643AE5C00C5F2EF /* BookingSlotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingSlotCell.xib; sourceTree = "<group>"; };
 		1B80EDD026354A950017A06B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		1B92AE5126921E1A00F9C86E /* Favourite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favourite.swift; path = ../../../../../../../Users/dixitrathod/Downloads/Favourite.swift; sourceTree = "<group>"; };
+		1B92AE5326921F7600F9C86E /* RegisterCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterCount.swift; sourceTree = "<group>"; };
+		1B92AE5526922B4900F9C86E /* CancelationRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelationRule.swift; sourceTree = "<group>"; };
+		1B92AE5826922D3600F9C86E /* CancelationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelationRuleView.swift; sourceTree = "<group>"; };
+		1B92AE5A26922D4500F9C86E /* CancelationRuleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancelationRuleView.xib; sourceTree = "<group>"; };
 		1B9849892641023E006E8914 /* AllSportsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSportsCell.swift; sourceTree = "<group>"; };
 		1B9DFC96268B4C1900D29E2B /* RegistrationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationList.swift; sourceTree = "<group>"; };
 		1B9DFC98268B59F700D29E2B /* TournamentRegistrationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentRegistrationData.swift; sourceTree = "<group>"; };
@@ -337,6 +347,7 @@
 		1B0C30DF26345929004793D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B92AE5726922D1D00F9C86E /* CancelationRuleView */,
 				1B520DD82691A0EA001E25B8 /* StepperView */,
 				1BBEBAFD269052620074DF60 /* NoDataView */,
 				1B1E42AF2683ADC9006F3063 /* TournamentListView */,
@@ -476,6 +487,15 @@
 			path = StepperView;
 			sourceTree = "<group>";
 		};
+		1B92AE5726922D1D00F9C86E /* CancelationRuleView */ = {
+			isa = PBXGroup;
+			children = (
+				1B92AE5826922D3600F9C86E /* CancelationRuleView.swift */,
+				1B92AE5A26922D4500F9C86E /* CancelationRuleView.xib */,
+			);
+			path = CancelationRuleView;
+			sourceTree = "<group>";
+		};
 		1BB7020B26328CCF00B66B62 = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +567,9 @@
 		1BEA4FC0264FAE84004C7171 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1B92AE5526922B4900F9C86E /* CancelationRule.swift */,
+				1B92AE5326921F7600F9C86E /* RegisterCount.swift */,
+				1B92AE5126921E1A00F9C86E /* Favourite.swift */,
 				1BD52C48268CE26A00BF3683 /* CancelTicket.swift */,
 				1B9DFC98268B59F700D29E2B /* TournamentRegistrationData.swift */,
 				1B9DFC96268B4C1900D29E2B /* RegistrationList.swift */,
@@ -654,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B242CC626333FA00077AECD /* Roboto-Medium.ttf in Resources */,
+				1B92AE5B26922D4500F9C86E /* CancelationRuleView.xib in Resources */,
 				1B242CBF26333FA00077AECD /* Roboto-ThinItalic.ttf in Resources */,
 				1BB7022426328CD000B66B62 /* LaunchScreen.storyboard in Resources */,
 				1B1E42AA2683AD18006F3063 /* OptionView.xib in Resources */,
@@ -748,6 +772,7 @@
 				1BB8D99326391BAE0075C109 /* ShadowView.swift in Sources */,
 				1B7D8ED12643AE5C00C5F2EF /* BookingSlotCell.swift in Sources */,
 				1BA53B13268642CA0050E725 /* RunRegister.swift in Sources */,
+				1B92AE5626922B4900F9C86E /* CancelationRule.swift in Sources */,
 				1BEA4FCC264FB324004C7171 /* City.swift in Sources */,
 				1BF1C89C264AF1180061BD6F /* TournamentRegisterCell.swift in Sources */,
 				1B4C7CBB268E32B500CCE555 /* SuccessVC.swift in Sources */,
@@ -757,6 +782,7 @@
 				1B520DDA2691A101001E25B8 /* StepperView.swift in Sources */,
 				1B0C30D02634070A004793D5 /* FirstNameVC.swift in Sources */,
 				1B1E42BF2683B541006F3063 /* ManageCenterVM.swift in Sources */,
+				1B92AE5926922D3600F9C86E /* CancelationRuleView.swift in Sources */,
 				1B29E618264C04CE00833FCB /* ParticipantCell.swift in Sources */,
 				1B1E42992683AB53006F3063 /* SportCentersDetails.swift in Sources */,
 				1B1E42A02683AB53006F3063 /* Run.swift in Sources */,
@@ -770,6 +796,7 @@
 				1BF1C89F264AF13E0061BD6F /* TournamentRegisterVC.swift in Sources */,
 				1BB7021C26328CCF00B66B62 /* ViewController.swift in Sources */,
 				1B9DFC99268B59F700D29E2B /* TournamentRegistrationData.swift in Sources */,
+				1B92AE5226921E1A00F9C86E /* Favourite.swift in Sources */,
 				1B6898D726850395006845FA /* Favorite.swift in Sources */,
 				1BBC951E26500E2D00735DCA /* Constants.swift in Sources */,
 				1BEA4FC8264FB0CB004C7171 /* ApplicationManager.swift in Sources */,
@@ -821,6 +848,7 @@
 				1B9FBCE7263C787D00AF1D0E /* AllSportsVC.swift in Sources */,
 				1B1E429F2683AB53006F3063 /* CMSData.swift in Sources */,
 				1B66847E264C501300DB3EAB /* TournamentCMSVC.swift in Sources */,
+				1B92AE5426921F7600F9C86E /* RegisterCount.swift in Sources */,
 				1B1E429C2683AB53006F3063 /* RunsCategory.swift in Sources */,
 				1B5F2FA92650DB6500A559D4 /* Profile.swift in Sources */,
 				1B2FA4612643152B00F64F39 /* SportGalleryCell.swift in Sources */,
@@ -981,7 +1009,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = JAHM2D434B;
 				INFOPLIST_FILE = SwyngUser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1005,7 +1033,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = JAHM2D434B;
 				INFOPLIST_FILE = SwyngUser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

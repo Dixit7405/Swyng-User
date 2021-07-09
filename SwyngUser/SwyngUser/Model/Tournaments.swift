@@ -48,6 +48,8 @@ struct Tournaments : Codable {
     let venueGoogleMap : String?
     let tournamentPublished:String?
     let tblTournamentRegistrationTickets:[TournamentTicket]?
+    let tbl_favourite_tournaments:[Favourite]?
+    let tbl_tournament_registrations:[RegisterCount]?
 
     enum CodingKeys: String, CodingKey {
             case aboutOrganizer = "aboutOrganizer"
@@ -91,6 +93,9 @@ struct Tournaments : Codable {
             case venueGoogleMap = "venue_google_map"
         case tournamentPublished = "tournamentPublished"
         case tblTournamentRegistrationTickets = "tbl_tournament_registration_tickets"
+        case tbl_favourite_tournaments = "tbl_favourite_tournaments"
+        case tbl_tournament_registrations = "tbl_tournament_registrations"
+        
     }
 
     init(from decoder: Decoder) throws {
@@ -136,6 +141,8 @@ struct Tournaments : Codable {
         venueGoogleMap = try values.decodeIfPresent(String.self, forKey: .venueGoogleMap)
         tournamentPublished = try values.decodeIfPresent(String.self, forKey: .tournamentPublished)
         tblTournamentRegistrationTickets = try values.decodeIfPresent([TournamentTicket].self, forKey: .tblTournamentRegistrationTickets)
+        tbl_favourite_tournaments = try values.decodeIfPresent([Favourite].self, forKey: .tbl_favourite_tournaments)
+        tbl_tournament_registrations = try values.decodeIfPresent([RegisterCount].self, forKey: .tbl_tournament_registrations)
     }
 
 }

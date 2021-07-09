@@ -37,8 +37,9 @@ class TournamentGridCell: UICollectionViewCell {
             let openFor = categories.filter({tournament?.categoryId?.contains(($0.tournamentCategoryId ?? 0).toString()) ?? false})
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
             lblRegisterBefore.text = "Register before \(tournament?.registerBeforeFromStartTime ?? "")"
-            lblPlayerCount.text = "\(tournament?.noOfPlayers ?? 0) players have registerd"
+            lblPlayerCount.text = "\(tournament?.tbl_tournament_registrations?.count ?? 0) players have registerd"
             imgTournament.setImage(from: ImageBase.imagePath + (tournament?.thumbnailImage ?? ""))
+            btnFavorite.isSelected = tournament?.tbl_favourite_tournaments?.compactMap({$0.userId}).contains(ApplicationManager.profileData?.userId) ?? false
         }
     }
     
@@ -51,8 +52,9 @@ class TournamentGridCell: UICollectionViewCell {
             let openFor = runsCategories.filter({runs?.category?.contains(($0.runCategoriesId ?? 0)) ?? false})
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
             lblRegisterBefore.text = "Register before \(runs?.registerBeforeFromStartTime ?? "")"
-            lblPlayerCount.text = "\(0) players have registerd"
+            lblPlayerCount.text = "\(runs?.tbl_run_registrations?.count ?? 0) players have registerd"
             imgTournament.setImage(from: ImageBase.imagePath + (runs?.thumbnailImage ?? ""))
+            btnFavorite.isSelected = runs?.tbl_favourite_runs?.compactMap({$0.userId}).contains(ApplicationManager.profileData?.userId) ?? false
         }
     }
     

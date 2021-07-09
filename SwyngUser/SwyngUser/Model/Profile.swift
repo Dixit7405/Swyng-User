@@ -17,6 +17,7 @@ struct Profile : Codable {
     let lname : String?
     let mobileNo : String?
     let tShirtSize : String?
+    let userId:Int?
     
     enum CodingKeys: String, CodingKey {
         case bloodGroup = "bloodGroup"
@@ -29,6 +30,7 @@ struct Profile : Codable {
         case lname = "lname"
         case mobileNo = "mobileNo"
         case tShirtSize = "tShirtSize"
+        case userId = "userId"
     }
     
     init(from decoder: Decoder) throws {
@@ -43,6 +45,7 @@ struct Profile : Codable {
         lname = try values.decodeIfPresent(String.self, forKey: .lname)
         mobileNo = try values.decodeIfPresent(String.self, forKey: .mobileNo)
         tShirtSize = try values.decodeIfPresent(String.self, forKey: .tShirtSize)
+        userId = try values.decodeIfPresent(Int.self, forKey: .userId)
     }
     
 }

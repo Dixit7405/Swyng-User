@@ -13,6 +13,8 @@ class TournamentRegisterCell: UITableViewCell {
     @IBOutlet weak var lblPrice:UILabel!
     @IBOutlet weak var stepperView:StepperView!
     
+    var stepperUpdateBlock:((Int) -> Void)?
+    
     var tournamentTicket:TournamentTicket?{
         didSet{
             lblPrice.text =  tournamentTicket?.participationFees
@@ -28,6 +30,11 @@ class TournamentRegisterCell: UITableViewCell {
             lblCategory.text = runsTicket?.runCategory?.name
             stepperView.maxValue = runsTicket?.allowedEntries ?? 0
             stepperView.currentIndex = 0
+            stepperView.stepperUpdateBlock = {[self] currentIndex in
+                if let stepper = stepperUpdateBlock{
+                    stepper(currentIndex)
+                }
+            }
         }
     }
     

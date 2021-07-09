@@ -25,8 +25,13 @@ class StepperView: UIView {
             if currentIndex == maxValue{
                 btnPlus.tintColor = UIColor.lightGray
             }
+            if let stepper = stepperUpdateBlock{
+                stepper(currentIndex)
+            }
         }
     }
+    
+    var stepperUpdateBlock:((Int) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
