@@ -96,7 +96,6 @@
 		1B7D8ED12643AE5C00C5F2EF /* BookingSlotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D8ECF2643AE5C00C5F2EF /* BookingSlotCell.swift */; };
 		1B7D8ED22643AE5C00C5F2EF /* BookingSlotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D8ED02643AE5C00C5F2EF /* BookingSlotCell.xib */; };
 		1B80EDD126354A950017A06B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B80EDD026354A950017A06B /* HomeVC.swift */; };
-		1B92AE5226921E1A00F9C86E /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5126921E1A00F9C86E /* Favourite.swift */; };
 		1B92AE5426921F7600F9C86E /* RegisterCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5326921F7600F9C86E /* RegisterCount.swift */; };
 		1B92AE5626922B4900F9C86E /* CancelationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5526922B4900F9C86E /* CancelationRule.swift */; };
 		1B92AE5926922D3600F9C86E /* CancelationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92AE5826922D3600F9C86E /* CancelationRuleView.swift */; };
@@ -141,6 +140,7 @@
 		1BF1969E264855C30040212A /* TournamentGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF1969D264855C30040212A /* TournamentGridCell.swift */; };
 		1BF1C89C264AF1180061BD6F /* TournamentRegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF1C89B264AF1180061BD6F /* TournamentRegisterCell.swift */; };
 		1BF1C89F264AF13E0061BD6F /* TournamentRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF1C89E264AF13E0061BD6F /* TournamentRegisterVC.swift */; };
+		1BF3F76626A1EA0200697F39 /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3F76526A1EA0200697F39 /* Favourite.swift */; };
 		FBC0394DA5121389F85116FB /* Pods_SwyngUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */; };
 /* End PBXBuildFile section */
 
@@ -249,7 +249,6 @@
 		1B7D8ECF2643AE5C00C5F2EF /* BookingSlotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSlotCell.swift; sourceTree = "<group>"; };
 		1B7D8ED02643AE5C00C5F2EF /* BookingSlotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingSlotCell.xib; sourceTree = "<group>"; };
 		1B80EDD026354A950017A06B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		1B92AE5126921E1A00F9C86E /* Favourite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favourite.swift; path = ../../../../../../../Users/dixitrathod/Downloads/Favourite.swift; sourceTree = "<group>"; };
 		1B92AE5326921F7600F9C86E /* RegisterCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterCount.swift; sourceTree = "<group>"; };
 		1B92AE5526922B4900F9C86E /* CancelationRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelationRule.swift; sourceTree = "<group>"; };
 		1B92AE5826922D3600F9C86E /* CancelationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelationRuleView.swift; sourceTree = "<group>"; };
@@ -294,6 +293,7 @@
 		1BF1969D264855C30040212A /* TournamentGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentGridCell.swift; sourceTree = "<group>"; };
 		1BF1C89B264AF1180061BD6F /* TournamentRegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRegisterCell.swift; sourceTree = "<group>"; };
 		1BF1C89E264AF13E0061BD6F /* TournamentRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentRegisterVC.swift; sourceTree = "<group>"; };
+		1BF3F76526A1EA0200697F39 /* Favourite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favourite.swift; sourceTree = "<group>"; };
 		AD51C64A8B348D3B513D9C23 /* Pods-SwyngUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwyngUser.release.xcconfig"; path = "Target Support Files/Pods-SwyngUser/Pods-SwyngUser.release.xcconfig"; sourceTree = "<group>"; };
 		C29897E2A0F57E97D649BB26 /* Pods_SwyngUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwyngUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE283B0CE639F779DFF97AC5 /* Pods-SwyngUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwyngUser.debug.xcconfig"; path = "Target Support Files/Pods-SwyngUser/Pods-SwyngUser.debug.xcconfig"; sourceTree = "<group>"; };
@@ -567,9 +567,9 @@
 		1BEA4FC0264FAE84004C7171 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1BF3F76526A1EA0200697F39 /* Favourite.swift */,
 				1B92AE5526922B4900F9C86E /* CancelationRule.swift */,
 				1B92AE5326921F7600F9C86E /* RegisterCount.swift */,
-				1B92AE5126921E1A00F9C86E /* Favourite.swift */,
 				1BD52C48268CE26A00BF3683 /* CancelTicket.swift */,
 				1B9DFC98268B59F700D29E2B /* TournamentRegistrationData.swift */,
 				1B9DFC96268B4C1900D29E2B /* RegistrationList.swift */,
@@ -796,7 +796,6 @@
 				1BF1C89F264AF13E0061BD6F /* TournamentRegisterVC.swift in Sources */,
 				1BB7021C26328CCF00B66B62 /* ViewController.swift in Sources */,
 				1B9DFC99268B59F700D29E2B /* TournamentRegistrationData.swift in Sources */,
-				1B92AE5226921E1A00F9C86E /* Favourite.swift in Sources */,
 				1B6898D726850395006845FA /* Favorite.swift in Sources */,
 				1BBC951E26500E2D00735DCA /* Constants.swift in Sources */,
 				1BEA4FC8264FB0CB004C7171 /* ApplicationManager.swift in Sources */,
@@ -852,6 +851,7 @@
 				1B1E429C2683AB53006F3063 /* RunsCategory.swift in Sources */,
 				1B5F2FA92650DB6500A559D4 /* Profile.swift in Sources */,
 				1B2FA4612643152B00F64F39 /* SportGalleryCell.swift in Sources */,
+				1BF3F76626A1EA0200697F39 /* Favourite.swift in Sources */,
 				1BB8D98F263918380075C109 /* EventMenuFooter.swift in Sources */,
 				1B0C30C52633F03C004793D5 /* LoginVC.swift in Sources */,
 				1B0C30DD2634085D004793D5 /* CitySelectionVC.swift in Sources */,

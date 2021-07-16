@@ -281,21 +281,21 @@ extension UIViewController{
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let published = UIAlertAction(title: tournament ? "Tournament Published" : "Published", style: .default) { (button) in
-            let vc:TournamentCMSVC = TournamentCMSVC.controller()
-            vc.pageType = .published
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+//        let published = UIAlertAction(title: tournament ? "Tournament Published" : "Published", style: .default) { (button) in
+//            let vc:TournamentCMSVC = TournamentCMSVC.controller()
+//            vc.pageType = .published
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
         
-        let export = UIAlertAction(title: "Export to Mail", style: .default) { (button) in
-        }
+//        let export = UIAlertAction(title: "Export to Mail", style: .default) { (button) in
+//        }
         
         alert.addAction(participant)
         alert.addAction(fixture)
         alert.addAction(tournaments)
         alert.addAction(photos)
-        alert.addAction(published)
-        alert.addAction(export)
+//        alert.addAction(published)
+//        alert.addAction(export)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)

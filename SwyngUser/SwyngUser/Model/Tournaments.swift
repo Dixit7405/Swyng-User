@@ -152,7 +152,7 @@ struct TournamentTicket : Codable {
         let allowedEntries : Int?
         let createdAt : String?
         let eventName : String?
-        let genderAllowed : String?
+        let genderAllowed : [String]?
         let id : Int?
         let isBookingAvailable : Bool?
         let isDeleted : Bool?
@@ -186,7 +186,7 @@ struct TournamentTicket : Codable {
                 allowedEntries = try values.decodeIfPresent(Int.self, forKey: .allowedEntries)
                 createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
                 eventName = try values.decodeIfPresent(String.self, forKey: .eventName)
-                genderAllowed = try values.decodeIfPresent(String.self, forKey: .genderAllowed)
+                genderAllowed = try values.decodeIfPresent([String].self, forKey: .genderAllowed)
                 id = try values.decodeIfPresent(Int.self, forKey: .id)
                 isBookingAvailable = try values.decodeIfPresent(Bool.self, forKey: .isBookingAvailable)
                 isDeleted = try values.decodeIfPresent(Bool.self, forKey: .isDeleted)

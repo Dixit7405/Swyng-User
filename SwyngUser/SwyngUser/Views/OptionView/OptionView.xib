@@ -14,7 +14,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptionView" customModule="Swyng" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptionView" customModule="SwyngUser" customModuleProvider="target">
             <connections>
                 <outlet property="lblTitle" destination="9bt-MS-Vkc" id="tyL-Pv-5EC"/>
                 <outlet property="roundView" destination="bjG-sv-uPZ" id="9HL-id-i3K"/>
@@ -26,12 +26,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjG-sv-uPZ" customClass="ShadowView" customModule="Swyng" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjG-sv-uPZ" customClass="ShadowView" customModule="SwyngUser" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9bt-MS-Vkc">
                             <rect key="frame" x="5" y="0.0" width="310" height="100"/>
-                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                             <color key="textColor" name="textBlack"/>
                             <nil key="highlightedColor"/>
                         </label>

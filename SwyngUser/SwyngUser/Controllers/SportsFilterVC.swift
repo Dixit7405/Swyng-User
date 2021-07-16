@@ -152,7 +152,7 @@ extension SportsFilterVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.size.width-32)/2
-        return CGSize(width: width-10, height: 60)
+        return CGSize(width: width-5, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

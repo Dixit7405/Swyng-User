@@ -14,6 +14,7 @@ class CitySelectionVC: UIViewController {
     @IBOutlet weak var btnApplySelection:UIButton!
     
     var citiesArr:[City] = []
+    var fromSignup = false
     var selectedIndex:Int?{
         didSet{
             btnApplySelection.backgroundColor = selectedIndex != nil ? UIColor.AppColor.themeColor : UIColor.white
@@ -51,7 +52,7 @@ extension CitySelectionVC{
         }
         ApplicationManager.cityId = citiesArr[selectedIndex ?? 0].cityId
         ApplicationManager.selectedCity = citiesArr[selectedIndex ?? 0]
-        if self.isModal{
+        if !fromSignup{
             self.dismiss(animated: true, completion: nil)
             return
         }
@@ -83,7 +84,7 @@ extension CitySelectionVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.size.width-32)/2
-        return CGSize(width: width-10, height: 60)
+        return CGSize(width: width-5, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

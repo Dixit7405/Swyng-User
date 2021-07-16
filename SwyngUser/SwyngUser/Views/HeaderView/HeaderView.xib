@@ -50,9 +50,9 @@ Open Tournament</string>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLv-Lm-t5Y">
-                            <rect key="frame" x="319" y="150" width="40" height="40"/>
+                            <rect key="frame" x="309" y="140" width="50" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="35e-6B-teT"/>
+                                <constraint firstAttribute="width" constant="50" id="35e-6B-teT"/>
                                 <constraint firstAttribute="width" secondItem="aLv-Lm-t5Y" secondAttribute="height" multiplier="1:1" id="OJA-vh-rMg"/>
                             </constraints>
                             <state key="normal" image="folder" backgroundImage="transparant_bg"/>

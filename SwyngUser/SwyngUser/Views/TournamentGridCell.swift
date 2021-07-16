@@ -36,7 +36,9 @@ class TournamentGridCell: UICollectionViewCell {
             lblAddressTime.text = startDate + " " + (tournament?.venueAddress ?? "")
             let openFor = categories.filter({tournament?.categoryId?.contains(($0.tournamentCategoryId ?? 0).toString()) ?? false})
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
-            lblRegisterBefore.text = "Register before \(tournament?.registerBeforeFromStartTime ?? "")"
+            let date = tournament?.dates?.compactMap({$0.convertDate(format: .serverDate)}).sorted(by: {$0 < $1}).first
+            let beforeDate = date?.addingTimeInterval(-((tournament?.registerBeforeFromStartTime?.doubleValue ?? 0)*3600))
+            lblRegisterBefore.text = String(format:"Register before %@", beforeDate?.toDate(format: "hh mm a EEE dd MMM yyyy") ?? "")//"Register before \()"
             lblPlayerCount.text = "\(tournament?.tbl_tournament_registrations?.count ?? 0) players have registerd"
             imgTournament.setImage(from: ImageBase.imagePath + (tournament?.thumbnailImage ?? ""))
             btnFavorite.isSelected = tournament?.tbl_favourite_tournaments?.compactMap({$0.userId}).contains(ApplicationManager.profileData?.userId) ?? false
@@ -51,7 +53,9 @@ class TournamentGridCell: UICollectionViewCell {
                 lblAddressTime.text = startDate + " " + (runs?.venueAddress ?? "")
             let openFor = runsCategories.filter({runs?.category?.contains(($0.runCategoriesId ?? 0)) ?? false})
             lblOpenFor.text = openFor.compactMap({$0.name}).joined(separator: ", ")
-            lblRegisterBefore.text = "Register before \(runs?.registerBeforeFromStartTime ?? "")"
+            let date = runs?.dates?.compactMap({$0.convertDate(format: .serverDate)}).sorted(by: {$0 < $1}).first
+            let beforeDate = date?.addingTimeInterval(-((runs?.registerBeforeFromStartTime?.doubleValue ?? 0)*3600))
+            lblRegisterBefore.text = String(format:"Register before %@", beforeDate?.toDate(format: "hh mm a EEE dd MMM yyyy") ?? "")
             lblPlayerCount.text = "\(runs?.tbl_run_registrations?.count ?? 0) players have registerd"
             imgTournament.setImage(from: ImageBase.imagePath + (runs?.thumbnailImage ?? ""))
             btnFavorite.isSelected = runs?.tbl_favourite_runs?.compactMap({$0.userId}).contains(ApplicationManager.profileData?.userId) ?? false

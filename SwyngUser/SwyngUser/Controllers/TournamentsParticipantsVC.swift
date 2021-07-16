@@ -93,7 +93,7 @@ extension TournamentsParticipantsVC:UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.size.width - 32)/2
-        return CGSize(width: width, height: 70)
+        return CGSize(width: width, height: 45)
     }
 }
 

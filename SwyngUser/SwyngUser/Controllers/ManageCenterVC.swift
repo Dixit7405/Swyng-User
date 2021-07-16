@@ -47,7 +47,7 @@ class ManageCenterVC: BaseVC {
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width-32)/2, height: 70)
+        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width-32)/2, height: 45)
         flowLayout.minimumInteritemSpacing = CGFloat.zero
         flowLayout.minimumLineSpacing = CGFloat.zero
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
